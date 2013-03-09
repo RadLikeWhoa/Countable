@@ -53,6 +53,11 @@ body {
 a {
   color: #eb8a4c;
   text-decoration: none;
+  @include transition(border-bottom 0.25s ease-in-out);
+
+  &:hover {
+    border-bottom-width: 4px;
+  }
 }
 
 p {
@@ -83,9 +88,13 @@ footer {
 
 h1 {
   margin: 0 0 0.75em;
-  font-size: 4em;
+  font-size: 2em;
   line-height: 1.5em;
   text-transform: uppercase;
+
+  @media (min-width: 30em) {
+    font-size: 4em;
+  }
 }
 
 .intro {
@@ -98,14 +107,14 @@ h1 {
 }
 
 .demo textarea {
-  float: left;
-  width: 70%;
+  display: block;
+  width: 100%;
   height: 15em;
-  margin-right: 5%;
   padding: 1.5em;
   font: inherit;
   border: 1px solid #ddd;
-  border-radius: 5px;
+  border-bottom: 0;
+  border-radius: 5px 5px 0 0;
   resize: vertical;
   cursor: pointer;
 
@@ -116,28 +125,49 @@ h1 {
     outline: none;
     cursor: text;
   }
+
+  @media (min-width: 41em) {
+    float: left;
+    width: 70%;
+    margin-right: 5%;
+    border-bottom: 1px solid #ddd;
+    border-radius: 5px;
+  }
 }
 
 .demo .result {
-  float: left;
-  width: 25%;
-  height: 15em;
   margin: 0;
   padding: 1.5em;
   background-color: #f5f5f5;
   border: 1px solid #ddd;
-  border-radius: 5px;
+  border-radius: 0 0 5px 5px;
   list-style: none;
+
+  @media (min-width: 41em) {
+    float: left;
+    width: 25%;
+    height: 15em;
+    border-radius: 5px;
+  }
+}
+
+pre,
+code {
+  font: 100%/1.5 Source Code Pro, monospace;
 }
 
 pre {
   margin: 0;
   padding: 1.5em;
-  font: inherit;
-  font-family: Source Code Pro, monospace;
+  @include background(linear-gradient(left, #f5f5f5 30%, rgba(#f5f5f5, 0)), linear-gradient(left, rgba(#f5f5f5, 0), #f5f5f5 70%), radial-gradient(0 50%, farthest-side, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)), radial-gradient(100% 50%, farthest-side, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)));
   background-color: #f5f5f5;
+  background-repeat: no-repeat;
+  background-position: 0 0, 100% 0, 0 0, 100% 0;
+  background-size: 40px 100%, 40px 100%, 14px 100%, 14px 100%;
+  background-attachment: local, local, scroll, scroll;
   border: 1px solid #ddd;
   border-radius: 5px;
+  overflow-y: scroll;
 }
 
 footer {
