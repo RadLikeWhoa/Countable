@@ -21,19 +21,28 @@
    *                                      the result. The callback should
    *                                      accept only one parameter. (default:
    *                                      logs to console)
+   * @param    {Boolean}      [hard]      Sets whether to use hard returns (2
+   *                                      line breaks) or not. (default: false)
    *
    * @example  new Countable(elem, function (counter) {
    *             alert(counter.paragraphs, counter.words, counter.characters);
    *           });
    */
 
-  var _ = window.Countable = function (element, callback) {
-    if (!element) return;
+  var _ = window.Countable = function (element, callback, hard) {
+
+    /**
+     * Expect a valid HTMLElement. If no element or an invalid value is given,
+     * Couontable returns nothing.
+     */
+
+    if (!element || !(typeof HTMLElement === 'object' ? element instanceof HTMLElement : element && typeof element === 'object' && element.nodeType === 1 && typeof element.nodeName === 'string')) return;
 
     this.element = element;
-    this.callback = callback || function (counter) {
+    this.callback = typeof callback === 'function' ? callback : function (counter) {
       if (typeof console !== 'undefined') console.log(counter);
     };
+    this.hard = hard;
 
     this.init();
   };
@@ -51,7 +60,7 @@
       var str = (this.element.value || this.element.innerText || this.element.textContent).replace(/^\s+|\s+$/, '');
 
       return {
-        paragraphs: str ? str.replace(/\n+/g, '\n').split('\n').length : 0,
+        paragraphs: str ? str.replace((this.hard ? /\n{2,}/g : /\n+/g), (this.hard ? '\n\n' : '\n')).split((this.hard ? '\n\n' : '\n')).length : 0,
         words: str ? str.replace(/\s+/g, ' ').split(' ').length : 0,
         characters: str ? str.replace(/\s/g, '').split('').length : 0
       };

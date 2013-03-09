@@ -101,6 +101,31 @@ h1 {
   font-size: 1.5em;
 }
 
+.download {
+  display: block;
+  max-width: 15em;
+  margin: 0 auto;
+  padding: 0.75em;
+  text-shadow: 0 -1px 0 rgba(#111, 0.25);
+  @include background-image(linear-gradient(top, rgba(#fff, 0.5), rgba(#fff, 0.3)));
+  background-color: #eb8a4c;
+  border: 1px solid #eb8a4c;
+  border-radius: 3px;
+  box-shadow: 0 1px 3px rgba(#111, 0.2);
+  @include transition(background-color 0.25s ease-in-out);
+
+  &:hover,
+  &:focus {
+    border-bottom-width: 1px;
+    background-color: lighten(#eb8a4c, 5%);
+  }
+
+  &:active {
+    position: relative;
+    top: 1px;
+  }
+}
+
 .demo {
   @extend %clearfix;
   margin-bottom: 3em;
