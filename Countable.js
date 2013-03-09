@@ -57,7 +57,7 @@
      */
 
     count: function () {
-      var str = (this.element.value || this.element.innerText || this.element.textContent).replace(/^\s+|\s+$/, '');
+      var str = (this.element.value || this.element.innerText || this.element.textContent || '').replace(/^\s+|\s+$/, '');
 
       return {
         paragraphs: str ? str.replace((this.hard ? /\n{2,}/g : /\n+/g), (this.hard ? '\n\n' : '\n')).split((this.hard ? '\n\n' : '\n')).length : 0,
