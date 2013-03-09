@@ -32,7 +32,7 @@
 
     this.element = element;
     this.callback = callback || function (counter) {
-      console.log(counter);
+      if (typeof console !== 'undefined') console.log(counter);
     };
 
     this.init();
@@ -48,7 +48,7 @@
      */
 
     count: function () {
-      var str = (this.element.value || this.element.innerText).replace(/^\s+|\s+$/, '');
+      var str = (this.element.value || this.element.innerText || this.element.textContent).replace(/^\s+|\s+$/, '');
 
       return {
         paragraphs: str ? str.replace(/\n+/g, '\n').split('\n').length : 0,
@@ -67,9 +67,15 @@
 
       self.callback(self.count());
 
-      self.element.addEventListener('input', function () {
-        self.callback(self.count());
-      });
+      if (typeof self.element.addEventListener !== 'undefined') {
+        self.element.addEventListener('input', function () {
+          self.callback(self.count());
+        });
+      } else if (typeof self.element.attachEvent !== 'undefined') {
+        self.element.attachEvent('onkeydown', function () {
+          self.callback(self.count());
+        });
+      }
     }
 
   };

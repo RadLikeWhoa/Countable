@@ -167,7 +167,8 @@ pre {
   background-attachment: local, local, scroll, scroll;
   border: 1px solid #ddd;
   border-radius: 5px;
-  overflow-y: scroll;
+  overflow-x: scroll;
+  overflow-y: visible;
 }
 
 footer {
