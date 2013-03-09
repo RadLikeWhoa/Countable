@@ -1,5 +1,13 @@
 @import "compass";
 
+/**
+ * WEBFONTS
+ * ----------------------------------------------------------------------------
+ *
+ * The demo site uses Source Sans Pro (400, 700) and Source Code Pro (400), all
+ * served from Google Web Fonts.
+ */
+
 @font-face {
   font-family: 'Source Sans Pro';
   font-style: normal;
@@ -21,6 +29,16 @@
   src: local('Source Code Pro'), local('SourceCodePro-Regular'), url(http://themes.googleusercontent.com/static/fonts/sourcecodepro/v3/mrl8jkM18OlOQN8JLgasD9Hq-FFgoDNV3GTKpHwuvtI.woff) format('woff');
 }
 
+
+
+/**
+ * MICRO CLEARFIX
+ * ----------------------------------------------------------------------------
+ *
+ * Micro clearfix by Nicholas Gallagher to clear floats on elements.
+ * (see: http://nicolasgallagher.com/micro-clearfix-hack/)
+ */
+
 %clearfix {
   *zoom: 1;
 
@@ -34,6 +52,15 @@
     clear: both;
   }
 }
+
+
+
+/**
+ * GENERAL STYLING
+ * ----------------------------------------------------------------------------
+ *
+ * Styles used for the larger portion of the site.
+ */
 
 * {
   @include box-sizing(border-box);
@@ -72,6 +99,16 @@ footer {
     margin-bottom: 0;
   }
 }
+
+
+
+/**
+ * SITE INFO
+ * ----------------------------------------------------------------------------
+ *
+ * Styles used for the header and the footer of the site. The styles are
+ * supposed to differentiate both sections from the rest of the site.
+ */
 
 header,
 footer {
@@ -125,6 +162,20 @@ h1 {
     top: 1px;
   }
 }
+
+footer {
+  border-top: 1px solid #ddd;
+}
+
+
+
+/**
+ * DEMO SECTION
+ * ----------------------------------------------------------------------------
+ *
+ * The demo section contains the acutal demonstration of the site, as well as
+ * the code used to create the demo.
+ */
 
 .demo {
   @extend %clearfix;
@@ -194,8 +245,4 @@ pre {
   border-radius: 5px;
   overflow-x: scroll;
   overflow-y: visible;
-}
-
-footer {
-  border-top: 1px solid #ddd;
 }
