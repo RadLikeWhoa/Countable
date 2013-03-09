@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="Countable is a JavaScript function to add live paragraph-, word- and character-counting to an HTML element.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Countable.js—live word-counting in JavaScript</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="author" href="humans.txt">
+  </head>
+  <body>
+    <header>
+      <div class="wrap">
+        <h1><a href="/">Countable.js</a></h1>
+        <p class="intro">Countable is a JavaScript function to add <strong>live paragraph-, word- and character-counting</strong> to an HTML element. Countable does not rely on any libraries and is very small in size.</p>
+      </div>
+    </header>
+    <section class="wrap">
+      <div class="demo">
+        <textarea id="countableArea" autofocus></textarea>
+        <ul class="result">
+          <li id="result__paragraphs"><strong>Paragraphs: </strong><span></span></li>
+          <li id="result__words"><strong>Words: </strong><span></span></li>
+          <li id="result__characters"><strong>Characters: </strong><span></span></li>
+        </ul>
+      </div>
+      <pre class="language-js"><code>new Countable(area, function (counter) {
+  results.paragraphs.innerText = counter.paragraphs;
+  results.words.innerText = counter.words;
+  results.characters.innerText = counter.characters;
+});</code></pre>
+    </section>
+    <footer>
+      <div class="wrap">
+        <p>My name is <a href="http://sachaschmid.ch">Sacha Schmid</a>. I'm a front-end engineer from Switzerland. I am the creator of <a href="http://github.com/RadLikeWhoa/SSGS">SSGS</a> and <a href="http://github.com/RadLikeWhoa">other open source projects</a>.</p>
+      </div>
+    </footer>
+    <script src="js/Countable.js"></script>
+    <script>
+      var area = document.getElementById('countableArea'),
+          results = {
+            paragraphs: document.getElementById('result__paragraphs').lastElementChild,
+            words: document.getElementById('result__words').lastElementChild,
+            characters: document.getElementById('result__characters').lastElementChild
+          };
+
+      new Countable(area, function (counter) {
+        results.paragraphs.innerText = counter.paragraphs;
+        results.words.innerText = counter.words;
+        results.characters.innerText = counter.characters;
+      });
+    </script>
+  </body>
+</html>
