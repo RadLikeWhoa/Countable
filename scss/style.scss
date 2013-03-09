@@ -129,6 +129,14 @@ h1 {
   line-height: 1.5em;
   text-transform: uppercase;
 
+  a {
+    border-bottom-width: 6px;
+
+    &:hover {
+      border-bottom-width: 8px;
+    }
+  }
+
   @media (min-width: 30em) {
     font-size: 4em;
   }
@@ -146,7 +154,8 @@ h1 {
   text-shadow: 0 -1px 0 rgba(#111, 0.25);
   @include background-image(linear-gradient(top, rgba(#fff, 0.5), rgba(#fff, 0.3)));
   background-color: #eb8a4c;
-  border: 1px solid #eb8a4c;
+  background-color: lighten(#eb8a4c, 5%)\9;
+  border: 0;
   border-radius: 3px;
   box-shadow: 0 1px 3px rgba(#111, 0.2);
   @include transition(background-color 0.25s ease-in-out);
@@ -155,6 +164,7 @@ h1 {
   &:focus {
     border-bottom-width: 1px;
     background-color: lighten(#eb8a4c, 5%);
+    background-color: lighten(#eb8a4c, 10%)\9;
   }
 
   &:active {
