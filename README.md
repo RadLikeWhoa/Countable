@@ -2,14 +2,19 @@
 
 Countable is a JavaScript function to add **live paragraph-, word- and character-counting** to an HTML element. Countable does not rely on any libraries and is very small in size.
 
+[View the Demo](http://radlikewhoa.github.com/Countable#demo)
+
 ## Usage
 
 You can define your own callback function that Countable should use. If you don't pass such a function, the results are simply logged to the console.
 
-```js
-new Countable(elem, function (counter) {
-  alert(counter.paragraphs, counter.words, counter.characters);
-});
+```html
+<script src="js/Countable.js"></script>
+<script>
+  new Countable(elem, function (counter) {
+    alert(counter.paragraphs, counter.words, counter.characters);
+  });
+</script>
 ```
 
 Countable takes the value from an HTML element and counts paragraphs, words and characters. Those numbers are then returned in an object, accessible by a single parameter in the callback function. In the above example, `counter` holds all numbers returned from Countable.
