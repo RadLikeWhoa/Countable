@@ -61,8 +61,8 @@
       var str = (this.element.value || this.element.innerText || this.element.textContent || '').replace(/^\s+|\s+$/, '');
 
       return {
-        paragraphs: str ? (str.match(this.hard ? /\n{2,}/g : /\n+/g)||[]).length+1 : 0,
-        words: str ? (str.match(/\s+/g)||[]).length+1 : 0,
+        paragraphs: str ? (str.match(this.hard ? /\n{2,}/g : /\n+/g) || []).length + 1 : 0,
+        words: str ? (str.match(/\s+/g) || []).length + 1 : 0,
         characters: str ? str.replace(/\s/g, '').length : 0
       };
     },
