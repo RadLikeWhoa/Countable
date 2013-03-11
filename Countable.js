@@ -17,7 +17,7 @@
    * @constructor
    *
    * @param    {HTMLElement}  element     The element to be used for the
-   *                                      couting.
+   *                                      counting.
    * @param    {Function}     [callback]  The callback to receive and process
    *                                      the result. The callback should
    *                                      accept only one parameter. (default:
@@ -34,7 +34,7 @@
 
     /**
      * Expect a valid HTMLElement. If no element or an invalid value is given,
-     * Couontable returns nothing.
+     * Countable returns nothing.
      */
 
     if (!element || !(typeof HTMLElement === 'object' ? element instanceof HTMLElement : element && typeof element === 'object' && element.nodeType === 1 && typeof element.nodeName === 'string')) return;
