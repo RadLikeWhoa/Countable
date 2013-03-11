@@ -9,6 +9,7 @@
  */
 
 ;(function () {
+  "use strict";
 
   /**
    * Create a new Countable instance on an HTML element.
