@@ -26,12 +26,14 @@
           <li><strong>Paragraphs: </strong><span id="result__paragraphs">0</span></li>
           <li><strong>Words: </strong><span id="result__words">0</span></li>
           <li><strong>Characters: </strong><span id="result__characters">0</span></li>
+          <li><strong>Characters (with spaces): </strong><span id="result__all">0</span></li>
         </ul>
       </div>
       <pre class="language-js"><code>new Countable(area, function (counter) {
   results.paragraphs.textContent = counter.paragraphs;
   results.words.textContent = counter.words;
   results.characters.textContent = counter.characters;
+  results.all.textContent = counter.all;
 });</code></pre>
     </section>
     <footer>
@@ -45,7 +47,8 @@
           results = {
             paragraphs: document.getElementById('result__paragraphs'),
             words: document.getElementById('result__words'),
-            characters: document.getElementById('result__characters')
+            characters: document.getElementById('result__characters'),
+            all: document.getElementById('result__all')
           };
 
       new Countable(area, function (counter) {
@@ -53,10 +56,12 @@
           results.paragraphs.textContent = counter.paragraphs;
           results.words.textContent = counter.words;
           results.characters.textContent = counter.characters;
+          results.all.textContent = counter.all;
         } else {
           results.paragraphs.innerText = counter.paragraphs;
           results.words.innerText = counter.words;
           results.characters.innerText = counter.characters;
+          results.all.textContent = counter.all;
         }
       });
     </script>
