@@ -10,6 +10,19 @@
 
 ;(function () {
   "use strict";
+  
+  /**
+   * String.trim() polyfill for non-supporting browsers.
+   * 
+   * @return  {String}  The original string with leading and trailing
+   *                    whitespace removed.
+   */
+  
+  if (typeof String.prototype.trim !== 'function') {
+    String.prototype.trim = function () {
+      return this.replace(/^\s+|\s+$/g, '');
+    }
+  }
 
   /**
    * Create a new Countable instance on an HTML element.
@@ -28,6 +41,8 @@
    * @example  new Countable(elem, function (counter) {
    *             alert(counter.paragraphs, counter.words, counter.characters);
    *           });
+   * 
+   * @return   {Countable}    An instance of the Countable class.
    */
 
   var _ = window.Countable = function (element, callback, hard) {
@@ -37,7 +52,7 @@
      * Countable returns nothing.
      */
 
-    if (!element || !(typeof HTMLElement === 'object' ? element instanceof HTMLElement : element && typeof element === 'object' && element.nodeType === 1 && typeof element.nodeName === 'string')) return;
+    if (!element || element.nodeType !== 1) return;
 
     this.element = element;
     this.callback = typeof callback === 'function' ? callback : function (counter) {
@@ -46,12 +61,15 @@
     this.hard = hard;
 
     this.init();
+    
+    return this;
   };
 
   _.prototype = {
 
     /**
-     * Trim leading and trailing whitespace.
+     * Trim leading and trailing whitespace and count paragraphs, words and
+     * characters.
      *
      * @return  {Object}  The object containing the number of paragraphs, words
      *                    and characters, all accessible by their names.
@@ -75,12 +93,6 @@
     init: function () {
       var self = this;
       
-      if (typeof String.prototype.trim !== 'function') {
-        String.prototype.trim = function () {
-          return this.replace(/^\s+|\s+$/g, '');
-        }
-      }
-
       self.callback(self.count());
 
       if (typeof self.element.addEventListener !== 'undefined') {
