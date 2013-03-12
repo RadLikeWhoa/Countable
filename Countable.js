@@ -58,7 +58,13 @@
      */
 
     count: function () {
-      var str = (this.element.value || this.element.innerText || this.element.textContent || '').replace(/^\s+|\s+$/, '');
+        var str = (this.element.value || this.element.innerText || this.element.textContent || '');
+        if (typeof String.prototype.trim == 'function') {
+            str = str.trim();
+        }
+        else { 
+            str = str.replace(/^\s+|\s+$/, '');
+        }
 
       return {
         paragraphs: str ? (str.match(this.hard ? /\n{2,}/g : /\n+/g) || []).length + 1 : 0,
