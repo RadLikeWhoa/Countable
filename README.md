@@ -12,12 +12,20 @@ You can define your own callback function that Countable should use. If you don'
 <script src="js/Countable.js"></script>
 <script>
   new Countable(elem, function (counter) {
-    alert(counter.paragraphs, counter.words, counter.characters);
+
+    /**
+     * `counters.paragraphs` holds the number of paragraphs.
+     * `counters.words` holds the number of words.
+     * `counters.characters` holds the number of characters (without spaces)
+     * `counters.all` holds the number of characters (with spaces)
+     */
+
+    alert(counter.paragraphs, counter.words, counter.characters, counters.all);
   });
 </script>
 ```
 
-Countable takes the value from an HTML element and counts paragraphs, words and characters. Those numbers are then returned in an object, accessible by a single parameter in the callback function. In the above example, `counter` holds all numbers returned from Countable.
+Countable takes the value from an HTML element and counts paragraphs, words and characters (without and with spaces). Those numbers are then returned in an object, accessible by a single parameter in the callback function. In the above example, `counter` holds all numbers returned from Countable.
 
 ## Browser Support
 

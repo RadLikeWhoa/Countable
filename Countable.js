@@ -10,18 +10,18 @@
 
 ;(function () {
   "use strict";
-  
+
   /**
    * String.trim() polyfill for non-supporting browsers.
-   * 
+   *
    * @return  {String}  The original string with leading and trailing
    *                    whitespace removed.
    */
-  
+
   if (typeof String.prototype.trim !== 'function') {
     String.prototype.trim = function () {
       return this.replace(/^\s+|\s+$/g, '');
-    }
+    };
   }
 
   /**
@@ -41,7 +41,7 @@
    * @example  new Countable(elem, function (counter) {
    *             alert(counter.paragraphs, counter.words, counter.characters);
    *           });
-   * 
+   *
    * @return   {Countable}    An instance of the Countable class.
    */
 
@@ -61,7 +61,7 @@
     this.hard = hard;
 
     this.init();
-    
+
     return this;
   };
 
@@ -76,12 +76,14 @@
      */
 
     count: function () {
-      var str = (this.element.value || this.element.innerText || this.element.textContent || '').trim();
+      var orig = (this.element.value || this.element.innerText || this.element.textContent || ''),
+          str = orig.trim();
 
       return {
         paragraphs: str ? (str.match(this.hard ? /\n{2,}/g : /\n+/g) || []).length + 1 : 0,
         words: str ? (str.match(/\s+/g) || []).length + 1 : 0,
-        characters: str ? str.replace(/\s/g, '').length : 0
+        characters: str ? str.replace(/\s/g, '').length : 0,
+        all: orig.replace(/[\n\r]/g, '').length
       };
     },
 
@@ -92,7 +94,7 @@
 
     init: function () {
       var self = this;
-      
+
       self.callback(self.count());
 
       if (typeof self.element.addEventListener !== 'undefined') {
