@@ -58,13 +58,7 @@
      */
 
     count: function () {
-        var str = (this.element.value || this.element.innerText || this.element.textContent || '');
-        if (typeof String.prototype.trim == 'function') {
-            str = str.trim();
-        }
-        else { 
-            str = str.replace(/^\s+|\s+$/, '');
-        }
+      var str = (this.element.value || this.element.innerText || this.element.textContent || '').trim();
 
       return {
         paragraphs: str ? (str.match(this.hard ? /\n{2,}/g : /\n+/g) || []).length + 1 : 0,
@@ -80,6 +74,12 @@
 
     init: function () {
       var self = this;
+      
+      if (typeof String.prototype.trim !== 'function') {
+        String.prototype.trim = function () {
+          return this.replace(/^\s+|\s+$/g, '');
+        }
+      }
 
       self.callback(self.count());
 
