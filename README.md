@@ -4,6 +4,15 @@ Countable is a JavaScript function to add **live paragraph-, word- and character
 
 [View the Demo](http://radlikewhoa.github.com/Countable#demo)
 
+## Installation
+
+You can install Countable in various ways.
+
+* Install using [bower](http://github.com/twitter/bower): `bower install Countable`
+* Clone the git repo: `git clone git@github.com:RadLikeWhoa/Countable.git`
+* Use the GitHub-hosted script: `<script src="https://rawgithub.com/RadLikeWhoa/Countable/master/Countable.js"></script>`
+* Copy the [contents of the script](https://raw.github.com/RadLikeWhoa/Countable/master/Countable.js) directly
+
 ## Usage
 
 You can define your own callback function that Countable should use. If you don't pass such a function, the results are simply logged to the console.
