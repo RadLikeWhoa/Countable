@@ -4,7 +4,7 @@
  * elements.
  *
  * @author   Sacha Schmid (http://github.com/RadLikeWhoa)
- * @version  1.0
+ * @version  1.1.0
  * @license  MIT
  */
 
