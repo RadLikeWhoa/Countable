@@ -4,12 +4,12 @@
  * elements.
  *
  * @author   Sacha Schmid (http://github.com/RadLikeWhoa)
- * @version  1.1.0
+ * @version  1.1.1
  * @license  MIT
  */
 
 ;(function () {
-  "use strict";
+  'use strict';
 
   /**
    * String.trim() polyfill for non-supporting browsers.
@@ -81,7 +81,7 @@
 
       return {
         paragraphs: str ? (str.match(this.hard ? /\n{2,}/g : /\n+/g) || []).length + 1 : 0,
-        words: str ? (str.match(/\s+/g) || []).length + 1 : 0,
+        words: str ? (str.replace(/\s['";:,.?¿\-!¡]/g, '').match(/\s+/g) || []).length + 1 : 0,
         characters: str ? str.replace(/\s/g, '').length : 0,
         all: orig.replace(/[\n\r]/g, '').length
       };
