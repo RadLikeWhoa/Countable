@@ -37,7 +37,7 @@ An optional HTML element attribute of *omit* can toggle whether or not text that
 
 ```html
  <textarea id="countableArea" placeholder="I count html tags as characters and words"></textarea>
- <textarea id="countableArea2"omit="on" placeholder="I eat html tags"></textarea>
+ <textarea id="countableArea2" omit="on" placeholder="I eat html tags"></textarea>
 ```
 
 
