@@ -9,7 +9,7 @@
  */
 
 ;(function () {
-  'use strict';
+  'use strict'
 
   /**
    * String.trim() polyfill for non-supporting browsers.
@@ -20,8 +20,8 @@
 
   if (typeof String.prototype.trim !== 'function') {
     String.prototype.trim = function () {
-      return this.replace(/^\s+|\s+$/g, '');
-    };
+      return this.replace(/^\s+|\s+$/g, '')
+    }
   }
 
   /**
@@ -52,18 +52,18 @@
      * Countable returns nothing.
      */
 
-    if (!element || element.nodeType !== 1) return;
+    if (!element || element.nodeType !== 1) return
 
-    this.element = element;
+    this.element = element
     this.callback = typeof callback === 'function' ? callback : function (counter) {
-      if (typeof console !== 'undefined') console.log(counter);
-    };
-    this.hard = hard;
+      if (typeof console !== 'undefined') console.log(counter)
+    }
+    this.hard = hard
 
-    this.init();
+    this.init()
 
-    return this;
-  };
+    return this
+  }
 
   _.prototype = {
 
@@ -79,24 +79,24 @@
       var output = [],
           counter = 0,
           length = string.length,
-          value, extra;
+          value, extra
 
       while (counter < length) {
-        value = string.charCodeAt(counter++);
+        value = string.charCodeAt(counter++)
 
         if ((value & 0xF800) == 0xD800 && counter < length) {
-          extra = string.charCodeAt(counter++);
+          extra = string.charCodeAt(counter++)
           if ((extra & 0xFC00) == 0xDC00) {
-            output.push(((value & 0x3FF) << 10) + (extra & 0x3FF) + 0x10000);
+            output.push(((value & 0x3FF) << 10) + (extra & 0x3FF) + 0x10000)
           } else {
-            output.push(value, extra);
+            output.push(value, extra)
           }
         } else {
-          output.push(value);
+          output.push(value)
         }
       }
 
-      return output;
+      return output
     },
 
     /**
@@ -111,14 +111,14 @@
       var orig = (this.element.value || this.element.innerText || this.element.textContent || ''),
           tagRegEx = /<([a-zA-Z]+).*>(.*)<\/\1>/,
           isTag = tagRegEx.exec(orig),
-          str = isTag ? isTag[2].trim() : orig.trim();
+          str = isTag ? isTag[2].trim() : orig.trim()
 
       return {
         paragraphs: str ? (str.match(this.hard ? /\n{2,}/g : /\n+/g) || []).length + 1 : 0,
         words: str ? (str.replace(/['";:,.?¿\-!¡]+/g, '').match(/\S+/g) || []).length : 0,
         characters: str ? this.decode(str.replace(/\s/g, '')).length : 0,
         all: this.decode(orig.replace(/[\n\r]/g, '')).length
-      };
+      }
     },
 
     /**
@@ -127,20 +127,20 @@
      */
 
     init: function () {
-      var self = this;
+      var self = this
 
-      self.callback(self.count());
+      self.callback(self.count())
 
       if (typeof self.element.addEventListener !== 'undefined') {
         self.element.addEventListener('input', function () {
-          self.callback(self.count());
-        });
+          self.callback(self.count())
+        })
       } else if (typeof self.element.attachEvent !== 'undefined') {
         self.element.attachEvent('onkeydown', function () {
-          self.callback(self.count());
-        });
+          self.callback(self.count())
+        })
       }
     }
 
-  };
-}());
+  }
+}())
