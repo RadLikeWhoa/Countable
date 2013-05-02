@@ -113,7 +113,7 @@
       var orig = (this.element.value || this.element.innerText || this.element.textContent || ''),
           tagRegEx = /<([a-zA-Z]+).*>(.*)<\/\1>/,
           isTag = tagRegEx.exec(orig),
-          askTag = (this.element.attributes.omit.value == "on"),
+          askTag = (this.element.attributes.omit) ? (this.element.attributes.omit.value == "on") : false,
           str = (isTag != null && askTag) ? isTag[2].trim() : orig.trim();
   
       return {
