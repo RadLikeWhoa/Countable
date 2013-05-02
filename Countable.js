@@ -68,6 +68,40 @@
   _.prototype = {
 
     /**
+     * ucs2decode from the https://github.com/bestiejs/punycode.js/ punycode.js library also
+     * on an MIT license.  This function allows for the proper counting of unicode characters. 
+     *
+     *
+     * @return  [Array]   This returns an array of unicode character codes. 
+     *                    Javascript internally uses ucs2.
+     *                      Mathias Bynens explains it well here :
+     *                      http://mathiasbynens.be/notes/javascript-encoding
+     */
+    ucs2decode: function(string) {
+      var output = [],
+      counter = 0,
+      length = string.length,
+        value,
+        extra;
+      while (counter < length) {
+        value = string.charCodeAt(counter++);
+        if ((value & 0xF800) == 0xD800 && counter < length) {
+          // high surrogate, and there is a next character
+          extra = string.charCodeAt(counter++);
+          if ((extra & 0xFC00) == 0xDC00) { // low surrogate
+            output.push(((value & 0x3FF) << 10) + (extra & 0x3FF) + 0x10000);
+          } else {
+            output.push(value, extra);
+          }
+          } else {
+            output.push(value);
+          }
+        }
+      return output;
+    },
+    
+
+    /**
      * Trim leading and trailing whitespace and count paragraphs, words and
      * characters.
      *
@@ -77,13 +111,16 @@
 
     count: function () {
       var orig = (this.element.value || this.element.innerText || this.element.textContent || ''),
-          str = orig.trim();
-
+          tagRegEx = /<([a-zA-Z]+).*>(.*)<\/\1>/,
+          isTag = tagRegEx.exec(orig),
+          askTag = (this.element.attributes.omit.value == "on"),
+          str = (isTag != null && askTag) ? isTag[2].trim() : orig.trim();
+  
       return {
         paragraphs: str ? (str.match(this.hard ? /\n{2,}/g : /\n+/g) || []).length + 1 : 0,
-        words: str ? (str.replace(/\s['";:,.?¿\-!¡]/g, '').match(/\s+/g) || []).length + 1 : 0,
-        characters: str ? str.replace(/\s/g, '').length : 0,
-        all: orig.replace(/[\n\r]/g, '').length
+        words: str ? (str.replace(/['";:,.?¿\-!¡]+/g, '').match(/\S+/g) || []).length : 0,
+        characters: str ? this.ucs2decode(str.replace(/\s/g, '')).length : 0,
+        all: this.ucs2decode(orig.replace(/[\n\r]/g, '')).length
       };
     },
 

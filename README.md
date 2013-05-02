@@ -14,7 +14,7 @@ You can install Countable in various ways.
 
 ## Usage
 
-You can define your own callback function that Countable should use. If you don't pass such a function, the results are simply logged to the console.
+You can define your own callback function that Countable should use. If you don't pass such a function, the results are simply logged to the console. 
 
 ```html
 <script src="js/Countable.js"></script>
@@ -32,6 +32,15 @@ You can define your own callback function that Countable should use. If you don'
   });
 </script>
 ```
+
+An optional HTML element attribute of *omit* can toggle whether or not text that contains HTML tags should count the tags in calculations. To activate this functionality set the attribute to on. 
+
+```html
+ <textarea id="countableArea" placeholder="I count html tags as characters and words"></textarea>
+ <textarea id="countableArea2" omit="on" placeholder="I eat html tags"></textarea>
+```
+
+
 
 Countable takes the value from an HTML element and counts paragraphs, words and characters (without and with spaces). Those numbers are then returned in an object, accessible by a single parameter in the callback function. In the above example, `counter` holds all numbers returned from Countable.
 
