@@ -69,10 +69,10 @@
 
     /**
      * ucs2decode from the https://github.com/bestiejs/punycode.js/ punycode.js library also
-     * on an MIT license.  This function allows for the proper counting of unicode characters. 
+     * on an MIT license.  This function allows for the proper counting of unicode characters.
      *
      *
-     * @return  [Array]   This returns an array of unicode character codes. 
+     * @return  [Array]   This returns an array of unicode character codes.
      *                    Javascript internally uses ucs2.
      *                      Mathias Bynens explains it well here :
      *                      http://mathiasbynens.be/notes/javascript-encoding
@@ -99,7 +99,7 @@
         }
       return output;
     },
-    
+
 
     /**
      * Trim leading and trailing whitespace and count paragraphs, words and
@@ -113,9 +113,8 @@
       var orig = (this.element.value || this.element.innerText || this.element.textContent || ''),
           tagRegEx = /<([a-zA-Z]+).*>(.*)<\/\1>/,
           isTag = tagRegEx.exec(orig),
-          askTag = (this.element.attributes.omit.value == "on"),
-          str = (isTag != null && askTag) ? isTag[2].trim() : orig.trim();
-  
+          str = isTag ? isTag[2].trim() : orig.trim();
+
       return {
         paragraphs: str ? (str.match(this.hard ? /\n{2,}/g : /\n+/g) || []).length + 1 : 0,
         words: str ? (str.replace(/['";:,.?¿\-!¡]+/g, '').match(/\S+/g) || []).length : 0,
