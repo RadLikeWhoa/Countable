@@ -1,6 +1,6 @@
 # Countable
 
-Countable is a JavaScript function to add **live paragraph-, word- and character-counting** to an HTML element. Countable does not rely on any libraries and is very small in size.
+Countable is a JavaScript function to add **live paragraph-, word- and character-counting** to an HTML element. Countable does not rely on any libraries and stays under 1KB when minified and gzipped.
 
 [View the Demo](http://radlikewhoa.github.io/Countable#demo)
 
@@ -12,30 +12,44 @@ Countable is a JavaScript function to add **live paragraph-, word- and character
 
 ## Usage
 
+Countable enables live counting on `<input>` and `<textarea>` elements as well as elements that have the `contenteditable` attribute. Elements whose text contents cannot be edited are simply parsed once.
+
 You can define your own callback function that Countable should use. If you don't pass such a function, the results are simply logged to the console.
 
 ```html
 <script src="js/Countable.js"></script>
 <script>
+  var elem = document.getElementById('field')
+
   new Countable(elem, function (counter) {
-
-    /**
-     * `counters.paragraphs` holds the number of paragraphs.
-     * `counters.words` holds the number of words.
-     * `counters.characters` holds the number of characters (without spaces)
-     * `counters.all` holds the number of characters (with spaces)
-     */
-
-    alert(counter.paragraphs, counter.words, counter.characters, counters.all);
-  });
+    alert(counter.words)
+  })
 </script>
 ```
 
-Countable takes the value from an HTML element and counts paragraphs, words and characters (without and with spaces). Those numbers are then returned in an object, accessible by a single parameter in the callback function. In the above example, `counter` holds all numbers returned from Countable.
+Countable takes the value from an HTML element and counts paragraphs, words and characters (with and without spaces). The callback function can receive a single parameter. This parameter is an object containing all the calculated values. In the above example, `counter` holds all numbers returned from Countable.
+
+```javascript
+counter = {
+  paragraphs: 0,
+  words: 0,
+  characters: 0,
+  all: 0
+}
+```
+
+Property   | Meaning
+---------- | ----------------------------------------
+paragraphs | The number of paragraphs. Paragraphs can be separated by either a soft or a hard (two line breaks) return. To use hard returns, add a truthy parameter to your Countable call after the callback.
+words      | The number of words. Words are split using spaces.
+characters | The number of characters (without spaces). This contains all non-whitespace characters.
+all        | The number of characters including whitespace. This is the total number of all characters in the element.
 
 ## Browser Support
 
-Countable has been tested in Chrome (latest), Safari (latest), Firefox (latest), Opera (latest) and Internet Explorer (7+). It is built to support both newer and older browsers. Should you find an error, please submit [an isssue](https://github.com/RadLikeWhoa/Countable/issues).
+Chrome   | Safari   | Firefox   | Opera   | Internet Explorer
+:------: | :------: | :-------: | :-----: | :-----------------:
+Yes      | Yes      | Yes       | Yes     | 7+
 
 ## About the Author
 

@@ -3,16 +3,20 @@
  * counting on an HTML element. Usage is recommended on `input` and `textarea`
  * elements.
  *
- * @author   Sacha Schmid (http://github.com/RadLikeWhoa)
+ * @author   Sacha Schmid (<https://github.com/RadLikeWhoa>)
  * @version  1.2.0
  * @license  MIT
+ * @see      <http://radlikewhoa.github.io/Countable/>
  */
 
 ;(function () {
   'use strict'
 
   /**
-   * String.trim() polyfill for non-supporting browsers.
+   * String.trim() polyfill for non-supporting browsers. This is the
+   * recommended polyfill on MDN.
+   *
+   * @see     <http://goo.gl/uYveB>
    *
    * @return  {String}  The original string with leading and trailing
    *                    whitespace removed.
@@ -39,28 +43,39 @@
    *                                      line breaks) or not. (default: false)
    *
    * @example  new Countable(elem, function (counter) {
-   *             alert(counter.paragraphs, counter.words, counter.characters);
-   *           });
+   *             alert(counter.words)
+   *           })
    *
    * @return   {Countable}    An instance of the Countable class.
    */
 
   var _ = window.Countable = function (element, callback, hard) {
+    var hasConsole = typeof console === 'object'
 
     /**
-     * Expect a valid HTMLElement. If no element or an invalid value is given,
-     * Countable returns nothing.
+     * Countable throws a breaking error if the first parameter is not a valid
+     * HTML element. Also, it will give a warning about a missing callback.
      */
 
-    if (!element || element.nodeType !== 1) return
+    if (!element || element.nodeType !== 1)
+      throw new Error('Countable expects a valid HTML element')
+
+    if (!callback && hasConsole)
+      console.warn('You should provide your own callback function to Countable')
+
+    /**
+     * In this step, the given parameters are bound to this instance of
+     * Countable. The callback parameter is optional; if it is not given,
+     * Countable will simply log the results to the console.
+     */
 
     this.element = element
-    this.callback = typeof callback === 'function' ? callback : function (counter) {
-      if (typeof console !== 'undefined') console.log(counter)
-    }
+    this.callback = callback ? callback : hasConsole ? function (counter) {
+      console.log(counter)
+    } : function (counter) {}
     this.hard = hard
 
-    this.init()
+    this.init(this)
 
     return this
   }
@@ -68,11 +83,20 @@
   _.prototype = {
 
     /**
-     * decode function from the punycode.js library also on an MIT license.
-     * This function allows for the proper counting of unicode characters.
+     * ucs2decode function from the punycode.js library.
      *
-     * @return  {Array}   This returns an array of unicode character codes.
-     *                    Javascript internally uses ucs2.
+     * Creates an array containing the decimal code points of each Unicode
+     * character in the string. While JavaScript uses UCS-2 internally,
+     * this function will convert a pair of surrogate halves (each of which
+     * UCS-2 exposes as separate characters) into a single code point,
+     * matching UTF-16.
+     *
+     * @see     <http://goo.gl/8M09r>
+     * @see     <http://goo.gl/u4UUC>
+     *
+     * @param   {String}  string   The Unicode input string (UCS-2).
+     *
+     * @return  {Array}   The new array of code points.
      */
 
     decode: function (string) {
@@ -85,8 +109,15 @@
         value = string.charCodeAt(counter++)
 
         if ((value & 0xF800) == 0xD800 && counter < length) {
+
+          // High surrogate, and there is a next character.
+
           extra = string.charCodeAt(counter++)
+
           if ((extra & 0xFC00) == 0xDC00) {
+
+            // Low surrogate.
+
             output.push(((value & 0x3FF) << 10) + (extra & 0x3FF) + 0x10000)
           } else {
             output.push(value, extra)
@@ -109,9 +140,13 @@
 
     count: function () {
       var orig = (this.element.value || this.element.innerText || this.element.textContent || ''),
-          tagRegEx = /<([a-zA-Z]+).*>(.*)<\/\1>/,
-          isTag = tagRegEx.exec(orig),
-          str = isTag ? isTag[2].trim() : orig.trim()
+          temp = document.createElement('div'),
+          str
+
+      // Strip out HTML tags and trim leading and trailing whitespace.
+
+      temp.innerHTML = orig
+      str = (temp.innerText || temp.textContent).trim()
 
       return {
         paragraphs: str ? (str.match(this.hard ? /\n{2,}/g : /\n+/g) || []).length + 1 : 0,
@@ -126,17 +161,18 @@
      * adding the `input` event listener to the given element.
      */
 
-    init: function () {
-      var self = this
+    init: function (self) {
+      var hasAEL = 'addEventListener' in window,
+          hasInput = 'oninput' in self.element
 
       self.callback(self.count())
 
-      if (typeof self.element.addEventListener !== 'undefined') {
-        self.element.addEventListener('input', function () {
+      if (hasAEL) {
+        self.element.addEventListener((hasInput ? 'input' : 'keydown'), function () {
           self.callback(self.count())
         })
-      } else if (typeof self.element.attachEvent !== 'undefined') {
-        self.element.attachEvent('onkeydown', function () {
+      } else {
+        self.element.attachEvent((!hasInput ? 'onkeydown' : 'oninput'), function () {
           self.callback(self.count())
         })
       }
