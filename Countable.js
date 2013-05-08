@@ -139,9 +139,15 @@
      */
 
     count: function () {
-      var orig = (this.element.value || this.element.innerText || this.element.textContent || ''),
-          temp = document.createElement('div'),
+      var temp = document.createElement('div'),
+          orig,
           str
+
+      if (this.element.value || this.element.value === '') {
+        orig = this.element.value
+      } else {
+        orig = (this.element.innerText || this.element.textContent || '')
+      }
 
       // Strip out HTML tags and trim leading and trailing whitespace.
 
