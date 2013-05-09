@@ -49,8 +49,10 @@
    * @return   {Countable}    An instance of the Countable class.
    */
 
-  var _ = window.Countable = function (element, callback, hard) {
-    var hasConsole = typeof console === 'object'
+  window.Countable = function (element, callback, hard) {
+    var hasConsole
+
+    hasConsole = typeof console === 'object'
 
     /**
      * Countable throws a breaking error if the first parameter is not a valid
@@ -80,7 +82,7 @@
     return this
   }
 
-  _.prototype = {
+  window.Countable.prototype = {
 
     /**
      * ucs2decode function from the punycode.js library.
@@ -100,10 +102,11 @@
      */
 
     decode: function (string) {
-      var output = [],
-          counter = 0,
-          length = string.length,
-          value, extra
+      var output, counter, length, value, extra
+
+      output = []
+      counter = 0
+      length = string.length
 
       while (counter < length) {
         value = string.charCodeAt(counter++)
@@ -139,18 +142,17 @@
      */
 
     count: function () {
-      var temp = document.createElement('div'),
-          orig,
-          str
+      var orig, str, temp
 
-      if (this.element.value || this.element.value === '') {
+      if (typeof this.element.value !== 'undefined') {
         orig = this.element.value
       } else {
-        orig = (this.element.innerText || this.element.textContent || '')
+        orig = this.element.innerText || this.element.textContent
       }
 
       // Strip out HTML tags and trim leading and trailing whitespace.
 
+      temp = document.createElement('div')
       temp.innerHTML = orig
       str = (temp.innerText || temp.textContent).trim()
 
@@ -168,12 +170,13 @@
      */
 
     init: function (self) {
-      var hasAEL = 'addEventListener' in window,
-          hasInput = 'oninput' in self.element
+      var hasInput
+
+      hasInput = 'oninput' in self.element
 
       self.callback(self.count())
 
-      if (hasAEL) {
+      if ('addEventListener' in window) {
         self.element.addEventListener((hasInput ? 'input' : 'keydown'), function () {
           self.callback(self.count())
         })
