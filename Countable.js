@@ -4,13 +4,13 @@
  * elements.
  *
  * @author   Sacha Schmid (<https://github.com/RadLikeWhoa>)
- * @version  1.2.0
+ * @version  1.3.0
  * @license  MIT
  * @see      <http://radlikewhoa.github.io/Countable/>
  */
 
-;(function () {
-  'use strict'
+;(function (global, undefined) {
+  'use strict';
 
   /**
    * String.trim() polyfill for non-supporting browsers. This is the
@@ -22,7 +22,7 @@
    *                    whitespace removed.
    */
 
-  if (typeof String.prototype.trim !== 'function') {
+  if (!String.prototype.trim) {
     String.prototype.trim = function () {
       return this.replace(/^\s+|\s+$/g, '')
     }
@@ -49,10 +49,8 @@
    * @return   {Countable}    An instance of the Countable class.
    */
 
-  window.Countable = function (element, callback, hard) {
-    var hasConsole
-
-    hasConsole = typeof console === 'object'
+  function Countable (element, callback, hard) {
+    var hasConsole = 'console' in global && 'log' in console
 
     /**
      * Countable throws a breaking error if the first parameter is not a valid
@@ -74,15 +72,15 @@
     this.element = element
     this.callback = callback ? callback : hasConsole ? function (counter) {
       console.log(counter)
-    } : function (counter) {}
+    } : undefined
     this.hard = hard
 
-    this.init(this)
+    this.init()
 
     return this
   }
 
-  window.Countable.prototype = {
+  Countable.prototype = {
 
     /**
      * ucs2decode function from the punycode.js library.
@@ -102,11 +100,10 @@
      */
 
     decode: function (string) {
-      var output, counter, length, value, extra
-
-      output = []
-      counter = 0
-      length = string.length
+      var output = [],
+          counter = 0,
+          length = string.length,
+          value, extra
 
       while (counter < length) {
         value = string.charCodeAt(counter++)
@@ -142,17 +139,11 @@
      */
 
     count: function () {
-      var orig, str, temp
+      var element = this.element,
+          orig = 'value' in element ? element.value : element.innerText || element.textContent,
+          temp = document.createElement('div'),
+          str
 
-      if (typeof this.element.value !== 'undefined') {
-        orig = this.element.value
-      } else {
-        orig = this.element.innerText || this.element.textContent
-      }
-
-      // Strip out HTML tags and trim leading and trailing whitespace.
-
-      temp = document.createElement('div')
       temp.innerHTML = orig
       str = (temp.innerText || temp.textContent).trim()
 
@@ -169,23 +160,41 @@
      * adding the `input` event listener to the given element.
      */
 
-    init: function (self) {
-      var hasInput
+    init: function () {
+      var self = this,
+          element = self.element,
+          callback = self.callback,
+          count = self.count,
+          hasInput = 'oninput' in element
 
-      hasInput = 'oninput' in self.element
+      if (!callback) return
 
-      self.callback(self.count())
+      callback(count.call(self))
 
-      if ('addEventListener' in window) {
-        self.element.addEventListener((hasInput ? 'input' : 'keydown'), function () {
-          self.callback(self.count())
+      if (element.addEventListener) {
+        element.addEventListener((hasInput ? 'input' : 'keydown'), function () {
+          callback(count.call(self))
         })
-      } else {
-        self.element.attachEvent((!hasInput ? 'onkeydown' : 'oninput'), function () {
-          self.callback(self.count())
+      } else if (element.attachEvent) {
+        element.attachEvent((!hasInput ? 'onkeydown' : 'oninput'), function () {
+          callback(count.call(self))
         })
       }
     }
-
   }
-}())
+
+  /**
+   * Expose Countable depending on the module system used across the
+   * application.
+   */
+
+  if (typeof exports === 'object') {
+    module.exports = Countable;
+  } else if (typeof define === 'function' && define.amd) {
+    define(function () {
+      return Countable
+    })
+  } else {
+    global.Countable = Countable;
+  }
+}(this))
