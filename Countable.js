@@ -50,7 +50,9 @@
    */
 
   function Countable (element, callback, hard) {
-    var hasConsole = 'console' in global && 'log' in console
+    var self = this,
+        hasConsole = 'console' in global && 'log' in console,
+        hasInput = 'oninput' in element
 
     /**
      * Countable throws a breaking error if the first parameter is not a valid
@@ -69,13 +71,25 @@
      * Countable will simply log the results to the console.
      */
 
-    this.element = element
-    this.callback = callback ? callback : hasConsole ? function (counter) {
+    self.element = element
+    self.callback = callback ? callback : hasConsole ? function (counter) {
       console.log(counter)
     } : undefined
-    this.hard = hard
+    self.hard = hard
 
-    this.init()
+    if (!self.callback) return
+
+    self.callback(self.count())
+
+    if (element.addEventListener) {
+      element.addEventListener((hasInput ? 'input' : 'keydown'), function () {
+        self.callback(self.count())
+      })
+    } else if (element.attachEvent) {
+      element.attachEvent((!hasInput ? 'onkeydown' : 'oninput'), function () {
+        self.callback(self.count())
+      })
+    }
 
     return this
   }
@@ -152,33 +166,6 @@
         words: str ? (str.replace(/['";:,.?¿\-!¡]+/g, '').match(/\S+/g) || []).length : 0,
         characters: str ? this.decode(str.replace(/\s/g, '')).length : 0,
         all: this.decode(orig.replace(/[\n\r]/g, '')).length
-      }
-    },
-
-    /**
-     * Initiate the Countable object by calling the `count()` function and
-     * adding the `input` event listener to the given element.
-     */
-
-    init: function () {
-      var self = this,
-          element = self.element,
-          callback = self.callback,
-          count = self.count,
-          hasInput = 'oninput' in element
-
-      if (!callback) return
-
-      callback(count.call(self))
-
-      if (element.addEventListener) {
-        element.addEventListener((hasInput ? 'input' : 'keydown'), function () {
-          callback(count.call(self))
-        })
-      } else if (element.attachEvent) {
-        element.attachEvent((!hasInput ? 'onkeydown' : 'oninput'), function () {
-          callback(count.call(self))
-        })
       }
     }
   }
