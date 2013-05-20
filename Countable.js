@@ -10,7 +10,7 @@
  */
 
 ;(function (global, undefined) {
-  'use strict';
+  'use strict'
 
   /**
    * String.trim() polyfill for non-supporting browsers. This is the
@@ -39,8 +39,10 @@
    *                                      the result. The callback should
    *                                      accept only one parameter. (default:
    *                                      logs to console)
-   * @param    {Boolean}      [hard]      Sets whether to use hard returns (2
-   *                                      line breaks) or not. (default: false)
+   * @param    {Boolean}      [options]   hardReturns: Use two line breaks
+   *                                      instead of one.
+   *                                      stripTags: Strip HTML tags before
+   *                                      counting.
    *
    * @example  new Countable(elem, function (counter) {
    *             alert(counter.words)
@@ -49,7 +51,7 @@
    * @return   {Countable}    An instance of the Countable class.
    */
 
-  function Countable (element, callback, hard) {
+  function Countable (element, callback, options) {
     var self = this,
         hasConsole = 'console' in global && 'log' in console,
         hasInput = 'oninput' in element
@@ -72,10 +74,30 @@
      */
 
     self.element = element
+
     self.callback = callback ? callback : hasConsole ? function (counter) {
       console.log(counter)
     } : undefined
-    self.hard = hard
+
+    self.options = {
+      hardReturns: false,
+      stripTags: false
+    }
+
+    /**
+     * The next line is used to support the old syntax of declaring the
+     * hardReturns setting using a dedicated syntax. This option will be
+     * deprecated in the next major release.
+     */
+
+    if (options) self.options.hardReturns = true
+
+    // Extend the default options with the options given to the constructor.
+
+    for (var prop in options) {
+      if (self.options.hasOwnProperty(prop))
+        self.options[prop] = options[prop]
+    }
 
     if (!self.callback) return
 
@@ -154,18 +176,27 @@
 
     count: function () {
       var element = this.element,
-          orig = 'value' in element ? element.value : element.innerText || element.textContent,
-          temp = document.createElement('div'),
-          str
+          original = 'value' in element ? element.value : element.innerText || element.textContent,
+          temp, stripped, trimmed
 
-      temp.innerHTML = orig
-      str = (temp.innerText || temp.textContent).trim()
+      /**
+       * If the option to strip tags from the text is set, create a temporary
+       * element that receives the value from the Countable element.
+       */
+
+      if (this.options.stripTags) {
+        temp = document.createElement('div')
+        temp.innerHTML = original
+        stripped = temp.innerText || temp.textContent
+      }
+
+      trimmed = (this.options.stripTags ? stripped : original).trim()
 
       return {
-        paragraphs: str ? (str.match(this.hard ? /\n{2,}/g : /\n+/g) || []).length + 1 : 0,
-        words: str ? (str.replace(/['";:,.?¿\-!¡]+/g, '').match(/\S+/g) || []).length : 0,
-        characters: str ? this.decode(str.replace(/\s/g, '')).length : 0,
-        all: this.decode(orig.replace(/[\n\r]/g, '')).length
+        paragraphs: trimmed ? (trimmed.match(this.options.hardReturns ? /\n{2,}/g : /\n+/g) || []).length + 1 : 0,
+        words: trimmed ? (trimmed.replace(/['";:,.?¿\-!¡]+/g, '').match(/\S+/g) || []).length : 0,
+        characters: trimmed ? this.decode(trimmed.replace(/\s/g, '')).length : 0,
+        all: this.decode((this.options.stripTags ? stripped : original).replace(/[\n\r]/g, '')).length
       }
     }
   }
