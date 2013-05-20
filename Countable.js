@@ -4,7 +4,7 @@
  * elements.
  *
  * @author   Sacha Schmid (<https://github.com/RadLikeWhoa>)
- * @version  1.3.0
+ * @version  1.4.0
  * @license  MIT
  * @see      <http://radlikewhoa.github.io/Countable/>
  */
