@@ -39,11 +39,18 @@ counter = {
 ```
 
 Property   | Meaning
----------- | ----------------------------------------
+---------- | --------------------------------------------------------------------------------------------
 paragraphs | The number of paragraphs. Paragraphs can be separated by either a soft or a hard (two line breaks) return. To use hard returns, add a truthy parameter to your Countable call after the callback.
 words      | The number of words. Words are split using spaces.
 characters | The number of characters (without spaces). This contains all non-whitespace characters.
 all        | The number of characters including whitespace. This is the total number of all characters in the element.
+
+You can optionally change Countable's behaviour by passing an options object as the third parameter.
+
+Option      | Value     | Meaning
+----------- | --------- | --------------------------------------------------------
+hardReturns | `Boolean` | Use two returns to seperate a paragraph instead of one.
+stripTags   | `Boolean` | Strip HTML tags before counting the values.
 
 ## Browser Support
 
