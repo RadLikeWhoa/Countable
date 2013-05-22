@@ -375,8 +375,3 @@
     global.Countable = Countable
   }
 }(this))
-
-var elements = document.getElementsByTagName('textarea')
-
-Countable.live(elements, function (counter) { console.log(counter) })
-Countable.die(elements[0])
