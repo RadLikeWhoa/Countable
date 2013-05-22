@@ -4,7 +4,7 @@
  * elements.
  *
  * @author   Sacha Schmid (<https://github.com/RadLikeWhoa>)
- * @version  1.4.0
+ * @version  1.4.1
  * @license  MIT
  * @see      <http://radlikewhoa.github.io/Countable/>
  */
@@ -39,10 +39,12 @@
    *                                      the result. The callback should
    *                                      accept only one parameter. (default:
    *                                      logs to console)
-   * @param    {Boolean}      [options]   hardReturns: Use two line breaks
+   * @param    {Object}       [options]   hardReturns: Use two line breaks
    *                                      instead of one.
    *                                      stripTags: Strip HTML tags before
    *                                      counting.
+   *                                      once: Execute the callback only once
+   *                                      and don't bind any events.
    *
    * @example  new Countable(elem, function (counter) {
    *             alert(counter.words)
@@ -81,7 +83,8 @@
 
     self.options = {
       hardReturns: false,
-      stripTags: false
+      stripTags: false,
+      once: false
     }
 
     /**
@@ -102,6 +105,8 @@
     if (!self.callback) return
 
     self.callback(self.count())
+
+    if (self.options.once) return
 
     if (element.addEventListener) {
       element.addEventListener((hasInput ? 'input' : 'keydown'), function () {
