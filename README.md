@@ -77,7 +77,7 @@ Countable.enabled(document.getElementById('text'))
 
 ## Browser Support
 
-Countable supports all modern browsers. Internet Explorer is supported down to version 8. The last version to support Internet Explorer 7 was 1.4.0.
+Countable supports all modern browsers. Internet Explorer is supported down to version 8. The last version to support Internet Explorer 7 was [1.4.1](https://github.com/RadLikeWhoa/Countable/tree/28cb82eba57a016b32fdd0970b5e8282dcc667ba).
 
 ## About the Author
 
