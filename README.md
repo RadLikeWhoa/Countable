@@ -6,46 +6,68 @@ Countable is a JavaScript function to add **live paragraph-, word- and character
 
 ## Installation
 
-The preferred method of installation is **[bower](https://github.com/bower/bower)**: `bower install Countable`.
+The preferred method of installation is **[bower](https://github.com/bower/bower)**: `bower install Countable`. Alternatively, you can download the latest [zipball](https://github.com/RadLikeWhoa/Countable/archive/master.zip) or copy the [script](https://raw.github.com/RadLikeWhoa/Countable/master/Countable.js) directly.
 
-Alternatively, you can download the latest [zipball](https://github.com/RadLikeWhoa/Countable/archive/master.zip) or copy the [script](https://raw.github.com/RadLikeWhoa/Countable/master/Countable.js) directly.
+## API
 
-## API // EDIT
+Countable is available as a Node / CommonJS module, an AMD module and as a global. All methods are accessed on the Countable object directly.
 
-Countable enables live counting on `<input>` and `<textarea>` elements as well as elements that have the `contenteditable` attribute. Elements whose text contents cannot be edited are simply parsed once.
+### Callbacks
 
-You can define your own callback function that Countable should use. If you don't pass such a function, the results are simply logged to the console.
-
-```html
-<script src="js/Countable.js"></script>
-<script>
-  var elem = document.getElementById('field')
-
-  new Countable(elem, function (counter) {
-    alert(counter.words)
-  })
-</script>
-```
-
-Countable takes the value from an HTML element and counts paragraphs, words and characters (with and without spaces). The callback function can receive a single parameter. This parameter is an object containing all the calculated values. In the above example, `counter` holds all numbers returned from Countable.
+The `live` and `once` method both accept a callback. The given callback is then called whenever needed with a single parameter that carries all the releavant data. `this` is bound to the current element. Take the following code for an example.
 
 ```javascript
-counter = {
-  paragraphs: 0,
-  words: 0,
-  characters: 0,
-  all: 0
-}
+Countable.once('#text', function (counter) {
+  console.log(this, counter)
+})
+```
+
+```
+=> <textarea id="text"></textarea>, { all: 0, characters: 0, paragraphs: 0, words: 0 }
 ```
 
 Property   | Meaning
 ---------- | --------------------------------------------------------------------------------------------
-paragraphs | The number of paragraphs. Paragraphs can be separated by either a soft or a hard (two line breaks) return. To use hard returns, add a truthy parameter to your Countable call after the callback.
+paragraphs | The number of paragraphs. Paragraphs can be separated by either a soft or a hard (two line breaks) return. To use hard returns, set the corresponding option (`hardReturns`).
 words      | The number of words. Words are split using spaces.
 characters | The number of characters (without spaces). This contains all non-whitespace characters.
 all        | The number of characters including whitespace. This is the total number of all characters in the element.
 
-You can optionally change Countable's behaviour by passing an options object as the third parameter.
+### Countable#live(selector, callback, options)
+
+Bind the callback to all elements matching a selector. The callback gets called everytime the elements value or text is changed.
+
+```javascript
+Countable.live('#text', function (counter) {
+  console.log(counter)
+})
+```
+
+### Countable#die(selector)
+
+Remove the bound callback from all elements matching a selector.
+
+```javascript
+Countable.die('#text')
+```
+
+### Countable#once(selector, callback, options)
+
+Similar to `live`, but the callback is only executed once, there are no events bound.
+
+```javascript
+Countable.once('#text', function (counter) {
+  console.log(counter)
+})
+```
+
+### Countable#enabled(element)
+
+Checks if an element has the live-counting functionality bound.
+
+```javascript
+Countable.enabled(document.getElementById('text'))
+```
 
 ### Options
 
@@ -55,7 +77,7 @@ You can optionally change Countable's behaviour by passing an options object as 
 
 ## Browser Support
 
-Countable supports all modern browsers. Internet Explorer is supported down to version 8. The last version to support Internet Explorer 7 was 1.4.0. If you want to use the new version while still supporting IE7, you'll need to include a polyfill for `document.querySelectorAll`.
+Countable supports all modern browsers. Internet Explorer is supported down to version 8. The last version to support Internet Explorer 7 was 1.4.0.
 
 ## About the Author
 
