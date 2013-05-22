@@ -176,7 +176,7 @@
 
     count: function () {
       var element = this.element,
-          original = 'value' in element ? element.value : element.innerText || element.textContent,
+          original = 'value' in element ? element.value : element.textContent || element.innerText || '',
           temp, stripped, trimmed
 
       /**
@@ -187,7 +187,7 @@
       if (this.options.stripTags) {
         temp = document.createElement('div')
         temp.innerHTML = original
-        stripped = temp.innerText || temp.textContent
+        stripped = temp.textContent || temp.innerText || ''
       }
 
       trimmed = (this.options.stripTags ? stripped : original).trim()
