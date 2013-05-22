@@ -13,6 +13,13 @@
   'use strict'
 
   /**
+   * Countable needs querySelectorAll to work properly. If it's not supported,
+   * no functionality is added.
+   */
+
+  if (!document.querySelectorAll) return
+
+  /**
    * @private
    *
    * `_liveElements` holds all elements that have the live-counting
@@ -132,9 +139,13 @@
    *
    * @private
    *
-   * @param   {Object}  options  Countable accepts the options `hardReturns` and
-   *                             `stripTags`. These can be used in a function
-   *                             call to override the default behaviour.
+   * @param   {Object}  options  Countable accepts the following options. They
+   *                             can be used in a function call to override the
+   *                             default behaviour.
+   *                             `hardReturns`: Use two returns to seperate a
+   *                             paragraph instead of one.
+   *                             `stripTags`: Strip HTML tags before counting
+   *                             the values.
    *
    * @return  {Object}  The new options object.
    */

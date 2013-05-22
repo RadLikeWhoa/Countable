@@ -1,16 +1,16 @@
 # Countable
 
-Countable is a JavaScript function to add **live paragraph-, word- and character-counting** to an HTML element. Countable does not rely on any libraries and stays under 1KB when minified and gzipped.
+Countable is a JavaScript function to add **live paragraph-, word- and character-counting** to an HTML element. Countable is a *zero-dependency* library and comes in at **1KB** when minified and gzipped.
 
-[View the Demo](http://radlikewhoa.github.io/Countable#demo)
+**[View the Demo](http://radlikewhoa.github.io/Countable#demo)**
 
 ## Installation
 
-* Install using [bower](http://github.com/twitter/bower): `bower install Countable`
-* Clone the git repo: `git clone git@github.com:RadLikeWhoa/Countable.git`
-* Copy the [contents of the script](https://raw.github.com/RadLikeWhoa/Countable/master/Countable.js) directly
+The preferred method of installation is **[bower](https://github.com/bower/bower)**: `bower install Countable`.
 
-## Usage
+Alternatively, you can download the latest [zipball](https://github.com/RadLikeWhoa/Countable/archive/master.zip) or copy the [script](https://raw.github.com/RadLikeWhoa/Countable/master/Countable.js) directly.
+
+## API // EDIT
 
 Countable enables live counting on `<input>` and `<textarea>` elements as well as elements that have the `contenteditable` attribute. Elements whose text contents cannot be edited are simply parsed once.
 
@@ -47,20 +47,19 @@ all        | The number of characters including whitespace. This is the total nu
 
 You can optionally change Countable's behaviour by passing an options object as the third parameter.
 
-Option      | Value     | Meaning
------------ | --------- | --------------------------------------------------------
-hardReturns | `Boolean` | Use two returns to seperate a paragraph instead of one.
-stripTags   | `Boolean` | Strip HTML tags before counting the values.
+### Options
+
+`Boolean` *hardReturns* — Use two returns to seperate a paragraph instead of one.
+
+`Boolean` *stripTags* — Strip HTML tags before counting the values.
 
 ## Browser Support
 
-Chrome   | Safari   | Firefox   | Opera   | Internet Explorer
-:------: | :------: | :-------: | :-----: | :-----------------:
-Yes      | Yes      | Yes       | Yes     | 7+
+Countable supports all modern browsers. Internet Explorer is supported down to version 8. The last version to support Internet Explorer 7 was 1.4.0. If you want to use the new version while still supporting IE7, you'll need to include a polyfill for `document.querySelectorAll`.
 
 ## About the Author
 
-My name is [Sacha Schmid](http://sachaschmid.ch). I'm a front-end engineer from Switzerland. I am the creator of [SSGS](http://github.com/RadLikeWhoa/SSGS) and [other open source projects](http://github.com/RadLikeWhoa).
+My name is [Sacha Schmid](https://twitter.com/sachaschmid). I'm a front-end engineer from Switzerland. I am the creator of [SSGS](http://github.com/RadLikeWhoa/SSGS) and [other open source projects](https://github.com/RadLikeWhoa).
 
 ### Contributors
 
