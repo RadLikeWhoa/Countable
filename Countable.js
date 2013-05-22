@@ -177,17 +177,14 @@
     count: function () {
       var element = this.element,
           original = 'value' in element ? element.value : element.textContent || element.innerText || '',
-          temp, stripped, trimmed
+          stripped, trimmed
 
       /**
-       * If the option to strip tags from the text is set, create a temporary
-       * element that receives the value from the Countable element.
+       * If the option to strip tags from the text is set, strip HTML tags.
        */
 
       if (this.options.stripTags) {
-        temp = document.createElement('div')
-        temp.innerHTML = original
-        stripped = temp.textContent || temp.innerText || ''
+        stripped = original.replace(/<\/?[a-z][^>]*>/gi, '')
       }
 
       trimmed = (this.options.stripTags ? stripped : original).trim()
