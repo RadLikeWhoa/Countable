@@ -1,7 +1,6 @@
 /**
  * Countable is a script to allow for live paragraph-, word- and character-
- * counting on an HTML element. Usage is recommended on `input` and `textarea`
- * elements.
+ * counting on an HTML element.
  *
  * @author   Sacha Schmid (<https://github.com/RadLikeWhoa>)
  * @version  1.4.2
