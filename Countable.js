@@ -4,7 +4,7 @@
  * elements.
  *
  * @author   Sacha Schmid (<https://github.com/RadLikeWhoa>)
- * @version  1.4.1
+ * @version  1.4.2
  * @license  MIT
  * @see      <http://radlikewhoa.github.io/Countable/>
  */
@@ -182,23 +182,21 @@
     count: function () {
       var element = this.element,
           original = 'value' in element ? element.value : element.textContent || element.innerText || '',
-          stripped, trimmed
+          trimmed
 
       /**
        * If the option to strip tags from the text is set, strip HTML tags.
        */
 
-      if (this.options.stripTags) {
-        stripped = original.replace(/<\/?[a-z][^>]*>/gi, '')
-      }
+      if (this.options.stripTags) original = original.replace(/<\/?[a-z][^>]*>/gi, '')
 
-      trimmed = (this.options.stripTags ? stripped : original).trim()
+      trimmed = original.trim()
 
       return {
         paragraphs: trimmed ? (trimmed.match(this.options.hardReturns ? /\n{2,}/g : /\n+/g) || []).length + 1 : 0,
         words: trimmed ? (trimmed.replace(/['";:,.?¿\-!¡]+/g, '').match(/\S+/g) || []).length : 0,
         characters: trimmed ? this.decode(trimmed.replace(/\s/g, '')).length : 0,
-        all: this.decode((this.options.stripTags ? stripped : original).replace(/[\n\r]/g, '')).length
+        all: this.decode(original.replace(/[\n\r]/g, '')).length
       }
     }
   }
