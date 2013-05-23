@@ -2,11 +2,11 @@
 
 Countable is a JavaScript function to add **live paragraph-, word- and character-counting** to an HTML element. Countable is a *zero-dependency* library and comes in at **1KB** when minified and gzipped.
 
-**[View the Demo](http://radlikewhoa.github.io/Countable#demo)**
+[**View the Demo**](http://radlikewhoa.github.io/Countable#demo)
 
 ## Installation
 
-The preferred method of installation is **[bower](https://github.com/bower/bower)**: `bower install Countable`. Alternatively, you can download the latest [zipball](https://github.com/RadLikeWhoa/Countable/archive/master.zip) or copy the [script](https://raw.github.com/RadLikeWhoa/Countable/master/Countable.js) directly.
+The preferred method of installation is [**bower**](https://github.com/bower/bower): `bower install Countable`. Alternatively, you can download the latest [zipball](https://github.com/RadLikeWhoa/Countable/archive/master.zip) or copy the [script](https://raw.github.com/RadLikeWhoa/Countable/master/Countable.js) directly.
 
 ## API
 
@@ -71,19 +71,22 @@ Countable.enabled(document.getElementById('text'))
 
 ### Options
 
-`Boolean` *hardReturns* — Use two returns to seperate a paragraph instead of one.
+`Boolean` `hardReturns` — Use two returns to seperate a paragraph instead of one.
 
-`Boolean` *stripTags* — Strip HTML tags before counting the values.
+`Boolean` `stripTags` — Strip HTML tags before counting the values.
 
 ## Browser Support
 
-Countable supports all modern browsers. Internet Explorer is supported down to version 8. The last version to support Internet Explorer 7 was [1.4.1](https://github.com/RadLikeWhoa/Countable/tree/28cb82eba57a016b32fdd0970b5e8282dcc667ba).
+Countable supports all modern browsers. Internet Explorer is supported down to version 8. The last version to support Internet Explorer 7 was [1.4.2](https://github.com/RadLikeWhoa/Countable/tree/28cb82eba57a016b32fdd0970b5e8282dcc667ba).
 
 ## About the Author
 
-My name is [Sacha Schmid](https://twitter.com/sachaschmid). I'm a front-end engineer from Switzerland. I am the creator of [SSGS](http://github.com/RadLikeWhoa/SSGS) and [other open source projects](https://github.com/RadLikeWhoa).
+My name is [Sacha Schmid](http://sachaschmid.ch) ([**@sachaschmid**](https://twitter.com/sachaschmid)). I'm a front-end engineer from Switzerland. I am the creator of [SSGS](http://github.com/RadLikeWhoa/SSGS) and [other open source projects](https://github.com/RadLikeWhoa).
+
+Are you using Countable in a project? I'd love to see what you've achieved. Just [**send me a tweet**](https://twitter.com/sachaschmid).
 
 ### Contributors
 
 * [@epmatsw](https://github.com/epmatsw)
 * [@craniumslows](https://github.com/craniumslows)
+* [@Rob--W](https://github.com/Rob--W)
