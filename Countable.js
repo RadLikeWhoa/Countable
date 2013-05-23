@@ -92,7 +92,7 @@
      * deprecated in the next major release.
      */
 
-    if (options) self.options.hardReturns = true
+    if (typeof options == 'boolean' && options) self.options.hardReturns = true
 
     // Extend the default options with the options given to the constructor.
 
