@@ -185,11 +185,7 @@
      * element.
      */
 
-    if (options.stripTags) {
-      temp = document.createElement('div')
-      temp.innerHTML = original
-      original = temp.innerText || temp.textContent
-    }
+    if (options.stripTags) original = original.replace(/<\/?[a-z][^>]*>/gi, '')
 
     trimmed = original.trim()
 
