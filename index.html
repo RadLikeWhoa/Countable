@@ -4,23 +4,27 @@
     <meta charset="utf-8">
     <meta name="description" content="Countable is a JavaScript function to add live paragraph-, word- and character-counting to an HTML element.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Countable.js—live word-counting in JavaScript</title>
+    <title>Countable.js — Live word-counting in JavaScript</title>
     <!--[if lt IE 9]>
       <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     <link rel="stylesheet" href="css/style.css">
-    <link rel="author" href="humans.txt">
   </head>
   <body>
     <header>
-      <div class="wrap">
+      <div class="wrap wrap--padded-small">
         <h1><a href="http://github.com/RadLikeWhoa/Countable">Countable.js</a></h1>
-        <p class="intro">Countable is a JavaScript function to add <strong>live paragraph-, word- and character-counting</strong> to an HTML element. Countable does not rely on any libraries and is very small in size.</p>
-        <a href="http://github.com/RadLikeWhoa/Countable" class="download">Download on GitHub</a>
       </div>
     </header>
-    <section class="wrap" id="demo">
-      <div class="demo">
+    <section class="section--bordered">
+      <div class="wrap">
+        <p class="intro">Countable is a JavaScript function to add <strong>live paragraph-, word- and character-counting</strong> to an HTML element. Countable does not rely on any libraries and is very small in size.</p>
+        <div class="button-wrapper"><a href="http://github.com/RadLikeWhoa/Countable" class="button button--download">Download on GitHub</a><span id="github-watch-count" class="button__count" style="display: none"></span></div>
+      </div>
+    </section>
+    <section class="section--bordered section--alt" id="demo">
+      <div class="demo wrap">
+        <h2>Demo</h2>
         <textarea id="countableArea" autofocus placeholder="Start entering some text here"></textarea>
         <ul class="result">
           <li><strong>Paragraphs: </strong><span id="result__paragraphs">0</span></li>
@@ -29,12 +33,37 @@
           <li><strong>Characters (with spaces): </strong><span id="result__all">0</span></li>
         </ul>
       </div>
-      <pre class="language-js"><code>new Countable(area, function (counter) {
-  results.paragraphs.textContent = counter.paragraphs;
-  results.words.textContent = counter.words;
-  results.characters.textContent = counter.characters;
-  results.all.textContent = counter.all;
-});</code></pre>
+    </section>
+    <section>
+      <div class="wrap">
+        <h2>Usage</h2>
+        <p>Countable offers easy-to-use methods you can use in your project. <code class="language-javascript">Countable.live()</code> and <code class="language-javascript">Countable.once()</code> accept one or more HTML elements and a callback that receives one parameter — holding all counted values — and <code class="language-javascript">this</code> bound to the relevant element.</p>
+        <hr>
+        <h3>Available methods</h3>
+        <p>To enable full live-counting on an element, call <code class="language-javascript">Countable.live()</code>.</p>
+        <pre class="language-javascript"><code>var area = document.getElementById('area')
+
+Countable.live(area, function (counter) {
+  console.log(counter)
+})</code></pre>
+        <p>In order to remove the Countable functionality from an element, call <code class="language-javascript">Countable.die()</code>.</p>
+        <pre class="language-javascript"><code>Countable.die(area)</code></pre>
+        <p>There might be situations where you only want to count paragraphs, words and characters of an element once, i.e. if you want to display the word count of an article on your blog. In order to achieve this, call <code class="language--javascript">Countable.once()</code>.</p>
+        <pre class="language-javascript"><code>Countable.once(area, function (counter) {
+  console.log(counter)
+})</code></pre>
+        <p>Countable also provides a handy method to check if live-counting functionality is enabled on an element: <code class="language-javascript">Countable.enabled()</code>.</p>
+        <pre class="language-javascript">Countable.enabled(area)</code></pre>
+        <hr>
+        <h3>Options</h3>
+        <p><code class="language-javascript">Countable.live()</code> and <code class="language-javascript">Countable.once()</code> both accept a third argument, an options object that allows you to change how Countable treats certain aspects of your element's text.</p>
+        <pre class="language-javascript"><code>{
+  hardReturns: false,
+  stripTags: false
+}</code></pre>
+        <p>By default, paragraphs are split by a single return (a soft return). By setting <code class="language-javascript">hardReturns</code> to true, Countable splits paragraphs after two returns.</p>
+        <p>Depending on your application and audience, you might need to strip HTML tags from the text before counting it. You can do this by setting <code class="language-javascript">stripTags</code> to true.</p>
+      </div>
     </section>
     <footer>
       <div class="wrap">
@@ -42,31 +71,74 @@
       </div>
     </footer>
     <script src="https://rawgithub.com/RadLikeWhoa/Countable/master/Countable.js"></script>
+    <script src="js/prism.js"></script>
     <script>
-      var area = document.getElementById('countableArea'),
+      var hasTextContent = 'textContent' in document.body,
+          area = document.getElementById('countableArea'),
           results = {
             paragraphs: document.getElementById('result__paragraphs'),
             words: document.getElementById('result__words'),
             characters: document.getElementById('result__characters'),
             all: document.getElementById('result__all')
-          }
+          },
+          _gaq = [['_setAccount', 'UA-39380123-1'], ['_trackPageview']]
 
-      new Countable(area, function (counter) {
-        if ('textContent' in document.body) {
-          results.paragraphs.textContent = counter.paragraphs
-          results.words.textContent = counter.words
-          results.characters.textContent = counter.characters
-          results.all.textContent = counter.all
+      function get (url, callback) {
+        var ajaxRequest
+
+        try {
+          ajaxRequest = new XMLHttpRequest()
+        } catch (e) {
+          try {
+            ajaxRequest = new ActiveXObject("Msxml2.XMLHTTP")
+          } catch (e) {
+            try {
+              ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP")
+            } catch (e){
+              return null
+            }
+          }
+        }
+
+        ajaxRequest.open("GET", url, true)
+        ajaxRequest.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
+        ajaxRequest.send(null)
+
+        ajaxRequest.onreadystatechange = function() {
+          if (ajaxRequest.readyState == 4) {
+            callback(ajaxRequest.responseText)
+          }
+        }
+
+        return ajaxRequest
+      }
+
+      Element.prototype.text = function (text) {
+        if (hasTextContent) {
+          this.textContent = text
         } else {
-          results.paragraphs.innerText = counter.paragraphs
-          results.words.innerText = counter.words
-          results.characters.innerText = counter.characters
-          results.all.textContent = counter.all
+          this.innerText = text
+        }
+
+        return this
+      }
+
+      Countable.live(area, function (counter) {
+        for (var field in results) {
+          results[field].text(counter[field])
         }
       })
-    </script>
-    <script>
-      var _gaq = [['_setAccount', 'UA-39380123-1'], ['_trackPageview']];
+
+      get('https://api.github.com/repos/RadLikeWhoa/Countable', function (data) {
+        var counter = document.getElementById('github-watch-count'),
+            watchers = JSON.parse(data).watchers
+
+        if (!counter || !watchers) return
+
+        counter.text(watchers).style.display = 'inline-block'
+        counter.title = 'Countable has ' + watchers + ' stargazers on GitHub'
+      })
+
       (function(d) {
         var g = d.createElement('script'),
             s = d.scripts[0]

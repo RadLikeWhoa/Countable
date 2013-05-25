@@ -71,24 +71,51 @@ body {
   font: 100%/1.5 Source Sans Pro, sans-serif;
 }
 
+.section--bordered {
+  border-bottom: 1px solid #eee;
+}
+
+.section--alt {
+  background-color: #fafafa;
+}
+
 .wrap {
   max-width: 50em;
   margin: 0 auto;
   padding: 3em 1.5em;
 }
 
+.wrap--padded-small {
+  padding: 1.5em;
+}
+
 a {
   color: #eb8a4c;
   text-decoration: none;
+  border-bottom: 1px solid;
   @include transition(border-bottom 0.25s ease-in-out);
+}
 
-  &:hover {
-    border-bottom-width: 4px;
-  }
+h2 {
+  font-size: 1.5em;
+  line-height: 1;
+  margin-top: 0;
+}
+
+h3 {
+  font-size: 1.2em;
+  line-height: 1.25;
+  margin-top: 0;
 }
 
 p {
   margin-top: 0;
+  margin-bottom: 1.5em;
+}
+
+hr {
+  border: 0;
+  border-bottom: 1px solid #eee;
   margin-bottom: 1.5em;
 }
 
@@ -114,13 +141,17 @@ header,
 footer {
   text-align: center;
   color: #fff;
-  background-color: #eb8a4c;
+  background-color: lighten(#eb8a4c, 5%);
+  box-shadow: 0 1px 3px rgba(#111, 0.15);
 
   a {
     font-weight: bold;
     color: #fff;
-    border-bottom: 2px solid;
   }
+}
+
+header a {
+  border-bottom: 0;
 }
 
 h1 {
@@ -146,30 +177,75 @@ h1 {
   font-size: 1.5em;
 }
 
-.download {
-  display: block;
-  max-width: 15em;
-  margin: 0 auto;
-  padding: 0.75em;
-  text-shadow: 0 -1px 0 rgba(#111, 0.25);
-  @include background-image(linear-gradient(top, rgba(#fff, 0.5), rgba(#fff, 0.3)));
-  background-color: #eb8a4c;
-  background-color: lighten(#eb8a4c, 5%)\9;
+.button-wrapper {
+  text-align: center;
+}
+
+.button {
+  display: inline-block;
+  padding: 0.75em 1em;
+  font-weight: bold;
   border: 0;
   border-radius: 3px;
   box-shadow: 0 1px 3px rgba(#111, 0.2);
   @include transition(background-color 0.25s ease-in-out);
 
-  &:hover,
-  &:focus {
-    border-bottom-width: 1px;
-    background-color: lighten(#eb8a4c, 5%);
-    background-color: lighten(#eb8a4c, 10%)\9;
-  }
-
   &:active {
     position: relative;
     top: 1px;
+  }
+}
+
+.button--download {
+  color: #fff;
+  text-shadow: 0 -1px 0 rgba(#111, 0.25);
+  @include background-image(linear-gradient(top, rgba(#fff, 0.3), rgba(#fff, 0.1)));
+  background-color: #eb8a4c;
+  background-color: lighten(#eb8a4c, 5%)\9;
+
+  &:hover,
+  &:focus {
+    background-color: lighten(#eb8a4c, 5%);
+    background-color: lighten(#eb8a4c, 10%)\9;
+  }
+}
+
+.button__count {
+  position: relative;
+  display: inline-block;
+  padding: 0.75em;
+  margin-left: 1em;
+  color: #333;
+  text-shadow: none;
+  line-height: 1.4;
+  @include background-image(linear-gradient(top, rgba(#fff, 0.3), rgba(#fff, 0.1)));
+  background-color: #fafafa;
+  border: 1px solid #eee;
+  border-radius: 3px;
+
+  &::before,
+  &::after {
+    content: " ";
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    display: block;
+    width: 0px;
+    height: 0px;
+  }
+
+  &::before {
+    margin-top: -0.6875em;
+    border-top: 0.6875em solid transparent;
+    border-bottom: 0.6875em solid transparent;
+    border-right: 0.6875em solid #eee;
+  }
+
+  &::after {
+    margin-top: -0.625em;
+    border-top: 0.625em solid transparent;
+    border-bottom: 0.625em solid transparent;
+    border-right: 0.625em solid #fafafa;
   }
 }
 
@@ -253,7 +329,7 @@ code {
 }
 
 pre {
-  margin: 0;
+  margin: 0 0 1.5em;
   padding: 1.5em;
   @include background(linear-gradient(left, #f5f5f5 30%, rgba(#f5f5f5, 0)), linear-gradient(left, rgba(#f5f5f5, 0), #f5f5f5 70%), radial-gradient(0 50%, farthest-side, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)), radial-gradient(100% 50%, farthest-side, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)));
   background-color: #f5f5f5;
@@ -266,3 +342,5 @@ pre {
   overflow-x: scroll;
   overflow-y: visible;
 }
+
+@import "prism";
