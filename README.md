@@ -90,6 +90,31 @@ Depending on your application and audience, you might need to strip HTML tags fr
 
 Countable supports all modern browsers. Internet Explorer is supported down to version 7. Note that some browsers don't implement the `oninput` event consistently so there might be differences in the way Countable works in different browsers.
 
+### Upgrading from version 1.x.x
+
+Upgrading from version 1.x.x is easy. Most likely, you've used something like the following:
+
+```javascript
+var area = document.getElementById('area')
+
+new Countable(area, function (counter) {
+  console.log(counter)
+}, { stripTags: true })
+```
+
+The new syntax offers more functions as described above, but to keep the live-counting functionality, you just write this:
+
+```javascript
+var area = document.getElementById('area')
+
+Countable.live(area, function (counter) {
+  console.log(counter)
+}, { stripTags: true })
+```
+
+* The callback parameter is not optional anymore, it's required now
+* `options.once` is gone and has been replaced with `Countable.once()`
+
 ## About the Author
 
 My name is [Sacha Schmid](http://sachaschmid.ch) ([**@sachaschmid**](https://twitter.com/sachaschmid)). I'm a front-end engineer from Switzerland. I am the creator of [SSGS](http://github.com/RadLikeWhoa/SSGS) and [other open source projects](https://github.com/RadLikeWhoa).
