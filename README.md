@@ -8,7 +8,7 @@ Countable is a JavaScript function to add **live paragraph-, word- and character
 
 The preferred method of installation is [**bower**](https://github.com/bower/bower): `bower install Countable`. Alternatively, you can download the latest [zipball](https://github.com/RadLikeWhoa/Countable/archive/master.zip) or copy the [script](https://raw.github.com/RadLikeWhoa/Countable/master/Countable.js) directly.
 
-## API
+## Usage
 
 Countable is available as a Node / CommonJS module, an AMD module and as a global. All methods are accessed on the Countable object directly.
 
@@ -17,7 +17,9 @@ Countable is available as a Node / CommonJS module, an AMD module and as a globa
 The `live` and `once` method both accept a callback. The given callback is then called whenever needed with a single parameter that carries all the releavant data. `this` is bound to the current element. Take the following code for an example.
 
 ```javascript
-Countable.once('#text', function (counter) {
+var area = document.getElementById('text')
+
+Countable.once(area, function (counter) {
   console.log(this, counter)
 })
 ```
@@ -33,51 +35,60 @@ words      | The number of words. Words are split using spaces.
 characters | The number of characters (without spaces). This contains all non-whitespace characters.
 all        | The number of characters including whitespace. This is the total number of all characters in the element.
 
-### Countable#live(selector, callback, options)
+### Countable#live(elements, callback, options)
 
-Bind the callback to all elements matching a selector. The callback gets called everytime the elements value or text is changed.
+Bind the callback to all given elements. The callback gets called everytime the element's value or text is changed.
 
 ```javascript
-Countable.live('#text', function (counter) {
+Countable.live(area, function (counter) {
   console.log(counter)
 })
 ```
 
-### Countable#die(selector)
+### Countable#die(elements)
 
-Remove the bound callback from all elements matching a selector.
+Remove the bound callback from all given elements.
 
 ```javascript
-Countable.die('#text')
+Countable.die(area)
 ```
 
-### Countable#once(selector, callback, options)
+### Countable#once(elements, callback, options)
 
-Similar to `live`, but the callback is only executed once, there are no events bound.
+Similar to `Countable.live()`, but the callback is only executed once, there are no events bound.
 
 ```javascript
-Countable.once('#text', function (counter) {
+Countable.once(area, function (counter) {
   console.log(counter)
 })
 ```
 
 ### Countable#enabled(element)
 
-Checks if an element has the live-counting functionality bound.
+Checks the live-counting functionality is bound to the given.
 
 ```javascript
-Countable.enabled(document.getElementById('text'))
+Countable.enabled(area)
 ```
 
 ### Options
 
-`Boolean` `hardReturns` — Use two returns to seperate a paragraph instead of one.
+`Countable.live()` and `Countable.once()` both accept a third argument, an options object that allows you to change how Countable treats certain aspects of your element's text.
 
-`Boolean` `stripTags` — Strip HTML tags before counting the values.
+```javascript
+{
+  hardReturns: false,
+  stripTags: false
+}
+```
+
+By default, paragraphs are split by a single return (a soft return). By setting `hardReturns` to true, Countable splits paragraphs after two returns.
+
+Depending on your application and audience, you might need to strip HTML tags from the text before counting it. You can do this by setting `stripTags` to true.
 
 ## Browser Support
 
-Countable supports all modern browsers. Internet Explorer is supported down to version 8. The last version to support Internet Explorer 7 was [1.4.2](https://github.com/RadLikeWhoa/Countable/tree/28cb82eba57a016b32fdd0970b5e8282dcc667ba).
+Countable supports all modern browsers. Internet Explorer is supported down to version 7. Note that some browsers don't implement the `oninput` event consistently so there might be differences in the way Countable works in different browsers.
 
 ## About the Author
 
