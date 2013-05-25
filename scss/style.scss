@@ -183,7 +183,7 @@ h1 {
 
 .button {
   display: inline-block;
-  padding: 0.75em 1em;
+  padding: 0.75em 1.5em;
   font-weight: bold;
   border: 0;
   border-radius: 3px;
@@ -273,8 +273,10 @@ h1 {
   border: 1px solid #ddd;
   border-bottom: 0;
   border-radius: 5px 5px 0 0;
+  box-shadow: 0;
   resize: vertical;
   cursor: pointer;
+  @include transition(border-color 0.25s ease-in-out, box-shadow 0.25s ease-in-out);
 
   &:focus {
     border: 1px solid #4cadeb;
@@ -342,5 +344,9 @@ pre {
   overflow-x: scroll;
   overflow-y: visible;
 }
+
+/**
+ * PRISM
+ */
 
 @import "prism";
