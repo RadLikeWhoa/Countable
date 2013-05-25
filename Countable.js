@@ -8,15 +8,13 @@
  * @see      <http://radlikewhoa.github.io/Countable/>
  */
 
+/**
+ * Note: For the purpose of this internal documentation, arguments of the type
+ * {Nodes} are to be interpreted as either {NodeList} or {Element}.
+ */
+
 ;(function (global) {
   'use strict'
-
-  /**
-   * Countable needs querySelectorAll to work properly. If it's not supported,
-   * no functionality is added.
-   */
-
-  if (!document.querySelectorAll) return
 
   /**
    * @private
@@ -102,49 +100,39 @@
    *
    * @private
    *
-   * @param   {String}            selector  The selector to validate.
+   * @param   {Nodes}     elements  The (collection of) element(s) to
+   *                                validate.
    *
-   * @param   {NodeList/Element}  elements  The (collection of) element(s) to
-   *                                        validate.
+   * @param   {Function}  callback  The callback function to validate.
    *
-   * @param   {Function}          callback  The callback function to validate.
-   *
-   * @return  {Boolean}           Returns whether all arguments are vaild.
+   * @return  {Boolean}   Returns whether all arguments are vaild.
    */
 
-  function _validateArguments (selector, elements, callback) {
-    var selectorValid = typeof selector === 'string',
-        elementsValid = elements && elements.length,
+  function _validateArguments (elements, callback) {
+    var elementsValid = elements && ((Object.prototype.toString.call(elements) === '[object NodeList]' && elements.length) || (elements.nodeType === 1)),
         callbackValid = callback && typeof callback === 'function'
 
     if ('console' in window && 'warn' in console) {
-      if (!selectorValid) {
-        console.warn('Countable: "' + selector + '" is not a valid selector')
-      } else if (!elementsValid) {
-        console.warn('Countable: No elements were found for the selector "' + selector + '"')
-      }
-
-      if (!callbackValid) {
-        console.warn('Countable: ' + callback + ' is not a valid callback function')
-      }
+      if (!elementsValid) console.warn('Countable: No valid elements were found')
+      if (!callbackValid) console.warn('Countable: "' + callback + '" is not a valid callback function')
     }
 
-    return selectorValid && elementsValid && callbackValid
+    return elementsValid && callbackValid
   }
 
   /**
    * `_extendDefaults` is a function to extend a set of default options with the
-   * ones given in the function call.
+   * ones given in the function call. Available options are described below.
+   *
+   * {Boolean}  hardReturns  Use two returns to seperate a paragraph instead of
+   *                         one.
+   * {Boolean}  stripTags    Strip HTML tags before counting the values.
    *
    * @private
    *
-   * @param   {Object}  options  Countable accepts the following options. They
-   *                             can be used in a function call to override the
-   *                             default behaviour.
-   *                             `hardReturns`: Use two returns to seperate a
-   *                             paragraph instead of one.
-   *                             `stripTags`: Strip HTML tags before counting
-   *                             the values.
+   * @param   {Object}  options  Countable allows the options described above.
+   *                             They can be used in a function call to override
+   *                             the default behaviour.
    *
    * @return  {Object}  The new options object.
    */
@@ -178,10 +166,11 @@
         temp, trimmed
 
     /**
-     * If the option to strip tags from the text is set, create a temporary
-     * element that receives the value from the Countable element. The original
-     * value is then replaced with the stripped value from the temporary
-     * element.
+     * The initial implementation to allow for HTML tags stripping was created
+     * @craniumslows while the current one was created by @Rob--W.
+     *
+     * @see <http://goo.gl/Exmlr>
+     * @see <http://goo.gl/gFQQh>
      */
 
     if (options.stripTags) original = original.replace(/<\/?[a-z][^>]*>/gi, '')
@@ -203,24 +192,9 @@
   }
 
   /**
-   * `_query` is a shorthand function to get all elements matching a given
-   * selector.
-   *
-   * @private
-   *
-   * @param   {String}    selector  A valid CSS selector is required.
-   *
-   * @return  {NodeList}  The NodeList containing all matching elements.
-   */
-
-  function _query (selector) {
-    selector = typeof selector === 'string' ? selector : '☺'
-    return document.querySelectorAll(selector)
-  }
-
-  /**
    * `_loop` is a helper function to iterate over a collection, e.g. a NodeList
-   * or an array. The callback receives the current element.
+   * or an Array. The callback receives the current element as the single
+   * parameter.
    *
    * @private
    *
@@ -233,8 +207,12 @@
   function _loop (which, callback) {
     var len = which.length
 
-    while (len--) {
-      callback(which[len])
+    if (typeof len !== 'undefined') {
+      while (len--) {
+        callback(which[len])
+      }
+    } else {
+      callback(which)
     }
   }
 
@@ -247,30 +225,28 @@
   var Countable = {
 
     /**
-     * The `live` method binds the counting handler to all elements that match
-     * a selector. The event is `oninput` or `onkeydown`, based on the
-     * capabilities of the browser.
+     * The `live` method binds the counting handler to all given elements. The
+     * event is either `oninput` or `onkeydown`, based on the capabilities of
+     * the browser.
      *
-     * @param   {String}    selector   The selector to get all elements that
-     *                                 should receive the Countable
-     *                                 functionality.
+     * @param   {Nodes}     elements   All elements that should receive the
+     *                                 Countable functionality.
      *
      * @param   {Function}  callback   The callback to fire whenever the
-     *                                 elements value changes. The callback is
-     *                                 called with the element bound to `this`
-     *                                 and the counted values as the single
-     *                                 parameter.
+     *                                 element's value changes. The callback is
+     *                                 called with the relevant element bound to
+     *                                 `this` and the counted values as the
+     *                                 single parameter.
      *
      * @param   {Object}    [options]  An object to modify Countable's
-     *                                 behaviour. Refer to `_extendDefaults`
-     *                                 for a list of available options.
+     *                                 behaviour. Refer to `_extendDefaults` for
+     *                                 a list of available options.
      *
      * @return  {Object}    Returns the Countable object to allow for chaining.
      */
 
-    live: function (selector, callback, options) {
-      var elements = _query(selector),
-          ops = _extendDefaults(options),
+    live: function (elements, callback, options) {
+      var ops = _extendDefaults(options),
           bind = function (element) {
             var handler = function () {
                   callback.call(element, _count(element, ops))
@@ -287,28 +263,29 @@
             }
           }
 
-      if (!_validateArguments(selector, elements, callback)) return
+      if (!_validateArguments(elements, callback)) return
 
-      _loop(elements, bind)
+      if (elements.length) {
+        _loop(elements, bind)
+      } else {
+        bind(elements)
+      }
 
       return this
     },
 
     /**
-     * The `die` method removes the Countable functionality from all elements
-     * matching the given selector.
+     * The `die` method removes the Countable functionality from all given
+     * elements.
      *
-     * @param   {String}  selector   The selector to get all elements that
-     *                               should receive the Countable
-     *                               functionality.
+     * @param   {Nodes}  elements  All elements whose Countable functionality
+     *                             should be unbound.
      *
      * @return  {Object}  Returns the Countable object to allow for chaining.
      */
 
-    die: function (selector) {
-      var elements = _query(selector)
-
-      if (!_validateArguments(selector, elements, function () {})) return
+    die: function (elements) {
+      if (!_validateArguments(elements, function () {})) return
 
       _loop(elements, function (element) {
         var liveElement
@@ -335,15 +312,14 @@
      * The `once` method works mostly like the `live` method, but no events are
      * bound, the functionality is only executed once.
      *
-     * @param   {String}    selector   The selector to get all elements that
-     *                                 should receive the Countable
-     *                                 functionality.
+     * @param   {Nodes}     elements   All elements that should receive the
+     *                                 Countable functionality.
      *
      * @param   {Function}  callback   The callback to fire whenever the
-     *                                 elements value changes. The callback is
-     *                                 called with the element bound to `this`
-     *                                 and the counted values as the single
-     *                                 parameter.
+     *                                 element's value changes. The callback is
+     *                                 called with the relevant element bound to
+     *                                 `this` and the counted values as the
+     *                                 single parameter.
      *
      * @param   {Object}    [options]  An object to modify Countable's
      *                                 behaviour. Refer to `_extendDefaults`
@@ -352,10 +328,8 @@
      * @return  {Object}    Returns the Countable object to allow for chaining.
      */
 
-    once: function (selector, callback, options) {
-      var elements = _query(selector)
-
-      if (!_validateArguments(selector, elements, callback)) return
+    once: function (callback, options) {
+      if (!_validateArguments(elements, callback)) return
 
       _loop(elements, function (element) {
         callback.call(element, _count(element, _extendDefaults(options)))
@@ -401,3 +375,8 @@
     global.Countable = Countable
   }
 }(this))
+
+var elements = document.getElementsByTagName('textarea')
+
+Countable.live(elements, function (counter) { console.log(counter) })
+Countable.die(elements[0])
