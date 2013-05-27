@@ -10,7 +10,7 @@
     <![endif]-->
     <link rel="stylesheet" href="css/style.css">
   </head>
-  <body>
+  <body class="language-javascript">
     <header>
       <div class="wrap wrap--padded-small">
         <h1><a href="http://github.com/RadLikeWhoa/Countable">Countable.js</a></h1>
@@ -37,32 +37,32 @@
     <section>
       <div class="wrap">
         <h2>Usage</h2>
-        <p>Countable offers easy-to-use methods you can use in your project. <code class="language-javascript">Countable.live()</code> and <code class="language-javascript">Countable.once()</code> accept one or more HTML elements and a callback that receives one parameter — holding all counted values — and <code class="language-javascript">this</code> bound to the relevant element.</p>
+        <p>Countable offers easy-to-use methods you can use in your project. <code>Countable.live()</code> and <code>Countable.once()</code> accept one or more HTML elements and a callback that receives one parameter — holding all counted values — and <code>this</code> bound to the relevant element.</p>
         <hr>
         <h3>Available methods</h3>
-        <p>To enable full live-counting on an element, call <code class="language-javascript">Countable.live()</code>.</p>
-        <pre class="language-javascript"><code>var area = document.getElementById('area')
+        <p>To enable full live-counting on an element, call <code>Countable.live()</code>.</p>
+        <pre><code>var area = document.getElementById('area')
 
 Countable.live(area, function (counter) {
   console.log(counter)
 })</code></pre>
-        <p>In order to remove the Countable functionality from an element, call <code class="language-javascript">Countable.die()</code>.</p>
-        <pre class="language-javascript"><code>Countable.die(area)</code></pre>
-        <p>There might be situations where you only want to count paragraphs, words and characters of an element once, i.e. if you want to display the word count of an article on your blog. In order to achieve this, call <code class="language--javascript">Countable.once()</code>.</p>
-        <pre class="language-javascript"><code>Countable.once(area, function (counter) {
+        <p>In order to remove the Countable functionality from an element, call <code>Countable.die()</code>.</p>
+        <pre><code>Countable.die(area)</code></pre>
+        <p>There might be situations where you only want to count paragraphs, words and characters of an element once, i.e. if you want to display the word count of an article on your blog. In order to achieve this, call <code>Countable.once()</code>.</p>
+        <pre><code>Countable.once(area, function (counter) {
   console.log(counter)
 })</code></pre>
-        <p>Countable also provides a handy method to check if live-counting functionality is enabled on an element: <code class="language-javascript">Countable.enabled()</code>.</p>
-        <pre class="language-javascript">Countable.enabled(area)</code></pre>
+        <p>Countable also provides a handy method to check if live-counting functionality is enabled on an element: <code>Countable.enabled()</code>.</p>
+        <pre>Countable.enabled(area)</code></pre>
         <hr>
         <h3>Options</h3>
-        <p><code class="language-javascript">Countable.live()</code> and <code class="language-javascript">Countable.once()</code> both accept a third argument, an options object that allows you to change how Countable treats certain aspects of your element's text.</p>
-        <pre class="language-javascript"><code>{
+        <p><code>Countable.live()</code> and <code>Countable.once()</code> both accept a third argument, an options object that allows you to change how Countable treats certain aspects of your element's text.</p>
+        <pre><code>{
   hardReturns: false,
   stripTags: false
 }</code></pre>
-        <p>By default, paragraphs are split by a single return (a soft return). By setting <code class="language-javascript">hardReturns</code> to true, Countable splits paragraphs after two returns.</p>
-        <p>Depending on your application and audience, you might need to strip HTML tags from the text before counting it. You can do this by setting <code class="language-javascript">stripTags</code> to true.</p>
+        <p>By default, paragraphs are split by a single return (a soft return). By setting <code>hardReturns</code> to true, Countable splits paragraphs after two returns.</p>
+        <p>Depending on your application and audience, you might need to strip HTML tags from the text before counting it. You can do this by setting <code>stripTags</code> to true.</p>
       </div>
     </section>
     <footer>
@@ -71,80 +71,7 @@ Countable.live(area, function (counter) {
       </div>
     </footer>
     <script src="https://rawgithub.com/RadLikeWhoa/Countable/master/Countable.js"></script>
+    <script src="js/main.js"></script>
     <script src="js/prism.js"></script>
-    <script>
-      var hasTextContent = 'textContent' in document.body,
-          area = document.getElementById('countableArea'),
-          results = {
-            paragraphs: document.getElementById('result__paragraphs'),
-            words: document.getElementById('result__words'),
-            characters: document.getElementById('result__characters'),
-            all: document.getElementById('result__all')
-          },
-          _gaq = [['_setAccount', 'UA-39380123-1'], ['_trackPageview']]
-
-      function get (url, callback) {
-        var ajaxRequest
-
-        try {
-          ajaxRequest = new XMLHttpRequest()
-        } catch (e) {
-          try {
-            ajaxRequest = new ActiveXObject("Msxml2.XMLHTTP")
-          } catch (e) {
-            try {
-              ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP")
-            } catch (e){
-              return null
-            }
-          }
-        }
-
-        ajaxRequest.open("GET", url, true)
-        ajaxRequest.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
-        ajaxRequest.send(null)
-
-        ajaxRequest.onreadystatechange = function() {
-          if (ajaxRequest.readyState == 4) {
-            callback(ajaxRequest.responseText)
-          }
-        }
-
-        return ajaxRequest
-      }
-
-      Element.prototype.text = function (text) {
-        if (hasTextContent) {
-          this.textContent = text
-        } else {
-          this.innerText = text
-        }
-
-        return this
-      }
-
-      Countable.live(area, function (counter) {
-        for (var field in results) {
-          results[field].text(counter[field])
-        }
-      })
-
-      get('https://api.github.com/repos/RadLikeWhoa/Countable', function (data) {
-        var counter = document.getElementById('github-watch-count'),
-            watchers = JSON.parse(data).watchers
-
-        if (!counter || !watchers) return
-
-        counter.text(watchers).style.display = 'inline-block'
-        counter.title = 'Countable has ' + watchers + ' stargazers on GitHub'
-      })
-
-      (function(d) {
-        var g = d.createElement('script'),
-            s = d.scripts[0]
-        g.src = '//www.google-analytics.com/ga.js'
-        s.parentNode.insertBefore(g, s)
-      }(document))
-    </script>
   </body>
 </html>
