@@ -178,7 +178,11 @@ h1 {
 }
 
 .intro {
-  font-size: 1.5em;
+  font-size: 1.3em;
+
+  @media (min-width: 30em) {
+    font-size: 1.5em;
+  }
 }
 
 .button-wrapper {
@@ -374,3 +378,7 @@ pre {
  */
 
 @import "prism";
+
+.token.countable-class {
+  color: #ba6720;
+}

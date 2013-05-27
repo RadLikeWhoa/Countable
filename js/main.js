@@ -73,4 +73,10 @@
     twttr.events.bind('tweet', track)
     twttr.events.bind('follow', track)
   })
+
+  // Prism extensions
+
+  Prism.languages.insertBefore('javascript', 'keyword', {
+    'countable-class': /Countable/
+  })
 }(document))
