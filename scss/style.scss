@@ -154,6 +154,10 @@ header a {
   border-bottom: 0;
 }
 
+footer {
+  box-shadow: 0 -1px 3px rgba(#111, 0.15);
+}
+
 h1 {
   margin: 0 0 0.75em;
   font-size: 2em;
@@ -197,6 +201,7 @@ h1 {
 }
 
 .button--download {
+  margin-bottom: 1.5em;
   color: #fff;
   text-shadow: 0 -1px 0 rgba(#111, 0.25);
   @include background-image(linear-gradient(top, rgba(#fff, 0.3), rgba(#fff, 0.1)));
@@ -207,6 +212,20 @@ h1 {
   &:focus {
     background-color: lighten(#eb8a4c, 5%);
     background-color: lighten(#eb8a4c, 10%)\9;
+  }
+}
+
+.button--tweet {
+  color: #fff;
+  text-shadow: 0 -1px 0 rgba(#111, 0.25);
+  @include background-image(linear-gradient(top, rgba(#fff, 0.3), rgba(#fff, 0.1)));
+  background-color: #9fb8c6;
+  background-color: lighten(#9fb8c6, 5%)\9;
+
+  &:hover,
+  &:focus {
+    background-color: lighten(#9fb8c6, 5%);
+    background-color: lighten(#9fb8c6, 10%)\9;
   }
 }
 
