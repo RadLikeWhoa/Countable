@@ -229,11 +229,11 @@ h1 {
   }
 }
 
-.button__count {
+a.button__count {
   position: relative;
   display: inline-block;
-  padding: 0.75em;
   margin-left: 1em;
+  padding: 0.75em;
   color: #333;
   text-shadow: none;
   line-height: 1.4;
@@ -241,6 +241,10 @@ h1 {
   background-color: #fafafa;
   border: 1px solid #eee;
   border-radius: 3px;
+
+  &:hover span {
+    border-bottom: 1px solid;
+  }
 
   &::before,
   &::after {

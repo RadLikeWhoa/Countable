@@ -31,8 +31,8 @@
     if (!counter || !watchers) return
 
     text(counter, watchers)
-    counter.style.display = 'inline-block'
-    counter.title = 'Countable has ' + watchers + ' stargazers on GitHub'
+    counter.parentNode.style.display = 'inline-block'
+    counter.parentNode.title = 'Countable has ' + watchers + ' stargazers on GitHub'
 
     window.gitHubWatchers = undefined
   }
