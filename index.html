@@ -37,6 +37,11 @@
     </section>
     <section>
       <div class="wrap">
+        <h2>Installation</h2>
+        <p>The preferred method of installation is <a href="https://github.com/bower/bower">bower</a>.</p>
+        <p><pre><code class="language-markup">bower install Countable</code></pre></p>
+        <p>Alternatively, you can download the latest <a href="https://github.com/RadLikeWhoa/Countable/archive/master.zip">zipball</a> or copy <a href="https://raw.github.com/RadLikeWhoa/Countable/master/Countable.js">the script</a> directly.</p>
+        <hr>
         <h2>Usage</h2>
         <p>Countable offers easy-to-use methods you can use in your project. <code>Countable.live()</code> and <code>Countable.once()</code> accept one or more HTML elements and a callback that receives one parameter — holding all counted values — and <code>this</code> bound to the relevant element.</p>
         <hr>
@@ -64,15 +69,18 @@ Countable.live(area, function (counter) {
 }</code></pre>
         <p>By default, paragraphs are split by a single return (a soft return). By setting <code>hardReturns</code> to true, Countable splits paragraphs after two returns.</p>
         <p>Depending on your application and audience, you might need to strip HTML tags from the text before counting it. You can do this by setting <code>stripTags</code> to true.</p>
+        <hr>
+        <p>For more detailed documentation, <a href="https://github.com/RadLikeWhoa/Countable#readme">see the GitHub repo</a>.</p>
       </div>
     </section>
     <footer>
       <div class="wrap">
         <p>My name is <a href="http://twitter.com/sachaschmid">Sacha Schmid</a>. I'm a front-end engineer from Switzerland. I am the creator of <a href="http://github.com/RadLikeWhoa/SSGS">SSGS</a> and <a href="http://github.com/RadLikeWhoa">other open source projects</a>.</p>
+        <p><a href="#top">Back to the top</a></p>
       </div>
     </footer>
     <script src="https://rawgithub.com/RadLikeWhoa/Countable/master/Countable.js"></script>
-    <script src="js/main.js"></script>
     <script src="js/prism.js"></script>
+    <script src="js/main.js"></script>
   </body>
 </html>
