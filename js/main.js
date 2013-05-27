@@ -2,6 +2,7 @@
   var scr = document.scripts[0],
       hasTextContent = 'textContent' in document.body,
       area = document.getElementById('countableArea'),
+      githubButton = document.getElementById('github-button'),
       fields = {
         paragraphs: document.getElementById('result__paragraphs'),
         words: document.getElementById('result__words'),
@@ -10,17 +11,23 @@
       },
       _gaq = [['_setAccount', 'UA-39380123-1'], ['_trackPageview']]
 
-  // Helper function to set an elements text in different browsers
+  // Adjusted bounce rate (http://drawingablank.me/blog/fix-your-bounce-rate.html)
 
-  function text (element, content) {
-    hasTextContent ? element.textContent = content : element.innerText = content
-  }
+  setTimeout(function () {
+    _gaq.push(['_trackEvent', 'Site', 'read'])
+  }, 15000);
 
   // Set up Countable on the demo textarea
 
   Countable.live(area, function (counter) {
     for (var field in fields) text(fields[field], counter[field])
   })
+
+  // Helper function to set an elements text in different browsers
+
+  function text (element, content) {
+    hasTextContent ? element.textContent = content : element.innerText = content
+  }
 
   // Get the current watcher count
 
@@ -79,4 +86,16 @@
   Prism.languages.insertBefore('javascript', 'keyword', {
     'countable-class': /Countable/
   })
+
+  // Track clicks on the download link
+
+  if (window.addEventListener) {
+    githubButton.addEventListener('click', function () {
+      _gaq.push(['_trackEvent', 'Site', 'Downloads'])
+    })
+  } else if (window.attachEvent) {
+    githubButton.attachEvent('click', function () {
+      _gaq.push(['_trackEvent', 'Site', 'Downloads'])
+    })
+  }
 }(document))
