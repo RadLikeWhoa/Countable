@@ -42,13 +42,13 @@
 %clearfix {
   *zoom: 1;
 
-  &::before,
-  &::after {
+  &:before,
+  &:after {
     content: " ";
     display: table;
   }
 
-  &::after {
+  &:after {
     clear: both;
   }
 }
@@ -250,8 +250,8 @@ a.button__count {
     border-bottom: 1px solid;
   }
 
-  &::before,
-  &::after {
+  &:before,
+  &:after {
     content: " ";
     position: absolute;
     top: 50%;
@@ -261,14 +261,14 @@ a.button__count {
     height: 0px;
   }
 
-  &::before {
+  &:before {
     margin-top: -0.6875em;
     border-top: 0.6875em solid transparent;
     border-bottom: 0.6875em solid transparent;
     border-right: 0.6875em solid #eee;
   }
 
-  &::after {
+  &:after {
     margin-top: -0.625em;
     border-top: 0.625em solid transparent;
     border-bottom: 0.625em solid transparent;
@@ -368,8 +368,7 @@ pre {
   background-attachment: local, local, scroll, scroll;
   border: 1px solid #ddd;
   border-radius: 5px;
-  overflow-x: scroll;
-  overflow-y: visible;
+  overflow: auto;
   -webkit-overflow-scrolling: touch;
 }
 
