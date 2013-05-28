@@ -6,9 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Countable.js — Live word-counting in JavaScript</title>
     <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     <link rel="stylesheet" href="css/style.css">
+    <!--[if lt IE 9]>
+      <link rel="stylesheet" href="css/ie.css">
+    <![endif]-->
+    <link rel="dns-prefetch" href="https://api.github.com">
+    <link rel="dns-prefetch" href="http://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://platform.twitter.com">
+    <link rel="dns-prefetch" href="http://otter.topsy.com">
   </head>
   <body class="language-javascript">
     <header>
@@ -19,8 +26,8 @@
     <section class="section--bordered">
       <div class="wrap">
         <p class="intro">Countable is a JavaScript function to add <strong>live paragraph-, word- and character-counting</strong> to an HTML element. Countable is a <em>zero-dependency</em> library and comes in at <strong>1KB</strong> when minified and gzipped.</p>
-        <div class="button-wrapper"><a id="github-button" href="http://github.com/RadLikeWhoa/Countable" class="button button--download">Download on GitHub</a><a href="https://github.com/RadLikeWhoa/Countable/stargazers" class="button__count" style="display: none"><span id="github-watch-count"></span></a></a></div>
-        <div class="button-wrapper"><a href="http://twitter.com/intent/tweet?url=http%3A%2F%2Fradlikewhoa.github.io%2FCountable%2F&text=Countable%20is%20a%20JS%20library%20to%20add%20live%20paragraph-%2C%20word-%20and%20character-counting%20to%20an%20HTML%20element%20by%20%40sachaschmid.&related=sachaschmid:Creator%20and%20designer%20of%20Countable" class="button button--tweet">Tweet</a><a href="https://twitter.com/search/realtime?q=radlikewhoa.github.com%2FCountable" class="button__count" style="display: none"><span id="tweet-count"></span></a></div>
+        <div class="button-wrapper"><a id="github-button" href="http://github.com/RadLikeWhoa/Countable" class="button button--download">Download on GitHub</a><a href="https://github.com/RadLikeWhoa/Countable/stargazers" class="button__count" style="display: none"><span id="github-watch-count"></span></a></div>
+        <div class="button-wrapper"><a href="http://twitter.com/intent/tweet?url=http%3A%2F%2Fradlikewhoa.github.io%2FCountable%2F&amp;text=Countable.js%20%E2%80%94%20Live%20word-counting%20in%20JavaScript%20by%20%40sachaschmid.&amp;related=sachaschmid:Creator%20and%20designer%20of%20Countable" class="button button--tweet">Tweet</a><a href="https://twitter.com/search/realtime?q=radlikewhoa.github.io%2FCountable" class="button__count" style="display: none"><span id="tweet-count"></span></a></div>
       </div>
     </section>
     <section class="section--bordered section--alt" id="demo">
@@ -39,7 +46,7 @@
       <div class="wrap">
         <h2>Installation</h2>
         <p>The preferred method of installation is <a href="https://github.com/bower/bower">bower</a>.</p>
-        <p><pre><code class="language-markup">bower install Countable</code></pre></p>
+        <pre><code class="language-markup">bower install Countable</code></pre>
         <p>Alternatively, you can download the latest <a href="https://github.com/RadLikeWhoa/Countable/archive/master.zip">zipball</a> or copy <a href="https://raw.github.com/RadLikeWhoa/Countable/master/Countable.js">the script</a> directly.</p>
         <hr>
         <h2>Usage</h2>
@@ -80,7 +87,7 @@ Countable.live(area, function (counter) {
       </div>
     </footer>
     <script src="https://rawgithub.com/RadLikeWhoa/Countable/master/Countable.js"></script>
-    <script src="js/prism.js"></script>
+    <script src="js/vendor/prism.js"></script>
     <script src="js/main.js"></script>
   </body>
 </html>
