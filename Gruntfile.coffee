@@ -14,7 +14,7 @@ module.exports = (grunt) ->
 
     concat:
       options:
-        separator: ';\n\n'
+        separator: ';'
       dist:
         files:
           'dist/js/main.js': [ 'js/vendor/prism.js', 'js/main.js' ]
@@ -33,10 +33,6 @@ module.exports = (grunt) ->
           cssDir: 'dist/css'
           outputStyle: 'compressed'
 
-  grunt.loadNpmTasks 'grunt-contrib-clean'
-  grunt.loadNpmTasks 'grunt-contrib-jshint'
-  grunt.loadNpmTasks 'grunt-contrib-concat'
-  grunt.loadNpmTasks 'grunt-contrib-uglify'
-  grunt.loadNpmTasks 'grunt-contrib-compass'
+  require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks)
 
   grunt.registerTask 'default', [ 'clean', 'jshint', 'concat', 'uglify', 'compass' ]
