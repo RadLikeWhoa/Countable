@@ -1,0 +1,9 @@
+{
+  "asi": true,
+  "browser": true,
+  "debug": true,
+  "devel": true,
+  "eqnull": true,
+  "expr": true,
+  "validthis": true
+}

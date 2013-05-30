@@ -82,7 +82,11 @@ body {
 .wrap {
   max-width: 50em;
   margin: 0 auto;
-  padding: 3em 1.5em;
+  padding: 1.5em;
+
+  @media (min-width: 30em) {
+    padding: 3em;
+  }
 }
 
 .wrap--padded-small {

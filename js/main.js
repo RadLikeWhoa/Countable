@@ -21,11 +21,19 @@ function text (element, content) {
  * @see <http://goo.gl/B3bGc>
  */
 
-function event (element, event, callback) {
-  if (window.addEventListener) {
-    element.addEventListener(event, callback)
-  } else if (window.attachEvent) {
-    element.attachEvent(event, callback)
+function event (action, element, _event, callback) {
+  if (action === 'add') {
+    if (window.addEventListener) {
+      element.addEventListener(_event, callback)
+    } else if (window.attachEvent) {
+      element.attachEvent(_event, callback)
+    }
+  } else if (action === 'remove') {
+    if (window.removeEventListener) {
+      element.removeEventListener(_event, callback)
+    } else if (window.detachEvent) {
+      element.detachEvent(_event, callback)
+    }
   }
 }
 
@@ -44,14 +52,22 @@ function async (url) {
 /**
  * In order to adjust the bounce rate on Google Analytics, we can safely
  * assume that if a visitor stays on the site for 15 seconds, he shouldn't
- * be counted as a bounce visitor.
+ * be counted as a bounce visitor. Alternatively, a user that scrolls on the
+ * page at least once is also not counted as a bounce.
  *
  * @see <http://goo.gl/nyGIK>
  */
 
 setTimeout(function () {
-  _gaq.push(['_trackEvent', 'Site', 'read'])
-}, 15000);
+  _gaq.push(['_trackEvent', 'Site', 'Read', 'The user stayed on the page for 15 seconds or longer'])
+}, 15000)
+
+function scrollAbr () {
+  _gaq.push(['_trackEvent', 'Site', 'Scrolled', 'The user scrolled the page at least once'])
+  event('remove', window, 'scroll', scrollAbr)
+}
+
+event('add', window, 'scroll', scrollAbr)
 
 /**
  * We set up Countable on the demo `textarea` and make it write the counted
@@ -104,8 +120,8 @@ var _gaq = [['_setAccount', 'UA-39380123-1'], ['_trackPageview']]
 
 async('http://www.google-analytics.com/ga.js')
 
-event(document.getElementById('github-button'), 'click', function () {
-  _gaq.push(['_trackEvent', 'Site', 'Downloads'])
+event('add', document.getElementById('github-button'), 'click', function () {
+  _gaq.push(['_trackEvent', 'Site', 'Downloads', 'The user clicked the "Download on GitHub" button'])
 })
 
 /**
@@ -164,8 +180,8 @@ window.tweetCount = function (data) {
 
     try {
       delete window.tweetCount
-      delete window.tweetsSent
-      delete window.callbacksCalled
+      ;delete window.tweetsSent
+      ;delete window.callbacksCalled
     } catch (e) {
       window.tweetCount = window.tweetsSent = window.callbacksCalled = undefined
     }
