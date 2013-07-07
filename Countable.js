@@ -328,7 +328,7 @@
      * @return  {Object}    Returns the Countable object to allow for chaining.
      */
 
-    once: function (callback, options) {
+    once: function (elements, callback, options) {
       if (!_validateArguments(elements, callback)) return
 
       _loop(elements, function (element) {
