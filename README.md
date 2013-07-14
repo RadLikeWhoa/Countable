@@ -1,5 +1,7 @@
 # Countable
 
+[![Build Status](https://travis-ci.org/RadLikeWhoa/Countable.png?branch=master)](https://travis-ci.org/RadLikeWhoa/Countable)
+
 Countable is a JavaScript function to add **live paragraph-, word- and character-counting** to an HTML element. Countable is a *zero-dependency* library and comes in at **1KB** when minified and gzipped.
 
 [**View the Demo**](http://radlikewhoa.github.io/Countable#demo)
