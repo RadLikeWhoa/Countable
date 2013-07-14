@@ -4,11 +4,15 @@
   "author": "Sacha Schmid <https://twitter.com/sachaschmid>",
   "version": "2.0.1",
   "keywords": [ "paragraphs", "words", "characters", "count", "live" ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RadLikeWhoa/Countable.git"
+  },
   "devDependencies": {
     "karma": ""
   },
   "scripts": {
-    "test": "./node_modules/.bin/karma start --browsers Chrome --single-run"
+    "test": "./node_modules/.bin/karma start --browsers Firefox --single-run"
   },
   "license": "MIT"
 }

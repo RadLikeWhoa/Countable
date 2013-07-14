@@ -7,7 +7,7 @@
     "test",
     "CONTRIBUTING.md",
     "karma.conf.js",
-    "package.json"
+    "package.json",
     ".travis.yml"
   ],
   "devDependencies": {
