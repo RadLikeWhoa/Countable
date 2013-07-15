@@ -2,7 +2,7 @@ var expect = chai.expect
 
 describe('Countable', function () {
   var results = {},
-      liveArea, onceArea
+      liveArea, onceArea, optionsArea
 
   function callback (counter) {
     results.paragraphs.innerHTML = counter.paragraphs
@@ -27,7 +27,8 @@ describe('Countable', function () {
                                 '<li id="all"></li>' +
                               '</ul>' +
                               '<textarea id="live"></textarea>' +
-                              '<textarea id="once"></textarea>'
+                              '<textarea id="once"></textarea>' +
+                              '<textarea id="options"></textarea>'
 
     results.paragraphs = document.getElementById('paragraphs')
     results.words = document.getElementById('words')
@@ -36,6 +37,7 @@ describe('Countable', function () {
 
     liveArea = document.getElementById('live')
     onceArea = document.getElementById('once')
+    optionsArea = document.getElementById('options')
   })
 
   describe('Countable.live', function () {
@@ -92,6 +94,34 @@ describe('Countable', function () {
     it('should kill live counting functionality', function () {
       Countable.die(liveArea)
       expect(Countable.enabled(liveArea)).to.equal(false)
+    })
+  })
+
+  describe('Options', function () {
+    afterEach(function () {
+      optionsArea.value = ''
+    })
+
+    it('should strip HTML tags', function () {
+      optionsArea.value = '<div>Hello <a href="http://google.com">world</a></div>'
+
+      Countable.once(optionsArea, callback, { stripTags: true })
+
+      expect(results.paragraphs.innerHTML).to.equal('1')
+      expect(results.words.innerHTML).to.equal('2')
+      expect(results.characters.innerHTML).to.equal('10')
+      expect(results.all.innerHTML).to.equal('11')
+    })
+
+    it('should use hard returns', function () {
+      optionsArea.value = 'Hello\n\nworld'
+
+      Countable.once(optionsArea, callback, { hardReturns: true })
+
+      expect(results.paragraphs.innerHTML).to.equal('2')
+      expect(results.words.innerHTML).to.equal('2')
+      expect(results.characters.innerHTML).to.equal('10')
+      expect(results.all.innerHTML).to.equal('10')
     })
   })
 })

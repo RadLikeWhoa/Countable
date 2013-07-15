@@ -163,7 +163,7 @@
 
   function _count (element, options) {
     var original = 'value' in element ? element.value : element.innerText || element.textContent,
-        temp, trimmed
+        trimmed
 
     /**
      * The initial implementation to allow for HTML tags stripping was created
