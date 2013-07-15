@@ -150,45 +150,6 @@ twttr.ready(function () {
 })
 
 /**
- * As Twitter forbids the use of the count API we need to rely on topsy for
- * both the .com and the .io URL of this page.
- */
-
-async('http://otter.topsy.com/stats.js?callback=tweetCount&url=http://radlikewhoa.github.io/Countable/&apikey=ULDPO6D4UZ7FT2ZACMLQAAAAACA3WEW5ZNIQAAAAAAAFQGYA')
-async('http://otter.topsy.com/stats.js?callback=tweetCount&url=http://radlikewhoa.github.com/Countable/&apikey=ULDPO6D4UZ7FT2ZACMLQAAAAACA3WEW5ZNIQAAAAAAAFQGYA')
-
-window.callbacksCalled = []
-window.tweetsSent = 0
-
-window.tweetCount = function (data) {
-  if (!data) return
-
-  var counter = document.getElementById('tweet-count'),
-      tweets = data.response.all
-
-  if (!tweets) return
-
-  tweetsSent += tweets
-  callbacksCalled.push(tweets)
-
-  if (callbacksCalled.length == 2) {
-    if (tweetsSent > 0) {
-      text(counter, tweetsSent)
-      counter.parentNode.style.display = 'inline-block'
-      counter.parentNode.title = 'There are ' + tweetsSent + ' Tweets about Countable'
-    }
-
-    try {
-      delete window.tweetCount
-      ;delete window.tweetsSent
-      ;delete window.callbacksCalled
-    } catch (e) {
-      window.tweetCount = window.tweetsSent = window.callbacksCalled = undefined
-    }
-  }
-}
-
-/**
  * Prism is used on the site to do syntax highlighting. In order to make the
  * documentation more appealing, Countable-specific keywords are highlighted
  * as well and can be styled using the given class.
