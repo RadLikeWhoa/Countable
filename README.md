@@ -22,7 +22,7 @@ Countable is available as a Node / CommonJS module, an AMD module and as a globa
 
 ### Callbacks
 
-The `live` and `once` method both accept a callback. The given callback is then called whenever needed with a single parameter that carries all the releavant data. `this` is bound to the current element. Take the following code for an example.
+The `live` and `once` methods both accept a callback. The given callback is then called whenever needed with a single parameter that carries all the releavant data. `this` is bound to the current element. Take the following code for an example.
 
 ```javascript
 var area = document.getElementById('text')
