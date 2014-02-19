@@ -121,6 +121,17 @@ describe('Countable', function () {
       expect(results.paragraphs.innerHTML).to.equal('2')
       expect(results.words.innerHTML).to.equal('2')
       expect(results.characters.innerHTML).to.equal('10')
+      expect(results.all.innerHTML).to.equal('12')
+    })
+
+    it('should ignore returns', function () {
+      optionsArea.value = 'Hello\nworld'
+
+      Countable.once(optionsArea, callback, { ignoreReturns: true })
+
+      expect(results.paragraphs.innerHTML).to.equal('2')
+      expect(results.words.innerHTML).to.equal('2')
+      expect(results.characters.innerHTML).to.equal('10')
       expect(results.all.innerHTML).to.equal('10')
     })
   })
