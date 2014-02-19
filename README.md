@@ -43,7 +43,7 @@ words      | The number of words. Words are split using spaces.
 characters | The number of characters (without spaces). This contains all non-whitespace characters.
 all        | The number of characters including whitespace. This is the total number of all characters in the element.
 
-### Countable#live(elements, callback, options)
+### Countable.live(elements, callback, options)
 
 Bind the callback to all given elements. The callback gets called everytime the element's value or text is changed.
 
@@ -53,7 +53,7 @@ Countable.live(area, function (counter) {
 })
 ```
 
-### Countable#die(elements)
+### Countable.die(elements)
 
 Remove the bound callback from all given elements.
 
@@ -61,7 +61,7 @@ Remove the bound callback from all given elements.
 Countable.die(area)
 ```
 
-### Countable#once(elements, callback, options)
+### Countable.once(elements, callback, options)
 
 Similar to `Countable.live()`, but the callback is only executed once, there are no events bound.
 
@@ -71,7 +71,7 @@ Countable.once(area, function (counter) {
 })
 ```
 
-### Countable#enabled(element)
+### Countable.enabled(element)
 
 Checks the live-counting functionality is bound to the given.
 
@@ -130,48 +130,48 @@ Countable.live(area, function (counter) {
 
 ## Changelog
 
-### 2.0.2 _(2014-02-19)_
+**2.0.2** (2014-02-19)
 
 * NEW: Returns are counted as part of the `all` property. A new option `ignoreReturns` was added to restore the old behaviour.
 
-### 2.0.1 _(2013-07-13)_
+**2.0.1** (2013-07-13)
 
 * FIX: Missing parameter in `Countable.once`. (Thanks to [MrOPR](https://github.com/RadLikeWhoa/Countable/pull/18))
 
-### 2.0.0 _(2013-05-25)_
+**2.0.0** (2013-05-25)
 
 * NEW: Countable has a new Syntax. You can now use `Countable.live`, `Countable.once`, `Countable.die` and `Countable.enabled`. Notes on upgrading is provided in the README.
 * NEW: Countable can now work on multiple elements with one function call.
 * FIX: Prevent a XSS bug. (Thanks to [Rob--W](https://github.com/RadLikeWhoa/Countable/pull/17))
 
-### 1.4.2 _(2013-05-23)_
+**1.4.2** (2013-05-23)
 
 * FIX: Fix a bug where options wouldn't be applied correctly.
 
-### 1.4.1 _(2013-05-22)_
+**1.4.1** (2013-05-22)
 
 * NEW: Added option to execute the callback only once.
 
-### 1.4.0 _(2013-05-20)_
+**1.4.0** (2013-05-20)
 
 * NEW: Allow for an options object as the third parameter.
 
-### 1.3.0 _(2013-05-16)_
+**1.3.0** (2013-05-16)
 
 * NEW: Countable is now available as an AMD and CommonJS module.
 * FIX: Better handle `textarea` with predefined value. (Thanks to [besmithett](https://github.com/RadLikeWhoa/Countable/pull/15))
 
-### 1.2.0 _(2013-05-02)_
+**1.2.0** (2013-05-02)
 
 * NEW: Optionally strip HTML tags. (Thanks to [craniumslows](https://github.com/RadLikeWhoa/Countable/pull/13))
 * NEW: Include ucs2decode function from the [punycode](https://github.com/bestiejs/punycode.js) library to better handle special characters. (Thanks to [craniumslows](https://github.com/RadLikeWhoa/Countable/pull/13))
 * IMPROVED: Better handling of punctuation.
 
-### 1.1.1 _(2013-03-16)_
+**1.1.1** (2013-03-16)
 
 * IMPROVED: Better support for foreign languages and special characters.
 
-### 1.1.0 _(2013-03-12)_
+**1.1.0** (2013-03-12)
 
 * NEW: Include number of characters including whitespace.
 * NEW: Countable is now available on Bower.
@@ -179,7 +179,7 @@ Countable.live(area, function (counter) {
 * IMPROVED: Improve performance when trimming strings by using `String::trim` when available.
 * IMPROVED: Better documentation.
 
-### 1.0.0 _(2013-03-11)_
+**1.0.0** (2013-03-11)
 
 * Initial release
 
