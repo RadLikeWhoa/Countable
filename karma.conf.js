@@ -6,12 +6,11 @@ module.exports = function (config) {
     // base path, that will be used to resolve files and exclude
     basePath: '',
 
-    frameworks: [ 'mocha' ],
+    frameworks: [ 'mocha', 'chai' ],
 
     // list of files / patterns to load in the browser
     files: [
       'Countable.js',
-      'bower_components/chai/chai.js',
       'test/*.js'
     ],
 
@@ -40,7 +39,7 @@ module.exports = function (config) {
     // - Safari (only Mac)
     // - PhantomJS
     // - IE (only Windows)
-    browsers: [ 'PhantomJS' ],
+    browsers: [ 'Firefox', 'PhantomJS' ],
 
     // If browser does not capture in Given timeout [ms], kill it
     captureTimeout: 20000,

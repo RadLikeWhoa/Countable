@@ -10,8 +10,5 @@
     "karma.conf.js",
     "package.json",
     ".travis.yml"
-  ],
-  "devDependencies": {
-    "chai": "~1.7.2"
-  }
+  ]
 }
