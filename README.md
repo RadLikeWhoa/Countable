@@ -103,7 +103,7 @@ In most cases, returns should be counted as part of the `all` property. Set `ign
 
 Countable supports all modern browsers. Internet Explorer is supported down to version 7. Note that some browsers don't implement the `oninput` event consistently so there might be differences in the way Countable works in different browsers.
 
-## Upgrading from version 1.x.x
+## Upgrading from version 1
 
 Upgrading from version 1.x.x is easy. Most likely, you've used something like the following:
 
@@ -129,70 +129,3 @@ Countable.live(area, function (counter) {
 * `options.once` has been replaced with `Countable.once()`
 * `Countable.live()` and `Countable.once()` both accept one or more elements, rather than just a single one
 * Inside the callback, `this` is now bound to the current element
-
-## Changelog
-
-**2.0.2** (2014-02-19)
-
-* NEW: Returns are counted as part of the `all` property. A new option `ignoreReturns` was added to restore the old behaviour.
-
-**2.0.1** (2013-07-13)
-
-* FIX: Missing parameter in `Countable.once`. (Thanks to [MrOPR](https://github.com/RadLikeWhoa/Countable/pull/18))
-
-**2.0.0** (2013-05-25)
-
-* NEW: Countable has a new Syntax. You can now use `Countable.live`, `Countable.once`, `Countable.die` and `Countable.enabled`. Notes on upgrading is provided in the README.
-* NEW: Countable can now work on multiple elements with one function call.
-* FIX: Prevent a XSS bug. (Thanks to [Rob--W](https://github.com/RadLikeWhoa/Countable/pull/17))
-
-**1.4.2** (2013-05-23)
-
-* FIX: Fix a bug where options wouldn't be applied correctly.
-
-**1.4.1** (2013-05-22)
-
-* NEW: Added option to execute the callback only once.
-
-**1.4.0** (2013-05-20)
-
-* NEW: Allow for an options object as the third parameter.
-
-**1.3.0** (2013-05-16)
-
-* NEW: Countable is now available as an AMD and CommonJS module.
-* FIX: Better handle `textarea` with predefined value. (Thanks to [besmithett](https://github.com/RadLikeWhoa/Countable/pull/15))
-
-**1.2.0** (2013-05-02)
-
-* NEW: Optionally strip HTML tags. (Thanks to [craniumslows](https://github.com/RadLikeWhoa/Countable/pull/13))
-* NEW: Include ucs2decode function from the [punycode](https://github.com/bestiejs/punycode.js) library to better handle special characters. (Thanks to [craniumslows](https://github.com/RadLikeWhoa/Countable/pull/13))
-* IMPROVED: Better handling of punctuation.
-
-**1.1.1** (2013-03-16)
-
-* IMPROVED: Better support for foreign languages and special characters.
-
-**1.1.0** (2013-03-12)
-
-* NEW: Include number of characters including whitespace.
-* NEW: Countable is now available on Bower.
-* IMPROVED: Improve performance when counting the values.
-* IMPROVED: Improve performance when trimming strings by using `String::trim` when available.
-* IMPROVED: Better documentation.
-
-**1.0.0** (2013-03-11)
-
-* Initial release
-
-## About the Author
-
-My name is [Sacha Schmid](http://sachaschmid.ch) ([**@sachaschmid**](https://twitter.com/sachaschmid)). I'm a front-end engineer from Switzerland. I am the creator of [SSGS](http://github.com/RadLikeWhoa/SSGS) and [other open source projects](https://github.com/RadLikeWhoa).
-
-Are you using Countable in a project? I'd love to see what you've achieved. Just [**send me a tweet**](https://twitter.com/sachaschmid).
-
-### Contributors
-
-* [@epmatsw](https://github.com/epmatsw)
-* [@craniumslows](https://github.com/craniumslows)
-* [@Rob--W](https://github.com/Rob--W)
