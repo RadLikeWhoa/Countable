@@ -24,7 +24,7 @@
     "mocha": "^1.21.4"
   },
   "scripts": {
-    "test": "./node_modules/.bin/karma start"
+    "test": "./node_modules/karma/bin/karma start"
   },
   "license": "MIT"
 }
