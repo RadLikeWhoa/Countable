@@ -1,5 +1,4 @@
 var gulp = require('gulp')
-var jshint = require('gulp-jshint')
 var concat = require('gulp-concat')
 var uglify = require('gulp-uglify')
 var sass = require('gulp-ruby-sass')
@@ -20,12 +19,6 @@ function notifyLivereload (event) {
     }
   })
 }
-
-gulp.task('jshint', function () {
-  gulp.src('./src/js/**/*.js')
-    .pipe(jshint())
-    .pipe(jshint.reporter('default'))
-})
 
 gulp.task('scripts', function () {
   gulp.src(['bower_components/Countable/Countable.js', 'src/**/*.js'])
