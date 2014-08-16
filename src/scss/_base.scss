@@ -75,10 +75,14 @@ hr {
 }
 
 .light-section {
+  @extend .section;
+
   background-image: linear-gradient(to bottom, #fafafa, #f2f2f2);
 }
 
 .dark-section {
+  @extend .section;
+
   color: #fff;
   background-image: linear-gradient(to bottom, #4e4e4e, #464646);
 

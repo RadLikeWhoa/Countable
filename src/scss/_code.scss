@@ -11,3 +11,7 @@ pre {
   border-radius: 5px;
   overflow: auto;
 }
+
+.terminal-line:before {
+  content: "$ ";
+}

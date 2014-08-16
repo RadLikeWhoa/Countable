@@ -6,5 +6,8 @@
     "Sacha Schmid <schmid.sacha@gmail.com>"
   ],
   "license": "MIT",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "Countable": "~2.0.2"
+  }
 }

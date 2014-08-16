@@ -19,7 +19,7 @@
     <header class="site-header">
       <div class="wrap">
         <h1 class="site-heading"><a href="http://github.com/RadLikeWhoa/Countable">Countable.js</a></h1>
-        <p class="intro">Countable is a JavaScript tool to add <strong>live paragraph-, word- and character-counting</strong> to an HTML element. Countable is a <em>zero-dependency</em> library and comes in at <strong>1KB</strong> when minified and gzipped.</p>
+        <p class="intro">Countable is a JavaScript library to add <strong>live paragraph-, word- and character-counting</strong> to an HTML element. It is a <em>zero-dependency</em> library and comes in at just about <strong>1KB</strong> when minified and gzipped.</p>
         <div class="grid">
           <div class="col med-col-1-2">
             <a id="github-button" href="http://github.com/RadLikeWhoa/Countable" class="blue-button">View on GitHub</a>
@@ -29,7 +29,7 @@
           </div>
       </div>
     </header>
-    <section class="section light-section" id="demo">
+    <section class="light-section" id="demo">
       <div class="demo wrap">
         <textarea class="demo-area" id="countableArea">Try it out yourself, Countable is enabled on this textarea. Just start typing... </textarea>
         <div class="result">
@@ -58,43 +58,29 @@
         </div>
       </div>
     </section>
-    <section class="section dark-section">
+    <section class="dark-section">
       <div class="wrap">
-        <pre><code class="language-markup">bower install Countable</code></pre>
-        <p>The preferred method of installation is <a href="https://github.com/bower/bower">bower</a>. Alternatively, you can <a href="https://raw.github.com/RadLikeWhoa/Countable/master/Countable.js">download the script</a> directly.</p>
+        <pre><code class="terminal-line">bower install --save Countable</code></pre>
+        <p>The preferred method of installation is <a href="https://github.com/bower/bower">bower</a>. Alternatively, you can <a href="https://raw.github.com/RadLikeWhoa/Countable/master/Countable.js">download the script</a> directly. Out of the box, Countable can be used with AMD loaders (require.js), CommonJS loaders (node, browserify) or directly in the browser.</p>
       </div>
     </section>
-    <section class="section light-section">
+    <section class="light-section">
       <div class="wrap">
-        <h2>Usage</h2>
-        <p>Countable offers easy-to-use methods you can use in your project. <code>Countable.live()</code> and <code>Countable.once()</code> accept one or more HTML elements and a callback that receives one parameter — holding all counted values — and <code>this</code> bound to the relevant element.</p>
-        <hr>
-        <h3>Available methods</h3>
-        <p>To enable full live-counting on an element, call <code>Countable.live()</code>.</p>
-        <pre><code>var area = document.getElementById('area')
+        <p>Countable offers an easy to understand API.</p>
+        <pre><code>var element = document.getElementById('area')
 
-Countable.live(area, function (counter) {
+function callback (counter) {
   console.log(counter)
-})</code></pre>
-        <p>In order to remove the Countable functionality from an element, call <code>Countable.die()</code>.</p>
-        <pre><code>Countable.die(area)</code></pre>
-        <p>There might be situations where you only want to count paragraphs, words and characters of an element once, i.e. if you want to display the word count of an article on your blog. In order to achieve this, call <code>Countable.once()</code>.</p>
-        <pre><code>Countable.once(area, function (counter) {
-  console.log(counter)
-})</code></pre>
-        <p>Countable also provides a handy method to check if live-counting functionality is enabled on an element: <code>Countable.enabled()</code>.</p>
-        <pre><code>Countable.enabled(area)</code></pre>
-        <hr>
-        <h3>Options</h3>
-        <p><code>Countable.live()</code> and <code>Countable.once()</code> both accept a third argument, an options object that allows you to change how Countable treats certain aspects of your element's text.</p>
-        <pre><code>{
-  hardReturns: false,
-  stripTags: false
-}</code></pre>
-        <p>By default, paragraphs are split by a single return (a soft return). By setting <code>hardReturns</code> to true, Countable splits paragraphs after two returns.</p>
-        <p>Depending on your application and audience, you might need to strip HTML tags from the text before counting it. You can do this by setting <code>stripTags</code> to true.</p>
-        <hr>
-        <p>For more detailed documentation, <a href="https://github.com/RadLikeWhoa/Countable#readme">see the GitHub repo</a>.</p>
+}
+
+Countable.live(area, callback)</code></pre>
+        <p>There are other methods you can use.</p>
+        <a class="orange-button" href="docs">View the full docs</a>
+      </div>
+    </section>
+    <section class="dark-section">
+      <div class="wrap">
+        <p>Ghost, extension, etc.</p>
       </div>
     </section>
     <footer class="site-footer">
