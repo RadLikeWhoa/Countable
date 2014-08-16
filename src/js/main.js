@@ -122,3 +122,8 @@ twttr.ready(function () {
   twttr.events.bind('tweet', track)
   twttr.events.bind('follow', track)
 })
+
+var val = countableArea.value
+countableArea.value = ''
+countableArea.focus()
+countableArea.value = val

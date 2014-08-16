@@ -31,14 +31,31 @@
     </header>
     <section class="section section--bordered section--alt" id="demo">
       <div class="demo wrap">
-        <h2>Demo</h2>
-        <textarea id="countableArea" autofocus placeholder="Start entering some text here"></textarea>
-        <ul class="result">
-          <li><strong>Paragraphs: </strong><span id="result__paragraphs">0</span></li>
-          <li><strong>Words: </strong><span id="result__words">0</span></li>
-          <li><strong>Characters: </strong><span id="result__characters">0</span></li>
-          <li><strong>Characters (with spaces): </strong><span id="result__all">0</span></li>
-        </ul>
+        <textarea id="countableArea">Try it out yourself, Countable is enabled on this textarea. Just start typing... </textarea>
+        <div class="result">
+          <div class="grid">
+            <div class="col m-col-1-2">
+              <div class="result-item">
+                <strong>Paragraphs: </strong><span class="result-count" id="result__paragraphs">0</span>
+              </div>
+            </div>
+            <div class="col m-col-1-2">
+              <div class="result-item">
+                <strong>Words: </strong><span class="result-count" id="result__words">0</span>
+              </div>
+            </div>
+            <div class="col m-col-1-2">
+              <div class="result-item">
+                <strong>Characters: </strong><span class="result-count" id="result__characters">0</span>
+              </div>
+            </div>
+            <div class="col m-col-1-2">
+              <div class="result-item">
+                <strong>Characters (with spaces): </strong><span class="result-count" id="result__all">0</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
     <section>

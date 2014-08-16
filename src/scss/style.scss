@@ -83,7 +83,7 @@ body {
 }
 
 .section--alt {
-  background-color: #fafafa;
+  background-image: linear-gradient(to bottom, #fafafa, #f7f7f7);
 }
 
 .wrap {
@@ -119,14 +119,6 @@ hr {
   border: 0;
   border-bottom: 1px solid #eee;
   margin-bottom: 1.5em;
-}
-
-section,
-.site-header,
-footer {
-  :last-child {
-    margin-bottom: 0;
-  }
 }
 
 
@@ -218,49 +210,6 @@ h1 {
   }
 }
 
-a.button__count {
-  position: relative;
-  display: inline-block;
-  margin-left: 1em;
-  padding: 0.75em;
-  color: #333;
-  text-shadow: none;
-  line-height: 1.4;
-  background-image: linear-gradient(top, rgba(#fff, 0.3), rgba(#fff, 0.1));
-  background-color: #fafafa;
-  border: 1px solid #eee;
-  border-radius: 3px;
-
-  &:hover span {
-    border-bottom: 1px solid;
-  }
-
-  &:before,
-  &:after {
-    content: " ";
-    position: absolute;
-    top: 50%;
-    right: 100%;
-    display: block;
-    width: 0px;
-    height: 0px;
-  }
-
-  &:before {
-    margin-top: -0.6875em;
-    border-top: 0.6875em solid transparent;
-    border-bottom: 0.6875em solid transparent;
-    border-right: 0.6875em solid #eee;
-  }
-
-  &:after {
-    margin-top: -0.625em;
-    border-top: 0.625em solid transparent;
-    border-bottom: 0.625em solid transparent;
-    border-right: 0.625em solid #fafafa;
-  }
-}
-
 
 
 /**
@@ -271,16 +220,12 @@ a.button__count {
  * the code used to create the demo.
  */
 
-.demo {
-  @extend %clearfix;
-  margin-bottom: 3em;
-}
-
 .demo textarea {
   display: block;
   width: 100%;
   height: 15em;
   padding: 1.5em;
+  margin-bottom: 1.5em;
   font: inherit;
   border: 1px solid #ddd;
   border-bottom: 0;
@@ -288,53 +233,42 @@ a.button__count {
   box-shadow: 0;
   resize: vertical;
   cursor: pointer;
-  transition: border-color 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
+  transition: border-color 0.25s ease-in-out;
 
   &:focus {
     border: 1px solid #4cadeb;
-    border-top-color: darken(#4cadeb, 10%);
-    box-shadow: 0 1px 3px rgba(#111, 0.25) inset;
     outline: none;
     cursor: text;
   }
 
   @media (min-width: 41em) {
-    float: left;
-    width: 70%;
-    margin-right: 5%;
     border-bottom: 1px solid #ddd;
     border-radius: 5px;
   }
 }
 
-.demo .result {
+.result {
   margin: 0;
-  padding: 1.5em;
-  background-color: #f5f5f5;
+  padding: 0.75em 1.5em;
   border: 1px solid #ddd;
   border-radius: 0 0 5px 5px;
   list-style: none;
 
   @media (min-width: 41em) {
-    float: left;
-    width: 25%;
-    height: 15em;
     border-radius: 5px;
   }
 }
 
-.result li {
-  padding: 0.375em 0;
-  border-bottom: 1px solid #ddd;
+.result-item {
+  padding: 0.75em 0;
 
-  &:first-child {
-    padding-top: 0;
+  .result .col:nth-child(-n+2) & {
+    border-bottom: 1px solid #e5e5e5;
   }
+}
 
-  &:last-child {
-    padding-bottom: 0;
-    border-bottom: 0;
-  }
+.result-count {
+  float: right;
 }
 
 pre,
