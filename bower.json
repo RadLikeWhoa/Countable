@@ -1,0 +1,10 @@
+{
+  "name": "Countable",
+  "version": "2.0.0",
+  "homepage": "http://sachaschmid.ch/Countable",
+  "authors": [
+    "Sacha Schmid <schmid.sacha@gmail.com>"
+  ],
+  "license": "MIT",
+  "private": true
+}
