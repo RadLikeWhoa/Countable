@@ -1,0 +1,11 @@
+$media-queries: () !default;
+
+@mixin mq ($name) {
+  @if map-has-key($media-queries, $name) {
+    @media #{map-get($media-queries, $name)} {
+      @content;
+    }
+  } @else {
+    @warn 'No media query called `#{$name}` could be found.';
+  }
+}

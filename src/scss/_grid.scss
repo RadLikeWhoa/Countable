@@ -1,0 +1,79 @@
+$grid-namespace: 'grid' !default;
+$grid-columns-namespace: 'col' !default;
+
+$column-prefixes: () !default;
+
+$columns: 2 3 4 5 6 !default;
+$gutters: 1.5em !default;
+
+$enable-push-columns: false !default;
+$enable-pull-columns: false !default;
+
+@mixin _column-setup ($prefix: false) {
+  $cache: ();
+
+  @each $group in $columns {
+    @for $i from 1 to $group {
+      $value: 100% / $group * $i;
+      $index: index($cache, $value);
+
+      @if not $index {
+        $cache: append($cache, $value);
+        $index: length($cache);
+
+        %#{$prefix + '-width-' + $index} { width: $value; }
+        %#{$prefix + '-push-' + $index}  { margin-left: $value; }
+        %#{$prefix + '-pull-' + $index}  { margin-left: $value * -1; }
+      }
+
+      $selector: $grid-columns-namespace + '-' + $i + '-' + $group;
+
+      .#{if($prefix, $prefix + '-', '') + $selector} {
+        @extend %#{$prefix + '-width-' + $index};
+      }
+
+      @if $enable-push-columns {
+        .#{if($prefix, $prefix + '-push-', 'push-') + $selector} {
+          @extend %#{$prefix + '-push-' + $index};
+        }
+      }
+
+      @if $enable-pull-columns {
+        .#{if($prefix, $prefix + '-pull-', 'pull-') + $selector} {
+          @extend %#{$prefix + '-pull-' + $index};
+        }
+      }
+    }
+  }
+}
+
+.#{$grid-namespace} {
+  display: block;
+  margin-left: -$gutters;
+
+  &:after {
+    content: ' ';
+    display: table;
+    clear: both;
+  }
+}
+
+.#{$grid-columns-namespace} {
+  position: relative;
+  display: block;
+  width: 100%;
+  float: left;
+  padding-left: $gutters;
+
+  .#{$grid-namespace}--rev & {
+    float: right;
+  }
+}
+
+@include _column-setup();
+
+@each $media-query, $prefix in $column-prefixes {
+  @include mq($media-query) {
+    @include _column-setup($prefix);
+  }
+}

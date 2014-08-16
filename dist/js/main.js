@@ -466,32 +466,6 @@ Countable.live(document.getElementById('countableArea'), function (counter) {
 })
 
 /**
- * We get the current watch count of Countable through the GitHub API and
- * display it on the button then.
- */
-
-async('https://api.github.com/repos/RadLikeWhoa/Countable?callback=watchCount')
-
-window.watchCount = function (data) {
-  if (!data) return
-
-  var counter = document.getElementById('github-watch-count'),
-      watchers = data.data.watchers
-
-  if (!counter || !watchers) return
-
-  text(counter, watchers)
-  counter.parentNode.style.display = 'inline-block'
-  counter.parentNode.title = 'Countable has ' + watchers + ' stargazers on GitHub'
-
-  try {
-    delete window.watchCount
-  } catch (e) {
-    window.watchCount = undefined
-  }
-}
-
-/**
  * We load the Google Analytics snippet asynchronously and track every click
  * on the 'Download on GitHub' button.
  */

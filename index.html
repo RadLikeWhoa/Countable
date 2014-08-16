@@ -12,24 +12,24 @@
     <!--[if lt IE 9]>
       <link rel="stylesheet" href="dist/css/ie.css">
     <![endif]-->
-    <link rel="dns-prefetch" href="https://api.github.com">
     <link rel="dns-prefetch" href="http://www.google-analytics.com">
     <link rel="dns-prefetch" href="https://platform.twitter.com">
   </head>
   <body class="language-javascript">
-    <header>
-      <div class="wrap wrap--padded-small">
+    <header class="site-header">
+      <div class="wrap">
         <h1><a href="http://github.com/RadLikeWhoa/Countable">Countable.js</a></h1>
+        <p class="intro">Countable is a JavaScript tool to add <strong>live paragraph-, word- and character-counting</strong> to an HTML element. Countable is a <em>zero-dependency</em> library and comes in at <strong>1KB</strong> when minified and gzipped.</p>
+        <div class="grid">
+          <div class="col m-col-1-2">
+            <a id="github-button" href="http://github.com/RadLikeWhoa/Countable" class="button button--download">Download on GitHub</a>
+          </div>
+          <div class="col m-col-1-2">
+            <a href="http://twitter.com/intent/tweet?url=http%3A%2F%2Fradlikewhoa.github.io%2FCountable%2F&amp;text=Countable.js%20%E2%80%94%20Live%20word-counting%20in%20JavaScript%20by%20%40sachaschmid.&amp;related=sachaschmid:Creator%20and%20designer%20of%20Countable" class="button button--tweet">Tweet</a>
+          </div>
       </div>
     </header>
-    <section class="section--bordered">
-      <div class="wrap">
-        <p class="intro">Countable is a JavaScript function to add <strong>live paragraph-, word- and character-counting</strong> to an HTML element. Countable is a <em>zero-dependency</em> library and comes in at <strong>1KB</strong> when minified and gzipped.</p>
-        <div class="button-wrapper"><a id="github-button" href="http://github.com/RadLikeWhoa/Countable" class="button button--download">Download on GitHub</a><a href="https://github.com/RadLikeWhoa/Countable/stargazers" class="button__count" style="display: none"><span id="github-watch-count"></span></a></div>
-        <div class="button-wrapper"><a href="http://twitter.com/intent/tweet?url=http%3A%2F%2Fradlikewhoa.github.io%2FCountable%2F&amp;text=Countable.js%20%E2%80%94%20Live%20word-counting%20in%20JavaScript%20by%20%40sachaschmid.&amp;related=sachaschmid:Creator%20and%20designer%20of%20Countable" class="button button--tweet">Tweet</a><a href="https://twitter.com/search/realtime?q=radlikewhoa.github.io%2FCountable" class="button__count" style="display: none"><span id="tweet-count"></span></a></div>
-      </div>
-    </section>
-    <section class="section--bordered section--alt" id="demo">
+    <section class="section section--bordered section--alt" id="demo">
       <div class="demo wrap">
         <h2>Demo</h2>
         <textarea id="countableArea" autofocus placeholder="Start entering some text here"></textarea>

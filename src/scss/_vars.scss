@@ -1,0 +1,13 @@
+$media-queries: (
+  'small': '(max-width: 30em)',
+  'medium': '(min-width: 30em)',
+  'large': '(min-width: 50em)'
+);
+
+$column-prefixes: (
+  'small': 's',
+  'medium': 'm',
+  'large': 'l'
+);
+
+$columns: 2;
