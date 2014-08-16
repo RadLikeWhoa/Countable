@@ -53,6 +53,7 @@ gulp.task('webserver', function () {
 gulp.task('watch', function () {
   gulp.watch('src/scss/**/*.scss', ['styles'])
   gulp.watch('src/js/**/*.js', ['jshint', 'scripts'])
+  gulp.watch('src/**/*.html', notifyLivereload)
   gulp.watch('dist/css/**/*.css', notifyLivereload)
   gulp.watch('dist/js/**/*.js', notifyLivereload)
 })
