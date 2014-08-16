@@ -1,0 +1,18 @@
+pre,
+code {
+  font: 100%/1.5 Source Code Pro, monospace;
+}
+
+pre {
+  margin: 0 0 1.5em;
+  padding: 1.5em;
+  background: linear-gradient(left, #f5f5f5 30%, rgba(#f5f5f5, 0)), linear-gradient(left, rgba(#f5f5f5, 0), #f5f5f5 70%), radial-gradient(0 50%, farthest-side, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)), radial-gradient(100% 50%, farthest-side, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0));
+  background-color: #f5f5f5;
+  background-repeat: no-repeat;
+  background-position: 0 0, 100% 0, 0 0, 100% 0;
+  background-size: 40px 100%, 40px 100%, 14px 100%, 14px 100%;
+  background-attachment: local, local, scroll, scroll;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  overflow: auto;
+}

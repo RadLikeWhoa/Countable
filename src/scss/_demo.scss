@@ -1,0 +1,44 @@
+.demo-area {
+  display: block;
+  width: 100%;
+  height: 15em;
+  padding: 1.5em;
+  margin-bottom: 1.5em;
+  font: inherit;
+  border: 1px solid #e5e5e5;
+  border-radius: 5px;
+  resize: vertical;
+  cursor: pointer;
+  transition: border-color 0.15s ease-in-out;
+  -webkit-appearance: none;
+
+  &:focus {
+    border-color: #4cadeb;
+    outline: none;
+    cursor: text;
+  }
+}
+
+.result {
+  padding: 0.75em 1.5em;
+  border: 1px solid #e5e5e5;
+  border-radius: 5px;
+}
+
+.result-item {
+  padding: 0.75em 0;
+
+  .result .col:nth-child(-n+2) & {
+    border-bottom: 1px solid #e5e5e5;
+  }
+
+  @include mq(s) {
+    .result .col:nth-child(-n+3) & {
+      border-bottom: 1px solid #e5e5e5;
+    }
+  }
+}
+
+.result-count {
+  float: right;
+}

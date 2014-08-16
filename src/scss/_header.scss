@@ -1,0 +1,44 @@
+.site-header,
+.site-footer {
+  text-align: center;
+}
+
+.site-header {
+  padding: 3em 1.5em 2.25em;
+  background-image: linear-gradient(to bottom, #eba44c, #eb894c);
+
+  .button {
+    @include mq(s) {
+      margin-bottom: 0.75em;
+    }
+  }
+
+  @include mq(m) {
+    padding: 4.5em 3em;
+  }
+}
+
+.site-heading {
+  margin-bottom: 0.75em;
+  text-transform: uppercase;
+
+  a {
+    color: #fff;
+    border-bottom: 0;
+  }
+
+  @include mq(m) {
+    font-size: 4em;
+  }
+}
+
+.intro {
+  margin-bottom: 2.307em;
+  color: #fff;
+  font-size: 1.3em;
+
+  @include mq(m) {
+    font-size: 1.5em;
+    margin-bottom: 2em;
+  }
+}
