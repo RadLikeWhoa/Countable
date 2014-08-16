@@ -67,7 +67,7 @@ hr {
 }
 
 .section {
-  padding: 1.5em 1.5em 0;
+  padding: 3em 1.5em 1.5em;
 
   @include mq(m) {
     padding: 4.5em 3em 3em;
@@ -88,7 +88,7 @@ hr {
 
   pre {
     color: #333;
-    border: 0;
+    background-color: #fff;
   }
 }
 

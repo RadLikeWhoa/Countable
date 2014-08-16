@@ -6,10 +6,11 @@ code {
 pre {
   margin-bottom: 1.5em;
   padding: 1.5em;
-  background-color: #f5f5f5;
-  border: 1px solid #e5e5e5;
+  color: #fff;
+  background-color: #4e4e4e;
   border-radius: 5px;
-  overflow: auto;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 
 .terminal-line:before {
