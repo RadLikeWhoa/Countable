@@ -9,6 +9,8 @@
   padding: 3em 1.5em 2.25em;
 
   .button {
+    margin-bottom: 0;
+
     @include mq(s) {
       margin-bottom: 0.75em;
     }
