@@ -1,13 +1,4 @@
 var gulp = require('gulp')
-var concat = require('gulp-concat')
-var uglify = require('gulp-uglify')
-var sass = require('gulp-ruby-sass')
-var autoprefixer = require('gulp-autoprefixer')
-var csso = require('gulp-csso')
-var cmq = require('gulp-combine-media-queries')
-var express = require('express')
-var opn = require('opn')
-
 var lr
 
 function notifyLivereload (event) {
@@ -21,6 +12,9 @@ function notifyLivereload (event) {
 }
 
 gulp.task('scripts', function () {
+  var concat = require('gulp-concat')
+  var uglify = require('gulp-uglify')
+
   gulp.src([ 'bower_components/Countable/Countable.js', 'src/**/*.js' ])
     .pipe(concat('main.js'))
     .pipe(uglify())
@@ -28,8 +22,13 @@ gulp.task('scripts', function () {
 })
 
 gulp.task('styles', function () {
+  var sass = require('gulp-ruby-sass')
+  var autoprefixer = require('gulp-autoprefixer')
+  var cmq = require('gulp-combine-media-queries')
+  var csso = require('gulp-csso')
+
   gulp.src('src/scss/**/*.scss')
-    .pipe(sass({ style: 'compressed' }))
+    .pipe(sass())
     .on('error', function (err) { console.log(err.message) })
     .pipe(autoprefixer('last 2 version', 'ie 7', 'ie 8', 'ie 9', 'ios 6', 'android 4'))
     .pipe(cmq())
@@ -38,6 +37,7 @@ gulp.task('styles', function () {
 })
 
 gulp.task('webserver', function () {
+  var express = require('express')
   var app = express()
 
   app.use(require('connect-livereload')())
@@ -47,7 +47,7 @@ gulp.task('webserver', function () {
   lr = require('tiny-lr')()
   lr.listen(35729)
 
-  opn('http://localhost:8000')
+  require('opn')('http://localhost:8000')
 })
 
 gulp.task('watch', function () {
