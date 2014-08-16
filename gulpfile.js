@@ -27,9 +27,9 @@ gulp.task('jshint', function () {
 })
 
 gulp.task('scripts', function () {
-  gulp.src(['bower_components/Countable/Countable.js', './src/js/**/*.js'])
+  gulp.src(['bower_components/Countable/Countable.js', 'src/js/vendor/prism.js', 'src/js/main.js'])
     .pipe(concat('main.js'))
-    .pipe(uglify())
+    // .pipe(uglify())
     .pipe(gulp.dest('dist/js'))
 })
 

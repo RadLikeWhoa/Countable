@@ -148,15 +148,3 @@ twttr.ready(function () {
   twttr.events.bind('tweet', track)
   twttr.events.bind('follow', track)
 })
-
-/**
- * Prism is used on the site to do syntax highlighting. In order to make the
- * documentation more appealing, Countable-specific keywords are highlighted
- * as well and can be styled using the given class.
- *
- * @see <http://goo.gl/6DpY8>
- */
-
-Prism.languages.insertBefore('javascript', 'keyword', {
-  'countable-class': /Countable/
-})
