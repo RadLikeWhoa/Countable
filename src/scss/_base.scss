@@ -26,7 +26,8 @@
 h1,
 h2,
 h3,
-p {
+p,
+pre {
   margin-top: 0;
 }
 
@@ -39,7 +40,6 @@ a {
   color: #eb8a4c;
   text-decoration: none;
   border-bottom: 1px solid;
-  transition: border-bottom 0.25s ease-in-out;
 }
 
 h1 {
@@ -62,27 +62,34 @@ p {
 
 hr {
   border: 0;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #e5e5e5;
   margin-bottom: 1.5em;
 }
 
 .section {
-  padding: 1.5em;
+  padding: 1.5em 1.5em 0;
 
   @include mq(m) {
-    padding: 3em;
+    padding: 4.5em 3em 3em;
   }
 }
 
-.section--bordered {
-  border-bottom: 1px solid #eee;
+.light-section {
+  background-image: linear-gradient(to bottom, #fafafa, #f2f2f2);
 }
 
-.section--alt {
-  background-image: linear-gradient(to bottom, #fafafa, #f7f7f7);
+.dark-section {
+  color: #fff;
+  background-image: linear-gradient(to bottom, #4e4e4e, #464646);
+
+  pre {
+    color: #333;
+    border: 0;
+  }
 }
 
 .wrap {
   max-width: 50em;
   margin: 0 auto;
+  overflow: hidden;
 }
