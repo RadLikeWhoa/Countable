@@ -21,20 +21,20 @@ function notifyLivereload (event) {
 }
 
 gulp.task('scripts', function () {
-  gulp.src(['bower_components/Countable/Countable.js', 'src/**/*.js'])
+  gulp.src([ 'bower_components/Countable/Countable.js', 'src/**/*.js' ])
     .pipe(concat('main.js'))
     .pipe(uglify())
-    .pipe(gulp.dest('dist/js'))
+    .pipe(gulp.dest('assets/js'))
 })
 
 gulp.task('styles', function () {
-  gulp.src('./src/scss/**/*.scss')
+  gulp.src('src/scss/**/*.scss')
     .pipe(sass({ style: 'compressed' }))
     .on('error', function (err) { console.log(err.message) })
     .pipe(autoprefixer('last 2 version', 'ie 7', 'ie 8', 'ie 9', 'ios 6', 'android 4'))
     .pipe(cmq())
     .pipe(csso())
-    .pipe(gulp.dest('./dist/css'))
+    .pipe(gulp.dest('assets/css'))
 })
 
 gulp.task('webserver', function () {
@@ -51,11 +51,11 @@ gulp.task('webserver', function () {
 })
 
 gulp.task('watch', function () {
-  gulp.watch('src/scss/**/*.scss', ['styles'])
-  gulp.watch('src/js/**/*.js', ['jshint', 'scripts'])
+  gulp.watch('src/scss/**/*.scss', [ 'styles' ])
+  gulp.watch('src/js/**/*.js', [ 'scripts' ])
   gulp.watch('src/**/*.html', notifyLivereload)
-  gulp.watch('dist/css/**/*.css', notifyLivereload)
-  gulp.watch('dist/js/**/*.js', notifyLivereload)
+  gulp.watch('assets/css/**/*.css', notifyLivereload)
+  gulp.watch('assets/js/**/*.js', notifyLivereload)
 })
 
-gulp.task('default', ['jshint', 'scripts', 'styles', 'webserver', 'watch'])
+gulp.task('default', [ 'scripts', 'styles', 'webserver', 'watch' ])
