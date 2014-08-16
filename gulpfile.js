@@ -7,6 +7,7 @@ var autoprefixer = require('gulp-autoprefixer')
 var csso = require('gulp-csso')
 var cmq = require('gulp-combine-media-queries')
 var express = require('express')
+var opn = require('opn')
 
 var lr
 
@@ -27,15 +28,16 @@ gulp.task('jshint', function () {
 })
 
 gulp.task('scripts', function () {
-  gulp.src(['bower_components/Countable/Countable.js', 'src/js/vendor/prism.js', 'src/js/main.js'])
+  gulp.src(['bower_components/Countable/Countable.js', 'src/**/*.js'])
     .pipe(concat('main.js'))
-    // .pipe(uglify())
+    .pipe(uglify())
     .pipe(gulp.dest('dist/js'))
 })
 
 gulp.task('styles', function () {
   gulp.src('./src/scss/**/*.scss')
     .pipe(sass({ style: 'compressed' }))
+    .on('error', function (err) { console.log(err.message) })
     .pipe(autoprefixer('last 2 version', 'ie 7', 'ie 8', 'ie 9', 'ios 6', 'android 4'))
     .pipe(cmq())
     .pipe(csso())
@@ -52,7 +54,7 @@ gulp.task('webserver', function () {
   lr = require('tiny-lr')()
   lr.listen(35729)
 
-  require('open')('http://localhost:8000')
+  opn('http://localhost:8000')
 })
 
 gulp.task('watch', function () {

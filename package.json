@@ -12,7 +12,7 @@
     "gulp-jshint": "^1.8.4",
     "gulp-ruby-sass": "^0.7.1",
     "gulp-uglify": "^0.3.1",
-    "open": "0.0.5",
+    "opn": "^1.0.0",
     "tiny-lr": "^0.1.0"
   }
 }
