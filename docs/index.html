@@ -23,9 +23,12 @@
     </header>
     <section class="light-section">
       <div class="wrap">
-        <h2 id="explanations">General explanations</h3>
+        <h2 id="explanations">General explanations</h2>
+        <p>TBD</p>
         <hr>
         <h2 id="methods">Available methods</h2>
+        <p>TBD</p>
+        <hr>
         <h3 id="live">Countable.live(elements, callback, options)</h3>
         <p>This method enables full live-counting on an element. Use the callback function to process the counted values.</p>
         <div class="method-description">
@@ -48,7 +51,7 @@
                 <b>elements</b>
               </div>
               <div class="col med-col-1-6">
-                Nodes
+                <span class="type">Nodes</span>
               </div>
               <div class="col med-col-4-6">
                 All elements that should receive the Countable functionality.
@@ -61,7 +64,7 @@
                 <b>callback</b>
               </div>
               <div class="col med-col-1-6">
-                Function
+                <span class="type">Function</span>
               </div>
               <div class="col med-col-4-6">
                 The callback to fire whenever the element's value changes. The callback is called with the relevant element bound to `this` and the counted values as the single parameter.
@@ -74,7 +77,7 @@
                 <b>options</b> *
               </div>
               <div class="col med-col-1-6">
-                Function
+                <span class="type">Object</span>
               </div>
               <div class="col med-col-4-6">
                 An object to modify Countable's behaviour. Refer to the <a href="#options">options section</a> of this documentation for a list of available options.
@@ -110,7 +113,7 @@ Countable.live(area, function (counter) {
                 <b>elements</b>
               </div>
               <div class="col med-col-1-6">
-                Nodes
+                <span class="type">Nodes</span>
               </div>
               <div class="col med-col-4-6">
                 All elements whose Countable functionality should be unbound.
@@ -144,7 +147,7 @@ Countable.die(area)</code></pre>
                         <b>elements</b>
                       </div>
                       <div class="col med-col-1-6">
-                        Nodes
+                        <span class="type">Nodes</span>
                       </div>
                       <div class="col med-col-4-6">
                         All elements that should receive the Countable functionality.
@@ -157,7 +160,7 @@ Countable.die(area)</code></pre>
                         <b>callback</b>
                       </div>
                       <div class="col med-col-1-6">
-                        Function
+                        <span class="type">Function</span>
                       </div>
                       <div class="col med-col-4-6">
                         The callback to fire whenever the element's value changes. The callback is called with the relevant element bound to `this` and the counted values as the single parameter.
@@ -170,7 +173,7 @@ Countable.die(area)</code></pre>
                         <b>options</b> *
                       </div>
                       <div class="col med-col-1-6">
-                        Function
+                        <span class="type">Object</span>
                       </div>
                       <div class="col med-col-4-6">
                         An object to modify Countable's behaviour. Refer to the <a href="#options">options section</a> of this documentation for a list of available options.
@@ -206,7 +209,7 @@ Countable.once(area, function (counter) {
                 <b>element</b>
               </div>
               <div class="col med-col-1-6">
-                Element
+                <span class="type">Element</span>
               </div>
               <div class="col med-col-4-6">
                 A single element.
@@ -227,7 +230,7 @@ Countable.enabled(area)</code></pre>
                 Name
               </div>
               <div class="col med-col-1-6">
-                Default
+                <span class="type">Default</span>
               </div>
               <div class="col med-col-4-6">
                 Description
@@ -240,7 +243,7 @@ Countable.enabled(area)</code></pre>
                 <b>hardReturns</b>
               </div>
               <div class="col med-col-1-6">
-                false
+                <span class="type">false</span>
               </div>
               <div class="col med-col-4-6">
                 Use two returns to seperate a paragraph instead of one.
@@ -253,7 +256,7 @@ Countable.enabled(area)</code></pre>
                 <b>stripTags</b>
               </div>
               <div class="col med-col-1-6">
-                false
+                <span class="type">false</span>
               </div>
               <div class="col med-col-4-6">
                 Strip HTML tags before counting the values.
@@ -266,7 +269,7 @@ Countable.enabled(area)</code></pre>
                 <b>ignoreReturns</b>
               </div>
               <div class="col med-col-1-6">
-                false
+                <span class="type">false</span>
               </div>
               <div class="col med-col-4-6">
                 Ignore returns when calculating the `all` property.

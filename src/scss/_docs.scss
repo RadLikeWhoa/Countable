@@ -1,3 +1,17 @@
+.docs .site-header {
+  padding: 1.5em;
+  text-align: left;
+
+  @include mq(m) {
+    padding: 1.5em 3em;
+  }
+
+  .site-heading {
+    margin-bottom: 0;
+    font-size: 2em;
+  }
+}
+
 .docs h2 {
   margin-bottom: 2em;
 }
@@ -29,4 +43,15 @@
 
 .description-header {
   font-weight: bold;
+
+  @include mq(s) {
+    display: none;
+  }
+}
+
+.type {
+  @include mq(s) {
+    display: inline-block;
+    padding: 0.75em 0;
+  }
 }
