@@ -1,29 +1,293 @@
-        <h2>Usage</h2>
-        <p>Countable offers easy-to-use methods you can use in your project. <code>Countable.live()</code> and <code>Countable.once()</code> accept one or more HTML elements and a callback that receives one parameter — holding all counted values — and <code>this</code> bound to the relevant element.</p>
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="Countable is a JavaScript function to add live paragraph-, word- and character-counting to an HTML element.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Countable.js — Live word-counting in JavaScript</title>
+    <!--[if lt IE 9]>
+      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <!--[if lt IE 9]>
+      <link rel="stylesheet" href="../assets/css/ie.css">
+    <![endif]-->
+    <link rel="dns-prefetch" href="http://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://platform.twitter.com">
+  </head>
+  <body class="docs">
+    <header class="site-header small-header">
+      <div class="wrap">
+        <h1 class="site-heading"><a href="http://sachaschmid.ch/Countable">Countable.js</a> <span class="muted">— Docs</span></h1>
+      </div>
+    </header>
+    <section class="light-section">
+      <div class="wrap">
+        <h2 id="explanations">General explanations</h3>
         <hr>
-        <h3>Available methods</h3>
-        <p>To enable full live-counting on an element, call <code>Countable.live()</code>.</p>
+        <h2 id="methods">Available methods</h2>
+        <h3 id="live">Countable.live(elements, callback, options)</h3>
+        <p>This method enables full live-counting on an element. Use the callback function to process the counted values.</p>
+        <div class="method-description">
+          <header class="description-header">
+            <div class="grid">
+              <div class="col med-col-1-6">
+                Name
+              </div>
+              <div class="col med-col-1-6">
+                Type
+              </div>
+              <div class="col med-col-4-6">
+                Description
+              </div>
+            </div>
+          </header>
+          <div class="method-argument">
+            <div class="grid">
+              <div class="col med-col-1-6">
+                <b>elements</b>
+              </div>
+              <div class="col med-col-1-6">
+                Nodes
+              </div>
+              <div class="col med-col-4-6">
+                All elements that should receive the Countable functionality.
+              </div>
+            </div>
+          </div>
+          <div class="method-argument">
+            <div class="grid">
+              <div class="col med-col-1-6">
+                <b>callback</b>
+              </div>
+              <div class="col med-col-1-6">
+                Function
+              </div>
+              <div class="col med-col-4-6">
+                The callback to fire whenever the element's value changes. The callback is called with the relevant element bound to `this` and the counted values as the single parameter.
+              </div>
+            </div>
+          </div>
+          <div class="method-argument">
+            <div class="grid">
+              <div class="col med-col-1-6">
+                <b>options</b> *
+              </div>
+              <div class="col med-col-1-6">
+                Function
+              </div>
+              <div class="col med-col-4-6">
+                An object to modify Countable's behaviour. Refer to the <a href="#options">options section</a> of this documentation for a list of available options.
+              </div>
+            </div>
+          </div>
+        </div>
         <pre><code>var area = document.getElementById('area')
 
 Countable.live(area, function (counter) {
   console.log(counter)
 })</code></pre>
+        <hr>
+        <h3 id="die">Countable.die(elements)</h3>
         <p>In order to remove the Countable functionality from an element, call <code>Countable.die()</code>.</p>
-        <pre><code>Countable.die(area)</code></pre>
+        <div class="method-description">
+          <header class="description-header">
+            <div class="grid">
+              <div class="col med-col-1-6">
+                Name
+              </div>
+              <div class="col med-col-1-6">
+                Type
+              </div>
+              <div class="col med-col-4-6">
+                Description
+              </div>
+            </div>
+          </header>
+          <div class="method-argument">
+            <div class="grid">
+              <div class="col med-col-1-6">
+                <b>elements</b>
+              </div>
+              <div class="col med-col-1-6">
+                Nodes
+              </div>
+              <div class="col med-col-4-6">
+                All elements whose Countable functionality should be unbound.
+              </div>
+            </div>
+          </div>
+        </div>
+        <pre><code>var area = document.getElementById('area')
+
+Countable.die(area)</code></pre>
+        <hr>
+        <h3 id="once">Countable.once(elements, callback, options)</h3>
         <p>There might be situations where you only want to count paragraphs, words and characters of an element once, i.e. if you want to display the word count of an article on your blog. In order to achieve this, call <code>Countable.once()</code>.</p>
-        <pre><code>Countable.once(area, function (counter) {
+        <div class="method-description">
+                  <header class="description-header">
+                    <div class="grid">
+                      <div class="col med-col-1-6">
+                        <b>Name</b>
+                      </div>
+                      <div class="col med-col-1-6">
+                        Type
+                      </div>
+                      <div class="col med-col-4-6">
+                        Description
+                      </div>
+                    </div>
+                  </header>
+                  <div class="method-argument">
+                    <div class="grid">
+                      <div class="col med-col-1-6">
+                        <b>elements</b>
+                      </div>
+                      <div class="col med-col-1-6">
+                        Nodes
+                      </div>
+                      <div class="col med-col-4-6">
+                        All elements that should receive the Countable functionality.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="method-argument">
+                    <div class="grid">
+                      <div class="col med-col-1-6">
+                        <b>callback</b>
+                      </div>
+                      <div class="col med-col-1-6">
+                        Function
+                      </div>
+                      <div class="col med-col-4-6">
+                        The callback to fire whenever the element's value changes. The callback is called with the relevant element bound to `this` and the counted values as the single parameter.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="method-argument">
+                    <div class="grid">
+                      <div class="col med-col-1-6">
+                        <b>options</b> *
+                      </div>
+                      <div class="col med-col-1-6">
+                        Function
+                      </div>
+                      <div class="col med-col-4-6">
+                        An object to modify Countable's behaviour. Refer to the <a href="#options">options section</a> of this documentation for a list of available options.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+        <pre><code>var area = document.getElementById('area')
+
+Countable.once(area, function (counter) {
   console.log(counter)
 })</code></pre>
-        <p>Countable also provides a handy method to check if live-counting functionality is enabled on an element: <code>Countable.enabled()</code>.</p>
-        <pre><code>Countable.enabled(area)</code></pre>
         <hr>
-        <h3>Options</h3>
+        <h3 id="enabled">Countable.enabled(element)</h3>
+        <p>Countable also provides a handy method to check if live-counting functionality is enabled on an element.</p>
+        <div class="method-description">
+          <header class="description-header">
+            <div class="grid">
+              <div class="col med-col-1-6">
+                Name
+              </div>
+              <div class="col med-col-1-6">
+                Type
+              </div>
+              <div class="col med-col-4-6">
+                Description
+              </div>
+            </div>
+          </header>
+          <div class="method-argument">
+            <div class="grid">
+              <div class="col med-col-1-6">
+                <b>element</b>
+              </div>
+              <div class="col med-col-1-6">
+                Element
+              </div>
+              <div class="col med-col-4-6">
+                A single element.
+              </div>
+            </div>
+          </div>
+        </div>
+        <pre><code>var area = document.getElementById('area')
+
+Countable.enabled(area)</code></pre>
+        <hr>
+        <h2 id="options">Options</h2>
         <p><code>Countable.live()</code> and <code>Countable.once()</code> both accept a third argument, an options object that allows you to change how Countable treats certain aspects of your element's text.</p>
-        <pre><code>{
-  hardReturns: false,
-  stripTags: false
-}</code></pre>
-        <p>By default, paragraphs are split by a single return (a soft return). By setting <code>hardReturns</code> to true, Countable splits paragraphs after two returns.</p>
-        <p>Depending on your application and audience, you might need to strip HTML tags from the text before counting it. You can do this by setting <code>stripTags</code> to true.</p>
-        <hr>
-        <p>For more detailed documentation, <a href="https://github.com/RadLikeWhoa/Countable#readme">see the GitHub repo</a>.</p>
+        <div class="method-description">
+          <header class="description-header">
+            <div class="grid">
+              <div class="col med-col-1-6">
+                Name
+              </div>
+              <div class="col med-col-1-6">
+                Default
+              </div>
+              <div class="col med-col-4-6">
+                Description
+              </div>
+            </div>
+          </header>
+          <div class="method-argument">
+            <div class="grid">
+              <div class="col med-col-1-6">
+                <b>hardReturns</b>
+              </div>
+              <div class="col med-col-1-6">
+                false
+              </div>
+              <div class="col med-col-4-6">
+                Use two returns to seperate a paragraph instead of one.
+              </div>
+            </div>
+          </div>
+          <div class="method-argument">
+            <div class="grid">
+              <div class="col med-col-1-6">
+                <b>stripTags</b>
+              </div>
+              <div class="col med-col-1-6">
+                false
+              </div>
+              <div class="col med-col-4-6">
+                Strip HTML tags before counting the values.
+              </div>
+            </div>
+          </div>
+          <div class="method-argument">
+            <div class="grid">
+              <div class="col med-col-1-6">
+                <b>ignoreReturns</b>
+              </div>
+              <div class="col med-col-1-6">
+                false
+              </div>
+              <div class="col med-col-4-6">
+                Ignore returns when calculating the `all` property.
+              </div>
+            </div>
+          </div>
+        </div>
+        <pre><code>var area = document.getElementById('area')
+
+Countable.live(area, function (counter) {
+  console.log(counter)
+}, {
+  stripTags: true
+})</code></pre>
+      </div>
+    </section>
+    <footer class="site-footer">
+      <div class="wrap">
+        <p>Created by <a href="http://twitter.com/sachaschmid">Sacha Schmid</a></p>
+      </div>
+    </footer>
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>

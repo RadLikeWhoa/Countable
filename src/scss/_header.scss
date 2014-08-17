@@ -17,6 +17,20 @@
   }
 }
 
+.small-header {
+  padding: 1.5em;
+
+  @include mq(m) {
+    padding: 1.5em 3em;
+    text-align: left;
+  }
+
+  .site-heading {
+    margin-bottom: 0;
+    font-size: 2em;
+  }
+}
+
 .site-heading {
   margin-bottom: 0.75em;
   text-transform: uppercase;
@@ -49,4 +63,8 @@
   @include mq(m) {
     padding: 1.5em 3em 0em;
   }
+}
+
+.muted {
+  color: #e5e5e5;
 }

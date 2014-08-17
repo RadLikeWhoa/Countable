@@ -1,0 +1,32 @@
+.docs h2 {
+  margin-bottom: 2em;
+}
+
+.docs .section {
+  padding: 3em 1.5em 1.5em;
+
+  @include mq(m) {
+    padding: 3em 3em 1.5em;
+  }
+}
+
+.method-description {
+  padding: 0.75em 1.5em;
+  margin-bottom: 1.5em;
+  border: 1px solid #e5e5e5;
+  border-radius: 5px;
+}
+
+.method-argument,
+.description-header {
+  padding: 0.75em 0;
+  border-bottom: 1px solid #e5e5e5;
+
+  &:last-child {
+    border-bottom: 0;
+  }
+}
+
+.description-header {
+  font-weight: bold;
+}
