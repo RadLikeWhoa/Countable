@@ -3,6 +3,7 @@
   "description": "Countable is a JavaScript function to add live paragraph-, word- and character-counting to an HTML element.",
   "author": "Sacha Schmid <https://twitter.com/sachaschmid>",
   "version": "2.0.2",
+  "main": "Countable.js",
   "keywords": [
     "paragraphs",
     "words",
