@@ -1,12 +1,8 @@
-.site-header,
-.site-footer {
+.site-header {
+  padding: 3em 1.5em 2.25em;
   color: #fff;
   text-align: center;
   background-image: linear-gradient(to bottom, #eba44c, #eb894c);
-}
-
-.site-header {
-  padding: 3em 1.5em 2.25em;
 
   .button {
     margin-bottom: 0;
@@ -47,12 +43,10 @@
 
 .site-footer {
   padding: 1.5em 1.5em 0;
-
-  a {
-    color: #fff;
-  }
+  text-align: center;
+  border-top: 1px solid #e5e5e5;
 
   @include mq(m) {
-    padding: 3em 3em 1.5em;
+    padding: 1.5em 3em 0em;
   }
 }
