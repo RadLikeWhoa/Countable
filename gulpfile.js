@@ -30,7 +30,7 @@ gulp.task('styles', function () {
   gulp.src('src/scss/**/*.scss')
     .pipe(sass())
     .on('error', function (err) { console.log(err.message) })
-    .pipe(autoprefixer('last 2 version', 'ie 7', 'ie 8', 'ie 9', 'ios 6', 'android 4'))
+    .pipe(autoprefixer('last 3 version'))
     .pipe(cmq())
     .pipe(csso())
     .pipe(gulp.dest('assets/css'))
