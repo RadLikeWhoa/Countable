@@ -1,11 +1,12 @@
 var expect = chai.expect
 
 describe('Countable', function () {
-  var paragraphs, words, characters, all,
+  var paragraphs, sentences, words, characters, all,
       areaContainer, area
 
   function callback (counter) {
     paragraphs.innerHTML = counter.paragraphs
+    sentences.innerHTML = counter.sentences
     words.innerHTML = counter.words
     characters.innerHTML = counter.characters
     all.innerHTML = counter.all
@@ -21,6 +22,7 @@ describe('Countable', function () {
   before(function () {
     document.body.innerHTML = '<ul>' +
                                 '<li id="paragraphs"></li>' +
+                                '<li id="sentences"></li>' +
                                 '<li id="words"></li>' +
                                 '<li id="characters"></li>' +
                                 '<li id="all"></li>' +
@@ -28,6 +30,7 @@ describe('Countable', function () {
                               '<textarea id="area"></textarea>'
 
     paragraphs = document.getElementById('paragraphs')
+    sentences = document.getElementById('sentences')
     words = document.getElementById('words')
     characters = document.getElementById('characters')
     all = document.getElementById('all')
@@ -47,6 +50,7 @@ describe('Countable', function () {
 
     it('should count initially', function () {
       expect(paragraphs.innerHTML).to.equal('0')
+      expect(sentences.innerHTML).to.equal('0')
       expect(words.innerHTML).to.equal('0')
       expect(characters.innerHTML).to.equal('0')
       expect(all.innerHTML).to.equal('0')
@@ -58,6 +62,7 @@ describe('Countable', function () {
       triggerInput()
 
       expect(paragraphs.innerHTML).to.equal('1')
+      expect(sentences.innerHTML).to.equal('1')
       expect(words.innerHTML).to.equal('2')
       expect(characters.innerHTML).to.equal('10')
       expect(all.innerHTML).to.equal('11')
@@ -77,6 +82,7 @@ describe('Countable', function () {
 
     it('should count initially', function () {
       expect(paragraphs.innerHTML).to.equal('0')
+      expect(sentences.innerHTML).to.equal('0')
       expect(words.innerHTML).to.equal('0')
       expect(characters.innerHTML).to.equal('0')
       expect(all.innerHTML).to.equal('0')
@@ -88,6 +94,7 @@ describe('Countable', function () {
       triggerInput()
 
       expect(paragraphs.innerHTML).to.equal('0')
+      expect(sentences.innerHTML).to.equal('0')
       expect(words.innerHTML).to.equal('0')
       expect(characters.innerHTML).to.equal('0')
       expect(all.innerHTML).to.equal('0')
@@ -99,6 +106,7 @@ describe('Countable', function () {
       Countable.count(area, callback)
 
       expect(paragraphs.innerHTML).to.equal('1')
+      expect(sentences.innerHTML).to.equal('1')
       expect(words.innerHTML).to.equal('2')
       expect(characters.innerHTML).to.equal('10')
       expect(all.innerHTML).to.equal('11')
@@ -116,6 +124,7 @@ describe('Countable', function () {
       Countable.once(area, callback, { stripTags: true })
 
       expect(paragraphs.innerHTML).to.equal('1')
+      expect(sentences.innerHTML).to.equal('1')
       expect(words.innerHTML).to.equal('2')
       expect(characters.innerHTML).to.equal('10')
       expect(all.innerHTML).to.equal('11')
@@ -127,6 +136,7 @@ describe('Countable', function () {
       Countable.once(area, callback, { hardReturns: true })
 
       expect(paragraphs.innerHTML).to.equal('2')
+      expect(sentences.innerHTML).to.equal('1')
       expect(words.innerHTML).to.equal('2')
       expect(characters.innerHTML).to.equal('10')
       expect(all.innerHTML).to.equal('12')
@@ -138,6 +148,7 @@ describe('Countable', function () {
       Countable.once(area, callback, { ignoreReturns: true })
 
       expect(paragraphs.innerHTML).to.equal('2')
+      expect(sentences.innerHTML).to.equal('1')
       expect(words.innerHTML).to.equal('2')
       expect(characters.innerHTML).to.equal('10')
       expect(all.innerHTML).to.equal('10')
@@ -149,6 +160,7 @@ describe('Countable', function () {
       Countable.once(area, callback, { ignoreZeroWidth: false })
 
       expect(paragraphs.innerHTML).to.equal('1')
+      expect(sentences.innerHTML).to.equal('1')
       expect(words.innerHTML).to.equal('1')
       expect(characters.innerHTML).to.equal('5')
       expect(all.innerHTML).to.equal('5')

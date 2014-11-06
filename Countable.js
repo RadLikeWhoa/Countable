@@ -158,7 +158,7 @@
 
   /**
    * `_count` trims an element's value, optionally strips HTML tags and counts
-   * paragraphs, words, characters and characters plus spaces.
+   * paragraphs, sentences, words, characters and characters plus spaces.
    *
    * @private
    *
@@ -167,7 +167,8 @@
    * @param   {Object}   options  The options to use for the counting.
    *
    * @return  {Object}   The object containing the number of paragraphs,
-   *                     words, characters and characters plus spaces.
+   *                     sentences, words, characters and characters plus
+   *                     spaces.
    */
 
   function _count (element, options) {
@@ -195,6 +196,7 @@
 
     return {
       paragraphs: trimmed ? (trimmed.match(options.hardReturns ? /\n{2,}/g : /\n+/g) || []).length + 1 : 0,
+      sentences: trimmed ? (trimmed.match(/[.?!…]+./g) || []).length + 1 : 0,
       words: trimmed ? (trimmed.replace(/['";:,.?¿\-!¡]+/g, '').match(/\S+/g) || []).length : 0,
       characters: trimmed ? _decode(trimmed.replace(/\s/g, '')).length : 0,
       all: _decode(options.ignoreReturns ? original.replace(/[\n\r]/g, '') : original).length
