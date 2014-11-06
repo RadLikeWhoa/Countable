@@ -336,11 +336,7 @@
       if (!_validateArguments(elements, callback)) return
 
       _loop(elements, function (element) {
-        if (callback) {
-          callback.call(element, _count(element, _extendDefaults(options)))
-        } else {
-          return _count(element, _extendDefaults(options))
-        }
+        callback.call(element, _count(element, _extendDefaults(options)))
       })
 
       return this
