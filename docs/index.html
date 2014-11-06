@@ -64,7 +64,7 @@
                 <span class="type">Function</span>
               </div>
               <div class="col med-col-4-6">
-                The callback to fire whenever the element's value changes. The callback is called with the relevant element bound to `this` and the counted values as the only parameter.
+                The callback to fire whenever the element's value changes. Refer to the <a href="#callback">Callback section</a> for more information on this.
               </div>
             </div>
           </div>
@@ -124,60 +124,61 @@ Countable.die(area)</code></pre>
         <hr>
         <h3 id="once">Countable.once(elements, callback, options)</h3>
         <p>There might be situations where you only want to count paragraphs, words and characters of an element once, i.e. if you want to display the word count of an article on your blog. In order to achieve this, call <code>Countable.once()</code>.</p>
+        <p>This method is aliased as <code>Countable.count()</code>.</p>
         <div class="method-description">
-                  <header class="description-header">
-                    <div class="grid">
-                      <div class="col med-col-1-6">
-                        <b>Name</b>
-                      </div>
-                      <div class="col med-col-1-6">
-                        Type
-                      </div>
-                      <div class="col med-col-4-6">
-                        Description
-                      </div>
-                    </div>
-                  </header>
-                  <div class="method-argument">
-                    <div class="grid">
-                      <div class="col med-col-1-6">
-                        <b>elements</b>
-                      </div>
-                      <div class="col med-col-1-6">
-                        <span class="type">Nodes</span>
-                      </div>
-                      <div class="col med-col-4-6">
-                        All elements that should receive the Countable functionality.
-                      </div>
-                    </div>
-                  </div>
-                  <div class="method-argument">
-                    <div class="grid">
-                      <div class="col med-col-1-6">
-                        <b>callback</b>
-                      </div>
-                      <div class="col med-col-1-6">
-                        <span class="type">Function</span>
-                      </div>
-                      <div class="col med-col-4-6">
-                        The callback to fire whenever the element's value changes. The callback is called with the relevant element bound to `this` and the counted values as the only parameter.
-                      </div>
-                    </div>
-                  </div>
-                  <div class="method-argument">
-                    <div class="grid">
-                      <div class="col med-col-1-6">
-                        <b>options</b> *
-                      </div>
-                      <div class="col med-col-1-6">
-                        <span class="type">Object</span>
-                      </div>
-                      <div class="col med-col-4-6">
-                        An object to modify Countable's behaviour. Refer to the <a href="#options">Options section</a> of this documentation for a list of available options and their default values.
-                      </div>
-                    </div>
-                  </div>
-                </div>
+          <header class="description-header">
+            <div class="grid">
+              <div class="col med-col-1-6">
+                <b>Name</b>
+              </div>
+              <div class="col med-col-1-6">
+                Type
+              </div>
+              <div class="col med-col-4-6">
+                Description
+              </div>
+            </div>
+          </header>
+          <div class="method-argument">
+            <div class="grid">
+              <div class="col med-col-1-6">
+                <b>elements</b>
+              </div>
+              <div class="col med-col-1-6">
+                <span class="type">Nodes</span>
+              </div>
+              <div class="col med-col-4-6">
+                All elements whose text should be counted.
+              </div>
+            </div>
+          </div>
+          <div class="method-argument">
+            <div class="grid">
+              <div class="col med-col-1-6">
+                <b>callback</b>
+              </div>
+              <div class="col med-col-1-6">
+                <span class="type">Function</span>
+              </div>
+              <div class="col med-col-4-6">
+                The callback to fire whenever the element's value changes. Refer to the <a href="#callback">Callback section</a> for more information on this.
+              </div>
+            </div>
+          </div>
+          <div class="method-argument">
+            <div class="grid">
+              <div class="col med-col-1-6">
+                <b>options</b> *
+              </div>
+              <div class="col med-col-1-6">
+                <span class="type">Object</span>
+              </div>
+              <div class="col med-col-4-6">
+                An object to modify Countable's behaviour. Refer to the <a href="#options">Options section</a> of this documentation for a list of available options and their default values.
+              </div>
+            </div>
+          </div>
+        </div>
         <pre><code>var area = document.getElementById('area')
 
 Countable.once(area, function (counter) {
@@ -217,6 +218,72 @@ Countable.once(area, function (counter) {
         <pre><code>var area = document.getElementById('area')
 
 Countable.enabled(area)</code></pre>
+        <hr>
+        <h2 id="callback">Callback</h2>
+        <p>Both <code>Countable.live()</code> and <code>Countable.once()</code> require a callback function. Your callback function is called with a single parameter, an object containing the following properties.</p>
+        <p>You can refer back to your element using <code>this</code> inside the callback function.</p>
+        <div class="method-description">
+          <header class="description-header">
+            <div class="grid">
+              <div class="col med-col-1-5">
+                Name
+              </div>
+              <div class="col med-col-4-5">
+                Description
+              </div>
+            </div>
+          </header>
+          <div class="method-argument">
+            <div class="grid">
+              <div class="col med-col-1-5">
+                <b>paragraphs</b>
+              </div>
+              <div class="col med-col-4-5">
+                The number of paragraphs.
+              </div>
+            </div>
+          </div>
+          <div class="method-argument">
+            <div class="grid">
+              <div class="col med-col-1-5">
+                <b>sentences</b>
+              </div>
+              <div class="col med-col-4-5">
+                The number of sentences.
+              </div>
+            </div>
+          </div>
+          <div class="method-argument">
+            <div class="grid">
+              <div class="col med-col-1-5">
+                <b>words</b>
+              </div>
+              <div class="col med-col-4-5">
+                The number of words.
+              </div>
+            </div>
+          </div>
+          <div class="method-argument">
+            <div class="grid">
+              <div class="col med-col-1-5">
+                <b>characters</b>
+              </div>
+              <div class="col med-col-4-5">
+                The number of characters.
+              </div>
+            </div>
+          </div>
+          <div class="method-argument">
+            <div class="grid">
+              <div class="col med-col-1-5">
+                <b>all</b>
+              </div>
+              <div class="col med-col-4-5">
+                The number of all characters, including spaces and newlines.
+              </div>
+            </div>
+          </div>
+        </div>
         <hr>
         <h2 id="options">Options</h2>
         <p><code>Countable.live()</code> and <code>Countable.once()</code> both accept a third argument, an options object that allows you to change how Countable treats certain aspects of your element's text.</p>
@@ -270,6 +337,19 @@ Countable.enabled(area)</code></pre>
               </div>
               <div class="col med-col-4-6">
                 Ignore returns when calculating the `all` property.
+              </div>
+            </div>
+          </div>
+          <div class="method-argument">
+            <div class="grid">
+              <div class="col med-col-1-6">
+                <b>ignoreZeroWidth</b>
+              </div>
+              <div class="col med-col-1-6">
+                <span class="type">true</span>
+              </div>
+              <div class="col med-col-4-6">
+                Ignore zero-width characters when calculating the values.
               </div>
             </div>
           </div>
