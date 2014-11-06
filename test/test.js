@@ -142,5 +142,16 @@ describe('Countable', function () {
       expect(characters.innerHTML).to.equal('10')
       expect(all.innerHTML).to.equal('10')
     })
+
+    it('should not ignore zero-width characters', function () {
+      area.value = '\u200B\u200B\u200B\u200B\u200B'
+
+      Countable.once(area, callback, { ignoreZeroWidth: false })
+
+      expect(paragraphs.innerHTML).to.equal('1')
+      expect(words.innerHTML).to.equal('1')
+      expect(characters.innerHTML).to.equal('5')
+      expect(all.innerHTML).to.equal('5')
+    })
   })
 })

@@ -130,7 +130,7 @@
    * {Boolean}  stripTags        Strip HTML tags before counting the values.
    * {Boolean}  ignoreReturns    Ignore returns when calculating the `all`
    *                             property.
-   * {Boolean}  ignoreZeroWidth
+   * {Boolean}  ignoreZeroWidth  Ignore zero-width space characters.
    *
    * @private
    *
@@ -142,7 +142,12 @@
    */
 
   function _extendDefaults (options) {
-    var defaults = { hardReturns: false, stripTags: false, ignoreReturns: false, ignoreZeroWidth: true }
+    var defaults = {
+      hardReturns: false,
+      stripTags: false,
+      ignoreReturns: false,
+      ignoreZeroWidth: true
+    }
 
     for (var prop in options) {
       if (defaults.hasOwnProperty(prop)) defaults[prop] = options[prop]
@@ -178,6 +183,7 @@
      */
 
     if (options.stripTags) original = original.replace(/<\/?[a-z][^>]*>/gi, '')
+    if (options.ignoreZeroWidth) original = original.replace(/[\u200B]+/, '')
 
     trimmed = original.trim()
 
@@ -345,7 +351,7 @@
     },
 
     count: function (elements, callback, options) {
-      this.once(elements, callback, options)
+      return this.once(elements, callback, options)
     },
 
     /**
