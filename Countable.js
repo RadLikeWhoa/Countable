@@ -314,6 +314,8 @@
      * The `once` method works mostly like the `live` method, but no events are
      * bound, the functionality is only executed once.
      *
+     * @alias   Countable.count
+     *
      * @param   {Nodes}     elements   All elements that should receive the
      *                                 Countable functionality.
      *
@@ -338,6 +340,10 @@
       })
 
       return this
+    },
+
+    count: function (elements, callback, options) {
+      this.once(elements, callback, options)
     },
 
     /**
