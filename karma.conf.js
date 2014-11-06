@@ -1,7 +1,7 @@
 // Karma configuration
 
 module.exports = function (config) {
-  config.set({
+  var configuration = {
 
     // base path, that will be used to resolve files and exclude
     basePath: '',
@@ -41,6 +41,13 @@ module.exports = function (config) {
     // - IE (only Windows)
     browsers: [ 'Firefox', 'Chrome' ],
 
+    customLaunchers: {
+      Chrome_travis_ci: {
+        base: 'Chrome',
+        flags: ['--no-sandbox']
+      }
+    },
+
     // If browser does not capture in Given timeout [ms], kill it
     captureTimeout: 20000,
 
@@ -51,5 +58,11 @@ module.exports = function (config) {
     // report which specs are slower than 500ms
     // CLI --report-slower-than 500
     reportSlowerThan: 500
-  })
+  }
+
+  if (process.env.TRAVIS) {
+    configuration.browsers = [ 'Chrome_travis_ci' ]
+  }
+
+  config.set(configuration)
 }
