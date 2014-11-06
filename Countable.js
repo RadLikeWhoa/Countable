@@ -36,8 +36,8 @@
    * @see     <http://goo.gl/uYveB>
    * @see     <http://goo.gl/xjIxJ>
    *
-   * @return  {String}  The original string with leading and trailing whitespace
-   *                    removed.
+   * @return  {String}  The original string with leading and trailing
+   *                    whitespace removed.
    */
 
   if (!String.prototype.trim) {
@@ -95,7 +95,8 @@
 
   /**
    * `_validateArguments` validates the arguments given to each function call.
-   * Errors are logged to the console as warnings, but Countable fails silently.
+   * Errors are logged to the console as warnings, but Countable fails
+   * silently.
    *
    * @private
    *
@@ -120,26 +121,28 @@
   }
 
   /**
-   * `_extendDefaults` is a function to extend a set of default options with the
-   * ones given in the function call. Available options are described below.
+   * `_extendDefaults` is a function to extend a set of default options with
+   * the ones given in the function call. Available options are described
+   * below.
    *
-   * {Boolean}  hardReturns    Use two returns to seperate a paragraph instead
-   *                           of one.
-   * {Boolean}  stripTags      Strip HTML tags before counting the values.
-   * {Boolean}  ignoreReturns  Ignore returns when calculating the `all`
-   *                           property.
+   * {Boolean}  hardReturns      Use two returns to seperate a paragraph
+   *                             instead of one.
+   * {Boolean}  stripTags        Strip HTML tags before counting the values.
+   * {Boolean}  ignoreReturns    Ignore returns when calculating the `all`
+   *                             property.
+   * {Boolean}  ignoreZeroWidth
    *
    * @private
    *
    * @param   {Object}  options  Countable allows the options described above.
-   *                             They can be used in a function call to override
-   *                             the default behaviour.
+   *                             They can be used in a function call to
+   *                             override the default behaviour.
    *
    * @return  {Object}  The new options object.
    */
 
   function _extendDefaults (options) {
-    var defaults = { hardReturns: false, stripTags: false, ignoreReturns: false }
+    var defaults = { hardReturns: false, stripTags: false, ignoreReturns: false, ignoreZeroWidth: true }
 
     for (var prop in options) {
       if (defaults.hasOwnProperty(prop)) defaults[prop] = options[prop]
@@ -235,13 +238,13 @@
      *
      * @param   {Function}  callback   The callback to fire whenever the
      *                                 element's value changes. The callback is
-     *                                 called with the relevant element bound to
-     *                                 `this` and the counted values as the
+     *                                 called with the relevant element bound
+     *                                 to `this` and the counted values as the
      *                                 single parameter.
      *
      * @param   {Object}    [options]  An object to modify Countable's
-     *                                 behaviour. Refer to `_extendDefaults` for
-     *                                 a list of available options.
+     *                                 behaviour. Refer to `_extendDefaults`
+     *                                 for a list of available options.
      *
      * @return  {Object}    Returns the Countable object to allow for chaining.
      */
@@ -320,8 +323,8 @@
      *
      * @param   {Function}  callback   The callback to fire whenever the
      *                                 element's value changes. The callback is
-     *                                 called with the relevant element bound to
-     *                                 `this` and the counted values as the
+     *                                 called with the relevant element bound
+     *                                 to `this` and the counted values as the
      *                                 single parameter.
      *
      * @param   {Object}    [options]  An object to modify Countable's
