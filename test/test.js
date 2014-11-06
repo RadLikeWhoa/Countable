@@ -12,6 +12,14 @@ describe('Countable', function () {
     all.innerHTML = counter.all
   }
 
+  function check (values) {
+    expect(paragraphs.innerHTML).to.equal(values[0])
+    expect(sentences.innerHTML).to.equal(values[1])
+    expect(words.innerHTML).to.equal(values[2])
+    expect(characters.innerHTML).to.equal(values[3])
+    expect(all.innerHTML).to.equal(values[4])
+  }
+
   function triggerInput () {
     var event = document.createEvent('HTMLEvents')
     event.initEvent('input', true, true)
@@ -49,23 +57,13 @@ describe('Countable', function () {
     })
 
     it('should count initially', function () {
-      expect(paragraphs.innerHTML).to.equal('0')
-      expect(sentences.innerHTML).to.equal('0')
-      expect(words.innerHTML).to.equal('0')
-      expect(characters.innerHTML).to.equal('0')
-      expect(all.innerHTML).to.equal('0')
+      check([ '0', '0', '0', '0', '0' ])
     })
 
     it('should update counts', function () {
       area.value = 'Hello world'
-
       triggerInput()
-
-      expect(paragraphs.innerHTML).to.equal('1')
-      expect(sentences.innerHTML).to.equal('1')
-      expect(words.innerHTML).to.equal('2')
-      expect(characters.innerHTML).to.equal('10')
-      expect(all.innerHTML).to.equal('11')
+      check([ '1', '1', '2', '10', '11' ])
     })
 
     it('should kill live counting', function () {
@@ -81,35 +79,19 @@ describe('Countable', function () {
     })
 
     it('should count initially', function () {
-      expect(paragraphs.innerHTML).to.equal('0')
-      expect(sentences.innerHTML).to.equal('0')
-      expect(words.innerHTML).to.equal('0')
-      expect(characters.innerHTML).to.equal('0')
-      expect(all.innerHTML).to.equal('0')
+      check([ '0', '0', '0', '0', '0' ])
     })
 
     it('should not update counts', function () {
       area.value = 'Hello world'
-
       triggerInput()
-
-      expect(paragraphs.innerHTML).to.equal('0')
-      expect(sentences.innerHTML).to.equal('0')
-      expect(words.innerHTML).to.equal('0')
-      expect(characters.innerHTML).to.equal('0')
-      expect(all.innerHTML).to.equal('0')
+      check([ '0', '0', '0', '0', '0' ])
     })
 
     it('should be aliased as count', function () {
       area.value = 'Hello world'
-
       Countable.count(area, callback)
-
-      expect(paragraphs.innerHTML).to.equal('1')
-      expect(sentences.innerHTML).to.equal('1')
-      expect(words.innerHTML).to.equal('2')
-      expect(characters.innerHTML).to.equal('10')
-      expect(all.innerHTML).to.equal('11')
+      check([ '1', '1', '2', '10', '11' ])
     })
   })
 
@@ -120,50 +102,26 @@ describe('Countable', function () {
 
     it('should strip HTML tags', function () {
       area.value = '<div>Hello <a href="http://google.com">world</a></div>'
-
       Countable.once(area, callback, { stripTags: true })
-
-      expect(paragraphs.innerHTML).to.equal('1')
-      expect(sentences.innerHTML).to.equal('1')
-      expect(words.innerHTML).to.equal('2')
-      expect(characters.innerHTML).to.equal('10')
-      expect(all.innerHTML).to.equal('11')
+      check([ '1', '1', '2', '10', '11' ])
     })
 
     it('should use hard returns', function () {
       area.value = 'Hello\n\nworld'
-
       Countable.once(area, callback, { hardReturns: true })
-
-      expect(paragraphs.innerHTML).to.equal('2')
-      expect(sentences.innerHTML).to.equal('1')
-      expect(words.innerHTML).to.equal('2')
-      expect(characters.innerHTML).to.equal('10')
-      expect(all.innerHTML).to.equal('12')
+      check([ '2', '1', '2', '10', '12' ])
     })
 
     it('should ignore returns', function () {
       area.value = 'Hello\nworld'
-
       Countable.once(area, callback, { ignoreReturns: true })
-
-      expect(paragraphs.innerHTML).to.equal('2')
-      expect(sentences.innerHTML).to.equal('1')
-      expect(words.innerHTML).to.equal('2')
-      expect(characters.innerHTML).to.equal('10')
-      expect(all.innerHTML).to.equal('10')
+      check([ '2', '1', '2', '10', '10' ])
     })
 
     it('should not ignore zero-width characters', function () {
       area.value = '\u200B\u200B\u200B\u200B\u200B'
-
       Countable.once(area, callback, { ignoreZeroWidth: false })
-
-      expect(paragraphs.innerHTML).to.equal('1')
-      expect(sentences.innerHTML).to.equal('1')
-      expect(words.innerHTML).to.equal('1')
-      expect(characters.innerHTML).to.equal('5')
-      expect(all.innerHTML).to.equal('5')
+      check([ '1', '1', '1', '5', '5' ])
     })
   })
 })
