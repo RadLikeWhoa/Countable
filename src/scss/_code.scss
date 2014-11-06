@@ -13,6 +13,11 @@ pre {
   -webkit-overflow-scrolling: touch;
 }
 
-.terminal-line:before {
-  content: "$ ";
+.terminal-line {
+  display: block;
+
+  &::before {
+    content: "$ ";
+    color: lighten(#333, 50%);
+  }
 }
