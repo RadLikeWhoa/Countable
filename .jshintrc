@@ -1,0 +1,16 @@
+{
+  "globals": {
+    "define": true
+  },
+  "asi": true,
+  "browser": true,
+  "curly": false,
+  "es3": true,
+  "latedef": true,
+  "laxbreak": true,
+  "node": true,
+  "nonbsp": true,
+  "strict": true,
+  "undef": true,
+  "unused": true
+}
