@@ -128,6 +128,8 @@
    * {Boolean}  hardReturns      Use two returns to seperate a paragraph
    *                             instead of one.
    * {Boolean}  stripTags        Strip HTML tags before counting the values.
+   * {Function} text2HTML        User supplied function to transform the values (markdown, etc.).
+   *                             Forces stripTags.
    * {Boolean}  ignoreReturns    Ignore returns when calculating the `all`
    *                             property.
    * {Boolean}  ignoreZeroWidth  Ignore zero-width space characters.
@@ -144,6 +146,7 @@
   function _extendDefaults (options) {
     var defaults = {
       hardReturns: false,
+      text2HTML: false,
       stripTags: false,
       ignoreReturns: false,
       ignoreZeroWidth: true
@@ -183,7 +186,8 @@
      * @see <http://goo.gl/gFQQh>
      */
 
-    if (options.stripTags) original = original.replace(/<\/?[a-z][^>]*>/gi, '')
+    if (options.text2HTML) original = options.text2HTML(original)
+    if (options.text2HTML || options.stripTags) original = original.replace(/<\/?[a-z][^>]*>/gi, '')
     if (options.ignoreZeroWidth) original = original.replace(/[\u200B]+/, '')
 
     trimmed = original.trim()

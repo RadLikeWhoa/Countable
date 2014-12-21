@@ -90,7 +90,8 @@ Countable.enabled(area)
 {
   hardReturns: false,
   stripTags: false,
-  ignoreReturns: false
+  ignoreReturns: false,
+  text2HTML: false
 }
 ```
 
@@ -99,6 +100,8 @@ By default, paragraphs are split by a single return (a soft return). By setting 
 Depending on your application and audience, you might need to strip HTML tags from the text before counting it. You can do this by setting `stripTags` to true.
 
 In most cases, returns should be counted as part of the `all` property. Set `ignoreReturns` to false to remove them from the counter.
+
+You can also supply a function to transform the value to HTML before counting it. Handy if you're dealing with a markdown textarea, for example.
 
 ## Browser Support
 
