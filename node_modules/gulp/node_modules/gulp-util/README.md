@@ -131,11 +131,11 @@ var existingError = new Error('OMG');
 var err = new gutil.PluginError('test', existingError, {showStack: true});
 ```
 
-[npm-url]: https://npmjs.org/package/gulp-util
+[npm-url]: https://www.npmjs.com/package/gulp-util
 [npm-image]: https://badge.fury.io/js/gulp-util.svg
 [travis-url]: https://travis-ci.org/gulpjs/gulp-util
-[travis-image]: https://travis-ci.org/gulpjs/gulp-util.svg?branch=master
+[travis-image]: https://img.shields.io/travis/gulpjs/gulp-util.svg?branch=master
 [coveralls-url]: https://coveralls.io/r/gulpjs/gulp-util
-[coveralls-image]: https://coveralls.io/repos/gulpjs/gulp-util/badge.png
+[coveralls-image]: https://img.shields.io/coveralls/gulpjs/gulp-util.svg
 [depstat-url]: https://david-dm.org/gulpjs/gulp-util
 [depstat-image]: https://david-dm.org/gulpjs/gulp-util.svg

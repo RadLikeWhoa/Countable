@@ -17,6 +17,10 @@
 </tr>
 </table>
 
+## What is this?
+
+Read this for more info about how this plays into the grand scheme of things https://medium.com/@eschoff/3828e8126466
+
 ## File
 
 ```javascript

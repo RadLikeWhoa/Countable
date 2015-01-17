@@ -4,7 +4,7 @@
   "devDependencies": {
     "connect-livereload": "^0.4.0",
     "express": "^4.8.4",
-    "gulp": "^3.8.7",
+    "gulp": "^3.8.10",
     "gulp-autoprefixer": "0.0.8",
     "gulp-combine-media-queries": "^0.1.0",
     "gulp-concat": "^2.3.4",

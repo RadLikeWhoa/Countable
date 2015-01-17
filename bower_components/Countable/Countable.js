@@ -3,7 +3,7 @@
  * counting on an HTML element.
  *
  * @author   Sacha Schmid (<https://github.com/RadLikeWhoa>)
- * @version  2.0.2
+ * @version  2.1.0
  * @license  MIT
  * @see      <http://radlikewhoa.github.io/Countable/>
  */
@@ -36,8 +36,8 @@
    * @see     <http://goo.gl/uYveB>
    * @see     <http://goo.gl/xjIxJ>
    *
-   * @return  {String}  The original string with leading and trailing whitespace
-   *                    removed.
+   * @return  {String}  The original string with leading and trailing
+   *                    whitespace removed.
    */
 
   if (!String.prototype.trim) {
@@ -72,19 +72,18 @@
     while (counter < length) {
       value = string.charCodeAt(counter++)
 
-      if ((value & 0xF800) == 0xD800 && counter < length) {
-
+      if (value >= 0xD800 && value <= 0xDBFF && counter < length) {
         // High surrogate, and there is a next character.
-
         extra = string.charCodeAt(counter++)
 
         if ((extra & 0xFC00) == 0xDC00) {
-
           // Low surrogate.
-
           output.push(((value & 0x3FF) << 10) + (extra & 0x3FF) + 0x10000)
         } else {
+          // unmatched surrogate; only append this code unit, in case the next
+          // code unit is the high surrogate of a surrogate pair
           output.push(value, extra)
+          counter--
         }
       } else {
         output.push(value)
@@ -96,7 +95,8 @@
 
   /**
    * `_validateArguments` validates the arguments given to each function call.
-   * Errors are logged to the console as warnings, but Countable fails silently.
+   * Errors are logged to the console as warnings, but Countable fails
+   * silently.
    *
    * @private
    *
@@ -121,26 +121,33 @@
   }
 
   /**
-   * `_extendDefaults` is a function to extend a set of default options with the
-   * ones given in the function call. Available options are described below.
+   * `_extendDefaults` is a function to extend a set of default options with
+   * the ones given in the function call. Available options are described
+   * below.
    *
-   * {Boolean}  hardReturns    Use two returns to seperate a paragraph instead
-   *                           of one.
-   * {Boolean}  stripTags      Strip HTML tags before counting the values.
-   * {Boolean}  ignoreReturns  Ignore returns when calculating the `all`
-   *                           property.
+   * {Boolean}  hardReturns      Use two returns to seperate a paragraph
+   *                             instead of one.
+   * {Boolean}  stripTags        Strip HTML tags before counting the values.
+   * {Boolean}  ignoreReturns    Ignore returns when calculating the `all`
+   *                             property.
+   * {Boolean}  ignoreZeroWidth  Ignore zero-width space characters.
    *
    * @private
    *
    * @param   {Object}  options  Countable allows the options described above.
-   *                             They can be used in a function call to override
-   *                             the default behaviour.
+   *                             They can be used in a function call to
+   *                             override the default behaviour.
    *
    * @return  {Object}  The new options object.
    */
 
   function _extendDefaults (options) {
-    var defaults = { hardReturns: false, stripTags: false, ignoreReturns: false }
+    var defaults = {
+      hardReturns: false,
+      stripTags: false,
+      ignoreReturns: false,
+      ignoreZeroWidth: true
+    }
 
     for (var prop in options) {
       if (defaults.hasOwnProperty(prop)) defaults[prop] = options[prop]
@@ -151,7 +158,7 @@
 
   /**
    * `_count` trims an element's value, optionally strips HTML tags and counts
-   * paragraphs, words, characters and characters plus spaces.
+   * paragraphs, sentences, words, characters and characters plus spaces.
    *
    * @private
    *
@@ -160,7 +167,8 @@
    * @param   {Object}   options  The options to use for the counting.
    *
    * @return  {Object}   The object containing the number of paragraphs,
-   *                     words, characters and characters plus spaces.
+   *                     sentences, words, characters and characters plus
+   *                     spaces.
    */
 
   function _count (element, options) {
@@ -176,6 +184,7 @@
      */
 
     if (options.stripTags) original = original.replace(/<\/?[a-z][^>]*>/gi, '')
+    if (options.ignoreZeroWidth) original = original.replace(/[\u200B]+/, '')
 
     trimmed = original.trim()
 
@@ -187,6 +196,7 @@
 
     return {
       paragraphs: trimmed ? (trimmed.match(options.hardReturns ? /\n{2,}/g : /\n+/g) || []).length + 1 : 0,
+      sentences: trimmed ? (trimmed.match(/[.?!…]+./g) || []).length + 1 : 0,
       words: trimmed ? (trimmed.replace(/['";:,.?¿\-!¡]+/g, '').match(/\S+/g) || []).length : 0,
       characters: trimmed ? _decode(trimmed.replace(/\s/g, '')).length : 0,
       all: _decode(options.ignoreReturns ? original.replace(/[\n\r]/g, '') : original).length
@@ -236,13 +246,13 @@
      *
      * @param   {Function}  callback   The callback to fire whenever the
      *                                 element's value changes. The callback is
-     *                                 called with the relevant element bound to
-     *                                 `this` and the counted values as the
+     *                                 called with the relevant element bound
+     *                                 to `this` and the counted values as the
      *                                 single parameter.
      *
      * @param   {Object}    [options]  An object to modify Countable's
-     *                                 behaviour. Refer to `_extendDefaults` for
-     *                                 a list of available options.
+     *                                 behaviour. Refer to `_extendDefaults`
+     *                                 for a list of available options.
      *
      * @return  {Object}    Returns the Countable object to allow for chaining.
      */
@@ -314,13 +324,15 @@
      * The `once` method works mostly like the `live` method, but no events are
      * bound, the functionality is only executed once.
      *
+     * @alias   Countable.count
+     *
      * @param   {Nodes}     elements   All elements that should receive the
      *                                 Countable functionality.
      *
      * @param   {Function}  callback   The callback to fire whenever the
      *                                 element's value changes. The callback is
-     *                                 called with the relevant element bound to
-     *                                 `this` and the counted values as the
+     *                                 called with the relevant element bound
+     *                                 to `this` and the counted values as the
      *                                 single parameter.
      *
      * @param   {Object}    [options]  An object to modify Countable's
@@ -338,6 +350,10 @@
       })
 
       return this
+    },
+
+    count: function (elements, callback, options) {
+      return this.once(elements, callback, options)
     },
 
     /**
