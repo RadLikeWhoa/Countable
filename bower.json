@@ -1,13 +1,7 @@
 {
   "name": "Countable",
-  "version": "2.0.0",
-  "homepage": "http://sacha.me/Countable",
-  "authors": [
-    "Sacha Schmid <schmid.sacha@gmail.com>"
-  ],
-  "license": "MIT",
   "private": true,
-  "dependencies": {
+  "devDependencies": {
     "Countable": "~2.1.0"
   }
 }
