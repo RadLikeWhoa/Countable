@@ -3,7 +3,7 @@
  * counting on an HTML element.
  *
  * @author   Sacha Schmid (<https://github.com/RadLikeWhoa>)
- * @version  2.1.0
+ * @version  2.1.1
  * @license  MIT
  * @see      <http://radlikewhoa.github.io/Countable/>
  */
@@ -36,6 +36,7 @@
    * event instead.
    * more info: http://www.matts411.com/post/internet-explorer-9-oninput/
    */
+
   if (navigator.userAgent.match(/MSIE 9.0/)) {
     _event = 'keyup'
   }
