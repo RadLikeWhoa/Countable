@@ -392,4 +392,4 @@
   } else {
     global.Countable = Countable
   }
-}(this))
+}(this));
