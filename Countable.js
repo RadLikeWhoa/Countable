@@ -195,7 +195,70 @@
      * @see <http://goo.gl/gFQQh>
      */
 
-    if (options.stripTags) original = original.replace(/<\/?[a-z][^>]*>/gi, '')
+    if (options.stripTags) {
+
+      // Block elements as defined by https://developer.mozilla.org/en-US/docs/Web/HTML/Block-level_elements
+      // 'br' is actually an inline element but must be
+      // treated as a block element in order to count words separated by a <br>.
+      var blockLikeElements = ['address','article','aside','blockquote','canvas',
+      'dd','div','dl','fieldset','figcaption','figure','footer','form','h1',
+      'h2', 'h3','h4','h5','h6', 'header', 'hgroup', 'hr', 'li', 'main', 'nav',
+      'noscript', 'ol', 'output', 'p', 'pre', 'section', 'table', 'tfoot', 'ul',
+      'video', 'br']
+
+      blockLikeElements.forEach(function(element) {
+        original = original.replace(new RegExp('<\s*/?\s*' + element + '\s*/?\s*>', 'gi'), ' ')
+      })
+
+      original = original.replace(/<\/?[a-z][^>]*>/gi, '')
+
+      // From: http://dev.w3.org/html5/html-author/charref
+      var whitespaceEntities = {
+        '&Tab;': '\u0009',
+        '&#x00009;': '\u0009',
+        '&#9;': '\u0009',
+        '&NewLine;': '\u000A',
+        '&#x0000A;': '\u000A',
+        '&#10;': '\u000A',
+        '&nbsp;': '\u00A0',
+        '&NonBreakingSpace;': '\u00A0',
+        '&#x000A0;': '\u00A0',
+        '&#160;': '\u00A0',
+        '&ensp;': '\u2002',
+        '&#x02002;': '\u2002',
+        '&#8194;': '\u2002',
+        '&emsp;': '\u2003',
+        '&#x02003;': '\u2003',
+        '&#8195;': '\u2003',
+        '&emsp13;': '\u2004',
+        '&#x02004;': '\u2004',
+        '&#8196;': '\u2004',
+        '&emsp14;': '\u2005',
+        '&#x02005;': '\u2005',
+        '&#8197;': '\u2005',
+        '&numsp;': '\u2007',
+        '&#x02007;': '\u2007',
+        '&#8199;': '\u2007',
+        '&puncsp;': '\u2008',
+        '&#x02008;': '\u2008',
+        '&#8200;': '\u2008',
+        '&thinsp;': '\u2009',
+        '&ThinSpace;': '\u2009',
+        '&#x02009;': '\u2009',
+        '&#8201;': '\u2009',
+        '&hairsp;': '\u200A',
+        '&VeryThinSpace;': '\u200A',
+        '&#x0200A;': '\u200A',
+        '&#8202;': '\u200A'
+      }
+
+      for (var entity in whitespaceEntities) {
+        if (whitespaceEntities.hasOwnProperty(entity)) {
+          original = original.replace(new RegExp(entity, 'gi'), whitespaceEntities[entity])
+        }
+      }
+    }
+
     if (options.ignoreZeroWidth) original = original.replace(/[\u200B]+/, '')
 
     trimmed = original.trim()
