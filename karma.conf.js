@@ -16,7 +16,11 @@ module.exports = function (config) {
 
     // test results reporter to use
     // possible values: 'dots', 'progress', 'junit'
-    reporters: [ 'dots' ],
+    reporters: [ 'progress', 'coverage' ],
+
+    preprocessors: {
+        'Countable.js': [ 'coverage' ]
+    },
 
     // web server port
     port: 9876,
