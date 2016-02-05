@@ -185,7 +185,7 @@
    */
 
   function _count (element, options) {
-    var original = 'value' in element ? element.value : element.innerText || element.textContent,
+    var original = '' + ('value' in element ? element.value : element.innerText || element.textContent),
         trimmed
 
     /**
