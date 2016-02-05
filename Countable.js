@@ -121,7 +121,8 @@
    */
 
   function _validateArguments (elements, callback) {
-    var elementsValid = elements && ((Object.prototype.toString.call(elements) === '[object NodeList]' && elements.length) || (elements.nodeType === 1)),
+    var nodes = Object.prototype.toString.call(elements),
+        elementsValid = elements && (((nodes === '[object NodeList]' || nodes === '[object HTMLCollection]') && elements.length) || (elements.nodeType === 1)),
         callbackValid = callback && typeof callback === 'function'
 
     if ('console' in window && 'warn' in console) {

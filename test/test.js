@@ -43,7 +43,7 @@ describe('Countable', function () {
     characters = document.getElementById('characters')
     all = document.getElementById('all')
 
-    area = document.getElementById('area')
+    area = document.getElementsByTagName('textarea')[0]
   })
 
   beforeEach(function () {
