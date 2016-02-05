@@ -103,7 +103,25 @@ describe('Countable', function () {
     it('should strip HTML tags', function () {
       area.value = '<div>Hello <a href="http://google.com">world</a></div>'
       Countable.once(area, callback, { stripTags: true })
-      check([ '1', '1', '2', '10', '11' ])
+      check([ '1', '1', '2', '10', '13' ])
+    })
+
+    it('should consider HTML block elements as word boundaries', function () {
+      area.value = '<div>Hello</div><div>world</div>'
+      Countable.once(area, callback, { stripTags: true })
+      check([ '1', '1', '2', '10', '14'])
+    })
+
+    it('should not consider HTML inline elements as word boundaries', function () {
+      area.value = '<strong>hello</strong>World'
+      Countable.once(area, callback, { stripTags: true })
+      check([ '1', '1', '1', '10', '10'])
+    })
+
+    it('should parse HTML entities', function () {
+      area.value = 'hello&nbsp;world'
+      Countable.once(area, callback, { stripTags: true })
+      check([ '1', '1', '2', '10', '11'])
     })
 
     it('should use hard returns', function () {
