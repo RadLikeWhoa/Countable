@@ -100,6 +100,12 @@ describe('Countable', function () {
       area.value = ''
     })
 
+    it('should transform text to html using supplied function and strip HTML tags', function () {
+      area.value = '<div>Hello [world](http://google.com)</div>'
+      Countable.once(area, callback, { text2HTML: function(){return '<div>Hello <a href="http://google.com">world</a></div>'} })
+      check([ '1', '1', '2', '10', '11' ])
+    })
+
     it('should strip HTML tags', function () {
       area.value = '<div>Hello <a href="http://google.com">world</a></div>'
       Countable.once(area, callback, { stripTags: true })
