@@ -196,7 +196,7 @@
      * @see <http://goo.gl/gFQQh>
      */
 
-    if (options.stripTags) original = original.replace(/<\/?[a-z][^>]*>/gi, '')
+    if (options.stripTags) original = original.replace(/<\/?[a-z][^>]*>/gi, ' ')
     if (options.ignoreZeroWidth) original = original.replace(/[\u200B]+/, '')
 
     trimmed = original.trim()
