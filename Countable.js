@@ -238,6 +238,8 @@
      */
 
     live: function (elements, callback, options) {
+      if (!_validateArguments(elements, callback)) return
+
       var ops = _extendDefaults(options),
           bind = function (element) {
             var handler = function () {
@@ -251,13 +253,7 @@
             element.addEventListener('input', handler, false)
           }
 
-      if (!_validateArguments(elements, callback)) return
-
-      if (elements.length) {
-        _loop(elements, bind)
-      } else {
-        bind(elements)
-      }
+      _loop(elements, bind)
 
       return this
     },
@@ -339,15 +335,7 @@
      */
 
     enabled: function (element) {
-      var isEnabled = false
-
-      if (element && element.nodeType === 1) {
-        _loop(_liveElements, function (live) {
-          if (live.element === element) isEnabled = true
-        })
-      }
-
-      return isEnabled
+      return _liveElements.filter(function (el) { return el.element === element }).length > 0
     }
 
   }
