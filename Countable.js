@@ -216,7 +216,7 @@
   var Countable = {
 
     /**
-     * The `live` method binds the counting handler to all given elements. The
+     * The `on` method binds the counting handler to all given elements. The
      * event is either `oninput` or `onkeydown`, based on the capabilities of
      * the browser.
      *
@@ -236,7 +236,7 @@
      * @return  {Object}    Returns the Countable object to allow for chaining.
      */
 
-    live: function (elements, callback, options) {
+    on: function (elements, callback, options) {
       if (!_validateArguments(elements, callback)) return
 
       var ops = _extendDefaults(options)
@@ -258,7 +258,7 @@
     },
 
     /**
-     * The `die` method removes the Countable functionality from all given
+     * The `off` method removes the Countable functionality from all given
      * elements.
      *
      * @param   {Nodes}  elements  All elements whose Countable functionality
@@ -267,7 +267,7 @@
      * @return  {Object}  Returns the Countable object to allow for chaining.
      */
 
-    die: function (elements) {
+    off: function (elements) {
       if (!_validateArguments(elements, function () {})) return
 
       _loop(elements, function (element) {
