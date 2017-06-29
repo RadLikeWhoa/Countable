@@ -19,11 +19,11 @@
   /**
    * @private
    *
-   * `_liveElements` holds all elements that have the live-counting
+   * `liveElements` holds all elements that have the live-counting
    * functionality bound to them.
    */
 
-  var _liveElements = []
+  var liveElements = []
 
   /**
    * `ucs2decode` function from the punycode.js library.
@@ -42,7 +42,7 @@
    * @return  {Array}   The new array of code points.
    */
 
-  function _decode (string) {
+  function decode (string) {
     var output = []
     var counter = 0
     var length = string.length
@@ -74,7 +74,7 @@
   }
 
   /**
-   * `_validateArguments` validates the arguments given to each function call.
+   * `validateArguments` validates the arguments given to each function call.
    * Errors are logged to the console as warnings, but Countable fails
    * silently.
    *
@@ -88,7 +88,7 @@
    * @return  {Boolean}   Returns whether all arguments are vaild.
    */
 
-  function _validateArguments (elements, callback) {
+  function validateArguments (elements, callback) {
     var nodes = Object.prototype.toString.call(elements)
     var elementsValid = (nodes === '[object NodeList]' || nodes === '[object HTMLCollection]') || elements.nodeType === 1
     var callbackValid = typeof callback === 'function'
@@ -100,7 +100,7 @@
   }
 
   /**
-   * `_count` trims an element's value, optionally strips HTML tags and counts
+   * `count` trims an element's value, optionally strips HTML tags and counts
    * paragraphs, sentences, words, characters and characters plus spaces.
    *
    * @private
@@ -114,7 +114,7 @@
    *                     spaces.
    */
 
-  function _count (element, options) {
+  function count (element, options) {
     var original = '' + ('value' in element ? element.value : element.textContent)
 
     /**
@@ -140,13 +140,13 @@
       paragraphs: trimmed ? (trimmed.match(options.hardReturns ? /\n{2,}/g : /\n+/g) || []).length + 1 : 0,
       sentences: trimmed ? (trimmed.match(/[.?!…]+./g) || []).length + 1 : 0,
       words: trimmed ? (trimmed.replace(/['";:,.?¿\-!¡]+/g, '').match(/\S+/g) || []).length : 0,
-      characters: trimmed ? _decode(trimmed.replace(/\s/g, '')).length : 0,
-      all: _decode(!options.ignoreReturns ? original : original.replace(/[\n\r]/g, '')).length
+      characters: trimmed ? decode(trimmed.replace(/\s/g, '')).length : 0,
+      all: decode(!options.ignoreReturns ? original : original.replace(/[\n\r]/g, '')).length
     }
   }
 
   /**
-   * `_loop` is a helper function to iterate over a collection, e.g. a NodeList
+   * `loop` is a helper function to iterate over a collection, e.g. a NodeList
    * or an Array. The callback receives the current element as the single
    * parameter.
    *
@@ -158,7 +158,7 @@
    *                               iteration.
    */
 
-  function _loop (which, callback) {
+  function loop (which, callback) {
     var len = which.length
 
     if (typeof len !== 'undefined') {
@@ -211,16 +211,16 @@
      */
 
     on: function (elements, callback, options) {
-      if (!_validateArguments(elements, callback)) return
+      if (!validateArguments(elements, callback)) return
 
       var options = options || {}
 
-      _loop(elements, function (element) {
+      loop(elements, function (element) {
         var handler = function () {
-          callback.call(element, _count(element, options))
+          callback.call(element, count(element, options))
         }
 
-        _liveElements.push({ element: element, handler: handler })
+        liveElements.push({ element: element, handler: handler })
 
         handler()
 
@@ -241,15 +241,15 @@
      */
 
     off: function (elements) {
-      if (!_validateArguments(elements, function () {})) return
+      if (!validateArguments(elements, function () {})) return
 
-      _loop(elements, function (element) {
-        var liveElement = _liveElements.filter(function (el) { return el.element === element })[0]
+      loop(elements, function (element) {
+        var liveElement = liveElements.filter(function (el) { return el.element === element })[0]
 
         if (!liveElement) return
 
         element.removeEventListener('input', liveElement.handler)
-        _liveElements = _liveElements.filter(function (el) { return el.element !== element })
+        liveElements = liveElements.filter(function (el) { return el.element !== element })
       })
 
       return this
@@ -275,12 +275,12 @@
      */
 
     count: function (elements, callback, options) {
-      if (!_validateArguments(elements, callback)) return
+      if (!validateArguments(elements, callback)) return
 
       var options = options || {}
 
-      _loop(elements, function (element) {
-        callback.call(element, _count(element, options))
+      loop(elements, function (element) {
+        callback.call(element, count(element, options))
       })
 
       return this
@@ -297,7 +297,7 @@
      */
 
     enabled: function (element) {
-      return _liveElements.filter(function (el) { return el.element === element }).length > 0
+      return liveElements.filter(function (el) { return el.element === element }).length > 0
     }
 
   }
