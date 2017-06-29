@@ -43,10 +43,11 @@
    */
 
   function _decode (string) {
-    var output = [],
-        counter = 0,
-        length = string.length,
-        value, extra
+    var output = []
+    var counter = 0
+    var length = string.length
+    var value
+    var extra
 
     while (counter < length) {
       value = string.charCodeAt(counter++)
@@ -88,14 +89,12 @@
    */
 
   function _validateArguments (elements, callback) {
-    var nodes = Object.prototype.toString.call(elements),
-        elementsValid = elements && (((nodes === '[object NodeList]' || nodes === '[object HTMLCollection]') && elements.length) || (elements.nodeType === 1)),
-        callbackValid = callback && typeof callback === 'function'
+    var nodes = Object.prototype.toString.call(elements)
+    var elementsValid = elements && (((nodes === '[object NodeList]' || nodes === '[object HTMLCollection]') && elements.length) || (elements.nodeType === 1))
+    var callbackValid = callback && typeof callback === 'function'
 
-    if ('console' in window && 'warn' in console) {
-      if (!elementsValid) console.warn('Countable: No valid elements were found')
-      if (!callbackValid) console.warn('Countable: "' + callback + '" is not a valid callback function')
-    }
+    if (!elementsValid) console.warn('Countable: No valid elements were found')
+    if (!callbackValid) console.warn('Countable: "' + callback + '" is not a valid callback function')
 
     return elementsValid && callbackValid
   }
@@ -152,8 +151,8 @@
    */
 
   function _count (element, options) {
-    var original = '' + ('value' in element ? element.value : element.innerText || element.textContent),
-        trimmed
+    var original = '' + ('value' in element ? element.value : element.innerText || element.textContent)
+    var trimmed
 
     /**
      * The initial implementation to allow for HTML tags stripping was created
@@ -240,18 +239,18 @@
     live: function (elements, callback, options) {
       if (!_validateArguments(elements, callback)) return
 
-      var ops = _extendDefaults(options),
-          bind = function (element) {
-            var handler = function () {
-                  callback.call(element, _count(element, ops))
-                }
+      var ops = _extendDefaults(options)
+      var bind = function (element) {
+        var handler = function () {
+          callback.call(element, _count(element, ops))
+        }
 
-            _liveElements.push({ element: element, handler: handler })
+        _liveElements.push({ element: element, handler: handler })
 
-            handler()
+        handler()
 
-            element.addEventListener('input', handler, false)
-          }
+        element.addEventListener('input', handler, false)
+      }
 
       _loop(elements, bind)
 
@@ -289,10 +288,8 @@
     },
 
     /**
-     * The `once` method works mostly like the `live` method, but no events are
+     * The `count` method works mostly like the `live` method, but no events are
      * bound, the functionality is only executed once.
-     *
-     * @alias   Countable.count
      *
      * @param   {Nodes}     elements   All elements that should receive the
      *                                 Countable functionality.
@@ -310,7 +307,7 @@
      * @return  {Object}    Returns the Countable object to allow for chaining.
      */
 
-    once: function (elements, callback, options) {
+    count: function (elements, callback, options) {
       if (!_validateArguments(elements, callback)) return
 
       _loop(elements, function (element) {
@@ -318,10 +315,6 @@
       })
 
       return this
-    },
-
-    count: function (elements, callback, options) {
-      return this.once(elements, callback, options)
     },
 
     /**
