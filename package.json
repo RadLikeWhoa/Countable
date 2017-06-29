@@ -2,16 +2,18 @@
   "name": "Countable",
   "version": "2.0.0",
   "devDependencies": {
-    "connect-livereload": "^0.4.0",
-    "express": "^4.8.4",
-    "gulp": "^3.8.10",
-    "gulp-autoprefixer": "0.0.8",
-    "gulp-combine-media-queries": "^0.1.0",
-    "gulp-concat": "^2.3.4",
-    "gulp-csso": "^0.2.9",
-    "gulp-ruby-sass": "^0.7.1",
-    "gulp-uglify": "^0.3.1",
-    "opn": "^1.0.0",
-    "tiny-lr": "^0.1.0"
+    "connect-livereload": "^0.6.0",
+    "express": "^4.15.3",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^4.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-csso": "^3.0.0",
+    "gulp-sass": "^3.1.0",
+    "gulp-uglify": "^3.0.0",
+    "opn": "^5.1.0",
+    "tiny-lr": "^1.0.5"
+  },
+  "dependencies": {
+    "countable": "^2.1.1"
   }
 }

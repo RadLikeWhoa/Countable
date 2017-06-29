@@ -82,11 +82,8 @@
             </div>
           </div>
         </div>
-        <pre><code>var area = document.getElementById('area')
-
-Countable.live(area, function (counter) {
-  console.log(counter)
-})</code></pre>
+        <pre><code>const area = document.getElementById('area')
+Countable.live(area, counter => console.log(counter))</code></pre>
         <hr>
         <h3 id="die">Countable.die(elements)</h3>
         <p>In order to remove the Countable functionality from an element, call <code>Countable.die()</code>.</p>
@@ -118,8 +115,7 @@ Countable.live(area, function (counter) {
             </div>
           </div>
         </div>
-        <pre><code>var area = document.getElementById('area')
-
+        <pre><code>const area = document.getElementById('area')
 Countable.die(area)</code></pre>
         <hr>
         <h3 id="once">Countable.once(elements, callback, options)</h3>
@@ -179,11 +175,8 @@ Countable.die(area)</code></pre>
             </div>
           </div>
         </div>
-        <pre><code>var area = document.getElementById('area')
-
-Countable.once(area, function (counter) {
-  console.log(counter)
-})</code></pre>
+        <pre><code>const area = document.getElementById('area')
+Countable.once(area, counter => console.log(counter))</code></pre>
         <hr>
         <h3 id="enabled">Countable.enabled(element)</h3>
         <p>Countable also provides a handy method to check if live-counting functionality is enabled on an element.</p>
@@ -215,8 +208,7 @@ Countable.once(area, function (counter) {
             </div>
           </div>
         </div>
-        <pre><code>var area = document.getElementById('area')
-
+        <pre><code>const area = document.getElementById('area')
 Countable.enabled(area)</code></pre>
         <hr>
         <h2 id="callback">Callback</h2>
@@ -354,11 +346,9 @@ Countable.enabled(area)</code></pre>
             </div>
           </div>
         </div>
-        <pre><code>var area = document.getElementById('area')
+        <pre><code>const area = document.getElementById('area')
 
-Countable.live(area, function (counter) {
-  console.log(counter)
-}, {
+Countable.live(area, counter => console.log(counter), {
   stripTags: true
 })</code></pre>
       </div>

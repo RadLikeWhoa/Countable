@@ -1,7 +1,0 @@
-{
-  "name": "Countable",
-  "private": true,
-  "devDependencies": {
-    "Countable": "~2.1.0"
-  }
-}
