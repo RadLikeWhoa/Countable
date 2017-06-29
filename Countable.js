@@ -115,8 +115,7 @@
    */
 
   function _count (element, options) {
-    var original = '' + ('value' in element ? element.value : element.innerText || element.textContent)
-    var trimmed
+    var original = '' + ('value' in element ? element.value : element.textContent)
 
     /**
      * The initial implementation to allow for HTML tags stripping was created
@@ -129,7 +128,7 @@
     if (options.stripTags) original = original.replace(/<\/?[a-z][^>]*>/gi, '')
     if (options.ignoreZeroWidth) original = original.replace(/[\u200B]+/, '')
 
-    trimmed = original.trim()
+    var trimmed = original.trim()
 
     /**
      * Most of the performance improvements are based on the works of @epmatsw.
@@ -215,7 +214,8 @@
       if (!_validateArguments(elements, callback)) return
 
       var options = options || {}
-      var bind = function (element) {
+
+      _loop(elements, function (element) {
         var handler = function () {
           callback.call(element, _count(element, options))
         }
@@ -225,9 +225,7 @@
         handler()
 
         element.addEventListener('input', handler, false)
-      }
-
-      _loop(elements, bind)
+      })
 
       return this
     },
@@ -236,8 +234,8 @@
      * The `off` method removes the Countable functionality from all given
      * elements.
      *
-     * @param   {Nodes}  elements  All elements whose Countable functionality
-     *                             should be unbound.
+     * @param   {Nodes}   elements  All elements whose Countable functionality
+     *                              should be unbound.
      *
      * @return  {Object}  Returns the Countable object to allow for chaining.
      */
@@ -246,17 +244,12 @@
       if (!_validateArguments(elements, function () {})) return
 
       _loop(elements, function (element) {
-        var liveElement
-
-        _loop(_liveElements, function (live) {
-          if (live.element === element) liveElement = live
-        })
+        var liveElement = _liveElements.filter(function (el) { return el.element === element })[0]
 
         if (!liveElement) return
 
         element.removeEventListener('input', liveElement.handler, false)
-
-        _liveElements.splice(_liveElements.indexOf(liveElement), 1)
+        _liveElements = _liveElements.filter(function (el) { return el.element !== element })
       })
 
       return this
