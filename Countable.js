@@ -90,10 +90,10 @@
 
   function _validateArguments (elements, callback) {
     var nodes = Object.prototype.toString.call(elements)
-    var elementsValid = elements && (((nodes === '[object NodeList]' || nodes === '[object HTMLCollection]') && elements.length) || (elements.nodeType === 1))
-    var callbackValid = callback && typeof callback === 'function'
+    var elementsValid = (nodes === '[object NodeList]' || nodes === '[object HTMLCollection]') || elements.nodeType === 1
+    var callbackValid = typeof callback === 'function'
 
-    if (!elementsValid) console.warn('Countable: No valid elements were found')
+    if (!elementsValid) console.warn('Countable: Not a valid target')
     if (!callbackValid) console.warn('Countable: Not a valid callback function')
 
     return elementsValid && callbackValid
@@ -224,7 +224,7 @@
 
         handler()
 
-        element.addEventListener('input', handler, false)
+        element.addEventListener('input', handler)
       })
 
       return this
@@ -248,7 +248,7 @@
 
         if (!liveElement) return
 
-        element.removeEventListener('input', liveElement.handler, false)
+        element.removeEventListener('input', liveElement.handler)
         _liveElements = _liveElements.filter(function (el) { return el.element !== element })
       })
 
