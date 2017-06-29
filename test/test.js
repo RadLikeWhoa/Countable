@@ -50,9 +50,9 @@ describe('Countable', function () {
     area.value = ''
   })
 
-  describe('Countable.live', function () {
+  describe('Countable.on', function () {
     it('should enable live counting', function () {
-      Countable.live(area, callback)
+      Countable.on(area, callback)
       expect(Countable.enabled(area)).to.equal(true)
     })
 
@@ -66,15 +66,15 @@ describe('Countable', function () {
       check([ '1', '1', '2', '10', '11' ])
     })
 
-    it('should kill live counting', function () {
-      Countable.die(area)
+    it('should disable live counting', function () {
+      Countable.off(area)
       expect(Countable.enabled(area)).to.equal(false)
     })
   })
 
-  describe('Countable.once', function () {
+  describe('Countable.count', function () {
     it('should not enable live counting', function () {
-      Countable.once(area, callback)
+      Countable.count(area, callback)
       expect(Countable.enabled(area)).to.equal(false)
     })
 
@@ -102,25 +102,25 @@ describe('Countable', function () {
 
     it('should strip HTML tags', function () {
       area.value = '<div>Hello <a href="http://google.com">world</a></div>'
-      Countable.once(area, callback, { stripTags: true })
+      Countable.count(area, callback, { stripTags: true })
       check([ '1', '1', '2', '10', '11' ])
     })
 
     it('should use hard returns', function () {
       area.value = 'Hello\n\nworld'
-      Countable.once(area, callback, { hardReturns: true })
+      Countable.count(area, callback, { hardReturns: true })
       check([ '2', '1', '2', '10', '12' ])
     })
 
     it('should ignore returns', function () {
       area.value = 'Hello\nworld'
-      Countable.once(area, callback, { ignoreReturns: true })
+      Countable.count(area, callback, { ignoreReturns: true })
       check([ '2', '1', '2', '10', '10' ])
     })
 
     it('should not ignore zero-width characters', function () {
       area.value = '\u200B\u200B\u200B\u200B\u200B'
-      Countable.once(area, callback, { ignoreZeroWidth: false })
+      Countable.count(area, callback, { ignoreZeroWidth: false })
       check([ '1', '1', '1', '5', '5' ])
     })
   })
