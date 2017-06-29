@@ -21,42 +21,9 @@
    *
    * `_liveElements` holds all elements that have the live-counting
    * functionality bound to them.
-   *
-   * `_event` holds the event to handle the live counting, based on the
-   * browser's capabilities.
    */
 
-  var _liveElements = [],
-      _event = 'oninput' in document ? 'input' : 'keyup'
-
-  /**
-   * IE9 is a special case. It does not fire an 'input' event when
-   * characters are deleted (via DEL key, BACKSPACE key, and CUT).
-   * If we want support for those actions we need to use the 'keyup'
-   * event instead.
-   * more info: http://www.matts411.com/post/internet-explorer-9-oninput/
-   */
-
-  if (navigator.userAgent.match(/MSIE 9.0/)) {
-    _event = 'keyup'
-  }
-
-  /**
-   * `String.trim()` polyfill for non-supporting browsers. This is the
-   * recommended polyfill on MDN.
-   *
-   * @see     <http://goo.gl/uYveB>
-   * @see     <http://goo.gl/xjIxJ>
-   *
-   * @return  {String}  The original string with leading and trailing
-   *                    whitespace removed.
-   */
-
-  if (!String.prototype.trim) {
-    String.prototype.trim = function () {
-      return this.replace(/^\s+|\s+$/g, '')
-    }
-  }
+  var _liveElements = []
 
   /**
    * `ucs2decode` function from the punycode.js library.
@@ -281,11 +248,7 @@
 
             handler()
 
-            if (element.addEventListener) {
-              element.addEventListener(_event, handler, false)
-            } else if (element.attachEvent) {
-              element.attachEvent('on' + _event, handler)
-            }
+            element.addEventListener('input', handler, false)
           }
 
       if (!_validateArguments(elements, callback)) return
@@ -321,11 +284,7 @@
 
         if (!liveElement) return
 
-        if (element.removeEventListener) {
-          element.removeEventListener(_event, liveElement.handler, false)
-        } else if (element.detachEvent) {
-          element.detachEvent('on' + _event, liveElement.handler)
-        }
+        element.removeEventListener('input', liveElement.handler, false)
 
         _liveElements.splice(_liveElements.indexOf(liveElement), 1)
       })
