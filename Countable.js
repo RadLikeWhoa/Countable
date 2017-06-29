@@ -94,45 +94,9 @@
     var callbackValid = callback && typeof callback === 'function'
 
     if (!elementsValid) console.warn('Countable: No valid elements were found')
-    if (!callbackValid) console.warn('Countable: "' + callback + '" is not a valid callback function')
+    if (!callbackValid) console.warn('Countable: Not a valid callback function')
 
     return elementsValid && callbackValid
-  }
-
-  /**
-   * `_extendDefaults` is a function to extend a set of default options with
-   * the ones given in the function call. Available options are described
-   * below.
-   *
-   * {Boolean}  hardReturns      Use two returns to seperate a paragraph
-   *                             instead of one.
-   * {Boolean}  stripTags        Strip HTML tags before counting the values.
-   * {Boolean}  ignoreReturns    Ignore returns when calculating the `all`
-   *                             property.
-   * {Boolean}  ignoreZeroWidth  Ignore zero-width space characters.
-   *
-   * @private
-   *
-   * @param   {Object}  options  Countable allows the options described above.
-   *                             They can be used in a function call to
-   *                             override the default behaviour.
-   *
-   * @return  {Object}  The new options object.
-   */
-
-  function _extendDefaults (options) {
-    var defaults = {
-      hardReturns: false,
-      stripTags: false,
-      ignoreReturns: false,
-      ignoreZeroWidth: true
-    }
-
-    for (var prop in options) {
-      if (defaults.hasOwnProperty(prop)) defaults[prop] = options[prop]
-    }
-
-    return defaults
   }
 
   /**
@@ -178,7 +142,7 @@
       sentences: trimmed ? (trimmed.match(/[.?!…]+./g) || []).length + 1 : 0,
       words: trimmed ? (trimmed.replace(/['";:,.?¿\-!¡]+/g, '').match(/\S+/g) || []).length : 0,
       characters: trimmed ? _decode(trimmed.replace(/\s/g, '')).length : 0,
-      all: _decode(options.ignoreReturns ? original.replace(/[\n\r]/g, '') : original).length
+      all: _decode(!options.ignoreReturns ? original : original.replace(/[\n\r]/g, '')).length
     }
   }
 
@@ -211,6 +175,18 @@
    * This is the main object that will later be exposed to other scripts. It
    * holds all the public methods that can be used to enable the Countable
    * functionality.
+   *
+   * Some methods accept an optional options parameter. This includes the
+   * following options.
+   *
+   * {Boolean}  hardReturns      Use two returns to seperate a paragraph
+   *                             instead of one. (default: false)
+   * {Boolean}  stripTags        Strip HTML tags before counting the values.
+   *                             (default: false)
+   * {Boolean}  ignoreReturns    Ignore returns when calculating the `all`
+   *                             property. (default: false)
+   * {Boolean}  ignoreZeroWidth  Ignore zero-width space characters. (default:
+   *                             true)
    */
 
   var Countable = {
@@ -230,8 +206,7 @@
      *                                 single parameter.
      *
      * @param   {Object}    [options]  An object to modify Countable's
-     *                                 behaviour. Refer to `_extendDefaults`
-     *                                 for a list of available options.
+     *                                 behaviour.
      *
      * @return  {Object}    Returns the Countable object to allow for chaining.
      */
@@ -239,10 +214,10 @@
     on: function (elements, callback, options) {
       if (!_validateArguments(elements, callback)) return
 
-      var ops = _extendDefaults(options)
+      var options = options || {}
       var bind = function (element) {
         var handler = function () {
-          callback.call(element, _count(element, ops))
+          callback.call(element, _count(element, options))
         }
 
         _liveElements.push({ element: element, handler: handler })
@@ -301,8 +276,7 @@
      *                                 single parameter.
      *
      * @param   {Object}    [options]  An object to modify Countable's
-     *                                 behaviour. Refer to `_extendDefaults`
-     *                                 for a list of available options.
+     *                                 behaviour.
      *
      * @return  {Object}    Returns the Countable object to allow for chaining.
      */
@@ -310,8 +284,10 @@
     count: function (elements, callback, options) {
       if (!_validateArguments(elements, callback)) return
 
+      var options = options || {}
+
       _loop(elements, function (element) {
-        callback.call(element, _count(element, _extendDefaults(options)))
+        callback.call(element, _count(element, options))
       })
 
       return this
