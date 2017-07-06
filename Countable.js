@@ -23,8 +23,8 @@
    * functionality bound to them.
    */
 
-  var liveElements = []
-  var each = Array.prototype.forEach
+  let liveElements = []
+  const each = Array.prototype.forEach
 
   /**
    * `ucs2decode` function from the punycode.js library.
@@ -44,18 +44,18 @@
    */
 
   function decode (string) {
-    var output = []
-  	var counter = 0
-  	var length = string.length
+    const output = []
+  	let counter = 0
+  	const length = string.length
 
   	while (counter < length) {
-  		var value = string.charCodeAt(counter++)
+  		const value = string.charCodeAt(counter++)
 
   		if (value >= 0xD800 && value <= 0xDBFF && counter < length) {
 
   			// It's a high surrogate, and there is a next character.
 
-  			var extra = string.charCodeAt(counter++)
+  			const extra = string.charCodeAt(counter++)
 
   			if ((extra & 0xFC00) == 0xDC00) { // Low surrogate.
   				output.push(((value & 0x3FF) << 10) + (extra & 0x3FF) + 0x10000)
@@ -91,9 +91,9 @@
    */
 
   function validateArguments (elements, callback) {
-    var nodes = Object.prototype.toString.call(elements)
-    var elementsValid = (nodes === '[object NodeList]' || nodes === '[object HTMLCollection]') || elements.nodeType === 1
-    var callbackValid = typeof callback === 'function'
+    const nodes = Object.prototype.toString.call(elements)
+    const elementsValid = (nodes === '[object NodeList]' || nodes === '[object HTMLCollection]') || elements.nodeType === 1
+    const callbackValid = typeof callback === 'function'
 
     if (!elementsValid) console.warn('Countable: Not a valid target')
     if (!callbackValid) console.warn('Countable: Not a valid callback function')
@@ -117,7 +117,7 @@
    */
 
   function count (element, options) {
-    var original = '' + ('value' in element ? element.value : element.textContent)
+    let original = '' + ('value' in element ? element.value : element.textContent)
 
     /**
      * The initial implementation to allow for HTML tags stripping was created
@@ -130,7 +130,7 @@
     if (options.stripTags) original = original.replace(/<\/?[a-z][^>]*>/gi, '')
     if (options.ignoreZeroWidth) original = original.replace(/[\u200B]+/, '')
 
-    var trimmed = original.trim()
+    const trimmed = original.trim()
 
     /**
      * Most of the performance improvements are based on the works of @epmatsw.
@@ -165,7 +165,7 @@
    *                             true)
    */
 
-  var Countable = {
+  const Countable = {
 
     /**
      * The `on` method binds the counting handler to all given elements. The
@@ -190,14 +190,14 @@
     on: function (elements, callback, options) {
       if (!validateArguments(elements, callback)) return
 
-      var options = options || {}
+      options = options || {}
 
       if (elements.length === undefined) {
           elements = [ elements ]
       }
 
       each.call(elements, function (e) {
-          var handler = function () {
+          const handler = function () {
             callback.call(e, count(e, options))
           }
 
@@ -263,7 +263,7 @@
     count: function (elements, callback, options) {
       if (!validateArguments(elements, callback)) return
 
-      var options = options || {}
+      options = options || {}
 
       if (elements.length === undefined) {
           elements = [ elements ]
@@ -287,7 +287,9 @@
      */
 
     enabled: function (element) {
-      return liveElements.filter(function (el) { return el.element === element }).length > 0
+      return liveElements.filter(function (el) {
+          return el.element === element
+      }).length > 0
     }
 
   }
