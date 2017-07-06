@@ -24,6 +24,7 @@
    */
 
   var liveElements = []
+  var each = Array.prototype.forEach
 
   /**
    * `ucs2decode` function from the punycode.js library.
@@ -44,33 +45,34 @@
 
   function decode (string) {
     var output = []
-    var counter = 0
-    var length = string.length
-    var value
-    var extra
+  	var counter = 0
+  	var length = string.length
 
-    while (counter < length) {
-      value = string.charCodeAt(counter++)
+  	while (counter < length) {
+  		var value = string.charCodeAt(counter++)
 
-      if (value >= 0xD800 && value <= 0xDBFF && counter < length) {
-        // High surrogate, and there is a next character.
-        extra = string.charCodeAt(counter++)
+  		if (value >= 0xD800 && value <= 0xDBFF && counter < length) {
 
-        if ((extra & 0xFC00) == 0xDC00) {
-          // Low surrogate.
-          output.push(((value & 0x3FF) << 10) + (extra & 0x3FF) + 0x10000)
-        } else {
-          // unmatched surrogate; only append this code unit, in case the next
-          // code unit is the high surrogate of a surrogate pair
-          output.push(value, extra)
-          counter--
-        }
-      } else {
-        output.push(value)
-      }
-    }
+  			// It's a high surrogate, and there is a next character.
 
-    return output
+  			var extra = string.charCodeAt(counter++)
+
+  			if ((extra & 0xFC00) == 0xDC00) { // Low surrogate.
+  				output.push(((value & 0x3FF) << 10) + (extra & 0x3FF) + 0x10000)
+  			} else {
+
+  				// It's an unmatched surrogate; only append this code unit, in case the
+  				// next code unit is the high surrogate of a surrogate pair.
+
+  				output.push(value)
+  				counter--
+  			}
+  		} else {
+  			output.push(value)
+  		}
+  	}
+
+  	return output
   }
 
   /**
@@ -146,31 +148,6 @@
   }
 
   /**
-   * `loop` is a helper function to iterate over a collection, e.g. a NodeList
-   * or an Array. The callback receives the current element as the single
-   * parameter.
-   *
-   * @private
-   *
-   * @param  {Array}     which     The collection to iterate over.
-   *
-   * @param  {Function}  callback  The callback function to call on each
-   *                               iteration.
-   */
-
-  function loop (which, callback) {
-    var len = which.length
-
-    if (typeof len !== 'undefined') {
-      while (len--) {
-        callback(which[len])
-      }
-    } else {
-      callback(which)
-    }
-  }
-
-  /**
    * This is the main object that will later be exposed to other scripts. It
    * holds all the public methods that can be used to enable the Countable
    * functionality.
@@ -215,16 +192,20 @@
 
       var options = options || {}
 
-      loop(elements, function (element) {
-        var handler = function () {
-          callback.call(element, count(element, options))
-        }
+      if (elements.length === undefined) {
+          elements = [ elements ]
+      }
 
-        liveElements.push({ element: element, handler: handler })
+      each.call(elements, function (e) {
+          var handler = function () {
+            callback.call(e, count(e, options))
+          }
 
-        handler()
+          liveElements.push({ element: e, handler: handler })
 
-        element.addEventListener('input', handler)
+          handler()
+
+          e.addEventListener('input', handler)
       })
 
       return this
@@ -243,13 +224,18 @@
     off: function (elements) {
       if (!validateArguments(elements, function () {})) return
 
-      loop(elements, function (element) {
-        var liveElement = liveElements.filter(function (el) { return el.element === element })[0]
+      if (elements.length === undefined) {
+          elements = [ elements ]
+      }
 
-        if (!liveElement) return
+      liveElements.filter(function (e) {
+          return elements.indexOf(e.element) !== -1
+      }).forEach(function (e) {
+          e.element.removeEventListener('input', e.handler)
+      })
 
-        element.removeEventListener('input', liveElement.handler)
-        liveElements = liveElements.filter(function (el) { return el.element !== element })
+      liveElements = liveElements.filter(function (e) {
+          return elements.indexOf(e.element) === -1
       })
 
       return this
@@ -279,8 +265,12 @@
 
       var options = options || {}
 
-      loop(elements, function (element) {
-        callback.call(element, count(element, options))
+      if (elements.length === undefined) {
+          elements = [ elements ]
+      }
+
+      each.call(elements, function (e) {
+          callback.call(e, count(e, options))
       })
 
       return this
