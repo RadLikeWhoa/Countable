@@ -112,16 +112,10 @@ describe('Countable', function () {
       check([ '2', '1', '2', '10', '12' ])
     })
 
-    it('should ignore returns', function () {
+    it('should ignore given characters', function () {
       area.value = 'Hello\nworld'
-      Countable.count(area, callback, { ignoreReturns: true })
-      check([ '2', '1', '2', '10', '10' ])
-    })
-
-    it('should not ignore zero-width characters', function () {
-      area.value = '\u200B\u200B\u200B\u200B\u200B'
-      Countable.count(area, callback, { ignoreZeroWidth: false })
-      check([ '1', '1', '1', '5', '5' ])
+      Countable.count(area, callback, { ignore: [ '\n', 'w', 'D' ] })
+      check([ '1', '1', '1', '9', '9' ])
     })
   })
 })

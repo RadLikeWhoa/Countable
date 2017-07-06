@@ -118,6 +118,7 @@
 
   function count (element, options) {
     let original = '' + ('value' in element ? element.value : element.textContent)
+    options = options || {}
 
     /**
      * The initial implementation to allow for HTML tags stripping was created
@@ -128,7 +129,12 @@
      */
 
     if (options.stripTags) original = original.replace(/<\/?[a-z][^>]*>/gi, '')
-    if (options.ignoreZeroWidth) original = original.replace(/[\u200B]+/, '')
+
+    if (options.ignore) {
+        each.call(options.ignore, function (i) {
+            original = original.replace(i, '')
+        })
+    }
 
     const trimmed = original.trim()
 
@@ -143,7 +149,7 @@
       sentences: trimmed ? (trimmed.match(/[.?!…]+./g) || []).length + 1 : 0,
       words: trimmed ? (trimmed.replace(/['";:,.?¿\-!¡]+/g, '').match(/\S+/g) || []).length : 0,
       characters: trimmed ? decode(trimmed.replace(/\s/g, '')).length : 0,
-      all: decode(!options.ignoreReturns ? original : original.replace(/[\n\r]/g, '')).length
+      all: decode(original).length
     }
   }
 
@@ -155,14 +161,13 @@
    * Some methods accept an optional options parameter. This includes the
    * following options.
    *
-   * {Boolean}  hardReturns      Use two returns to seperate a paragraph
+   * {Boolean}      hardReturns  Use two returns to seperate a paragraph
    *                             instead of one. (default: false)
-   * {Boolean}  stripTags        Strip HTML tags before counting the values.
+   * {Boolean}      stripTags    Strip HTML tags before counting the values.
    *                             (default: false)
-   * {Boolean}  ignoreReturns    Ignore returns when calculating the `all`
-   *                             property. (default: false)
-   * {Boolean}  ignoreZeroWidth  Ignore zero-width space characters. (default:
-   *                             true)
+   * {Array<Char>}  ignore       A list of characters that should be removed
+   *                             ignored when calculating the counters.
+   *                             (default: [])
    */
 
   const Countable = {
@@ -189,8 +194,6 @@
 
     on: function (elements, callback, options) {
       if (!validateArguments(elements, callback)) return
-
-      options = options || {}
 
       if (elements.length === undefined) {
           elements = [ elements ]
@@ -261,8 +264,6 @@
 
     count: function (elements, callback, options) {
       if (!validateArguments(elements, callback)) return
-
-      options = options || {}
 
       if (elements.length === undefined) {
           elements = [ elements ]
