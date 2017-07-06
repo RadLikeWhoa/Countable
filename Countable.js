@@ -245,8 +245,7 @@
      * The `count` method works mostly like the `live` method, but no events are
      * bound, the functionality is only executed once.
      *
-     * @param   {Nodes}     elements   All elements that should receive the
-     *                                 Countable functionality.
+     * @param   {Nodes}     elements   All elements that should be counted.
      *
      * @param   {Function}  callback   The callback to fire whenever the
      *                                 element's value changes. The callback is
@@ -280,16 +279,21 @@
      * The `enabled` method checks if the live-counting functionality is bound
      * to an element.
      *
-     * @param   {Element}  element  A single Element.
+     * @param   {Element}  element  All elements that should be checked for the
+     *                              Countable functionality.
      *
      * @return  {Boolean}  A boolean value representing whether Countable
-     *                     functionality is bound to the given element.
+     *                     functionality is bound to all given elements.
      */
 
-    enabled: function (element) {
-      return liveElements.filter(function (el) {
-          return el.element === element
-      }).length > 0
+    enabled: function (elements) {
+      if (elements.length === undefined) {
+        elements = [ elements ]
+      }
+
+      return liveElements.filter(function (e) {
+          return elements.indexOf(e.element) !== -1
+      }).length === elements.length
     }
 
   }
