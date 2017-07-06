@@ -3,7 +3,7 @@
  * counting on an HTML element.
  *
  * @author   Sacha Schmid (<https://github.com/RadLikeWhoa>)
- * @version  2.1.1
+ * @version  3.0.0
  * @license  MIT
  * @see      <http://radlikewhoa.github.io/Countable/>
  */
