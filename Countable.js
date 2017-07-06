@@ -95,8 +95,8 @@
     const elementsValid = (nodes === '[object NodeList]' || nodes === '[object HTMLCollection]') || elements.nodeType === 1
     const callbackValid = typeof callback === 'function'
 
-    if (!elementsValid) console.warn('Countable: Not a valid target')
-    if (!callbackValid) console.warn('Countable: Not a valid callback function')
+    if (!elementsValid) console.error('Countable: Not a valid target')
+    if (!callbackValid) console.error('Countable: Not a valid callback function')
 
     return elementsValid && callbackValid
   }
@@ -167,7 +167,7 @@
    *                             (default: false)
    * {Array<Char>}  ignore       A list of characters that should be removed
    *                             ignored when calculating the counters.
-   *                             (default: [])
+   *                             (default: )
    */
 
   const Countable = {
