@@ -11,13 +11,7 @@ Countable is a JavaScript function to add **live paragraph-, word- and character
 
 ## Installation
 
-The preferred method of installation is [**bower**](https://github.com/bower/bower).
-
-```
-bower install Countable
-```
-
- [**npm**](https://www.npmjs.com/) or [**yarn**](https://yarnpkg.com/)
+The preferred method of installation is[**npm**](https://www.npmjs.com/) or [**yarn**](https://yarnpkg.com/).
 
 ```
 npm i --save-dev countable
@@ -58,7 +52,7 @@ Bind the callback to all given elements. The callback gets called every time the
 Countable.on(area, counter => console.log(counter))
 ```
 
-### Countable.die(elements)
+### Countable.off(elements)
 
 Remove the bound callback from all given elements.
 
