@@ -88,11 +88,10 @@ describe('Countable', function () {
       check([ '0', '0', '0', '0', '0' ])
     })
 
-    it('should be aliased as count', function () {
-      area.value = 'Hello world'
-      Countable.count(area, callback)
-      check([ '1', '1', '2', '10', '11' ])
-    })
+		it('should work on strings', function () {
+			Countable.count('Hello world', callback)
+			check([ '1', '1', '2', '10', '11' ])
+		})
   })
 
   describe('Options', function () {

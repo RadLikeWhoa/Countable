@@ -14,7 +14,7 @@
  */
 
 ;(function (global) {
-  
+
   /**
    * @private
    *
@@ -81,23 +81,23 @@
    *
    * @private
    *
-   * @param   {Nodes}     elements  The (collection of) element(s) to
-   *                                validate.
+   * @param   {Nodes|String}  targets   A (collection of) element(s) or a single
+	 *                                    string to validate.
    *
-   * @param   {Function}  callback  The callback function to validate.
+   * @param   {Function}      callback  The callback function to validate.
    *
-   * @return  {Boolean}   Returns whether all arguments are vaild.
+   * @return  {Boolean}       Returns whether all arguments are vaild.
    */
 
-  function validateArguments (elements, callback) {
-    const nodes = Object.prototype.toString.call(elements)
-    const elementsValid = (nodes === '[object NodeList]' || nodes === '[object HTMLCollection]') || elements.nodeType === 1
+  function validateArguments (targets, callback) {
+    const nodes = Object.prototype.toString.call(targets)
+    const targetsValid = typeof targets === 'string' || ((nodes === '[object NodeList]' || nodes === '[object HTMLCollection]') || targets.nodeType === 1)
     const callbackValid = typeof callback === 'function'
 
-    if (!elementsValid) console.error('Countable: Not a valid target')
+    if (!targetsValid) console.error('Countable: Not a valid target')
     if (!callbackValid) console.error('Countable: Not a valid callback function')
 
-    return elementsValid && callbackValid
+    return targetsValid && callbackValid
   }
 
   /**
@@ -106,17 +106,17 @@
    *
    * @private
    *
-   * @param   {Element}  element  The element whose value is to be counted.
+   * @param   {Node|String}  target   The target for the count.
    *
-   * @param   {Object}   options  The options to use for the counting.
+   * @param   {Object}   	   options  The options to use for the counting.
    *
-   * @return  {Object}   The object containing the number of paragraphs,
-   *                     sentences, words, characters and characters plus
-   *                     spaces.
+   * @return  {Object}       The object containing the number of paragraphs,
+   *                         sentences, words, characters and characters
+	 *                         plus spaces.
    */
 
-  function count (element, options) {
-    let original = '' + ('value' in element ? element.value : element.textContent)
+  function count (target, options) {
+    let original = '' + (typeof target === 'string' ? target : ('value' in target ? target.value : target.textContent))
     options = options || {}
 
     /**
@@ -194,7 +194,7 @@
     on: function (elements, callback, options) {
       if (!validateArguments(elements, callback)) return
 
-      if (elements.length === undefined) {
+      if (!Array.isArray(elements)) {
           elements = [ elements ]
       }
 
@@ -226,7 +226,7 @@
     off: function (elements) {
       if (!validateArguments(elements, function () {})) return
 
-      if (elements.length === undefined) {
+      if (!Array.isArray(elements)) {
           elements = [ elements ]
       }
 
@@ -247,28 +247,28 @@
      * The `count` method works mostly like the `live` method, but no events are
      * bound, the functionality is only executed once.
      *
-     * @param   {Nodes}     elements   All elements that should be counted.
+     * @param   {Nodes|String}  targets   All elements that should be counted.
      *
-     * @param   {Function}  callback   The callback to fire whenever the
-     *                                 element's value changes. The callback is
-     *                                 called with the relevant element bound
-     *                                 to `this` and the counted values as the
-     *                                 single parameter.
+     * @param   {Function}      callback   The callback to fire whenever the
+     *                                     element's value changes. The callback
+		 *                                     is called with the relevant element
+		 *                                     bound to `this` and the counted values
+		 *                                     as the single parameter.
      *
-     * @param   {Object}    [options]  An object to modify Countable's
-     *                                 behaviour.
+     * @param   {Object}        [options]  An object to modify Countable's
+     *                                     behaviour.
      *
      * @return  {Object}    Returns the Countable object to allow for chaining.
      */
 
-    count: function (elements, callback, options) {
-      if (!validateArguments(elements, callback)) return
+    count: function (targets, callback, options) {
+      if (!validateArguments(targets, callback)) return
 
-      if (elements.length === undefined) {
-          elements = [ elements ]
+      if (!Array.isArray(targets)) {
+          targets = [ targets ]
       }
 
-      each.call(elements, function (e) {
+      each.call(targets, function (e) {
           callback.call(e, count(e, options))
       })
 
@@ -279,7 +279,7 @@
      * The `enabled` method checks if the live-counting functionality is bound
      * to an element.
      *
-     * @param   {Element}  element  All elements that should be checked for the
+     * @param   {Node}     element  All elements that should be checked for the
      *                              Countable functionality.
      *
      * @return  {Boolean}  A boolean value representing whether Countable
