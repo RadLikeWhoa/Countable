@@ -11,7 +11,7 @@ Countable is a JavaScript function to add **live paragraph-, word- and character
 
 ## Installation
 
-The preferred method of installation is[**npm**](https://www.npmjs.com/) or [**yarn**](https://yarnpkg.com/).
+The preferred method of installation is [**npm**](https://www.npmjs.com/) or [**yarn**](https://yarnpkg.com/).
 
 ```
 npm i --save-dev countable
