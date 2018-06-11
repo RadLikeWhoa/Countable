@@ -24,10 +24,12 @@
     "karma-firefox-launcher": "^1.0.1",
     "karma-mocha": "^1.3.0",
     "karma-safari-launcher": "^1.0.0",
-    "mocha": "^3.4.2"
+    "mocha": "^3.4.2",
+    "uglify-es": "^3.3.9"
   },
   "scripts": {
-    "test": "./node_modules/karma/bin/karma start"
+    "test": "./node_modules/karma/bin/karma start",
+    "minify": "./node_modules/uglify-es/bin/uglifyjs -c -m -o Countable.min.js Countable.js"
   },
   "license": "MIT"
 }
