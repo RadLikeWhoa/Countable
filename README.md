@@ -14,7 +14,14 @@ Countable is a JavaScript function to add **live paragraph-, word- and character
 The preferred method of installation is [**bower**](https://github.com/bower/bower).
 
 ```
-yarn add Countable
+bower install Countable
+```
+
+ [**npm**](https://www.npmjs.com/) or [**yarn**](https://yarnpkg.com/)
+
+```
+npm i --save-dev countable
+yarn add --dev countable
 ```
 
 Alternatively, you can download the latest [zipball](https://github.com/RadLikeWhoa/Countable/archive/master.zip) or copy the [script](https://raw.github.com/RadLikeWhoa/Countable/master/Countable.js) directly.
