@@ -81,7 +81,7 @@ var fields = {
   all: document.getElementById('result__all')
 }
 
-Countable.live(document.getElementById('countableArea'), function (counter) {
+Countable.on(document.getElementById('countableArea'), function (counter) {
   for (var field in fields) text(fields[field], counter[field])
 })
 

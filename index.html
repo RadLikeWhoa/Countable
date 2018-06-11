@@ -60,7 +60,7 @@
     </section>
     <section class="dark-section">
       <div class="wrap">
-        <pre><code class="terminal-line">yarn install countable</code></pre>
+        <pre><code class="terminal-line">yarn add countable</code></pre>
         <p>The preferred method of installation is <a href="http://yarnpkg.com">yarn</a>. Alternatively, you can <a href="https://raw.github.com/RadLikeWhoa/Countable/master/Countable.js">download the script</a> directly. Out of the box, Countable can be used with AMD loaders (require.js), CommonJS loaders (node, browserify) or directly in the browser.</p>
       </div>
     </section>
@@ -70,7 +70,7 @@
         <pre><code>const area = document.getElementById('area')
 const callback = counter => console.log(counter)
 
-Countable.live(area, callback)</code></pre>
+Countable.on(area, callback)</code></pre>
         <p>There are other methods you can use, all of which are thorougly described in the code itself, as well as in the full documentation.</p>
         <a class="orange-button" href="docs">View the full docs</a>
       </div>

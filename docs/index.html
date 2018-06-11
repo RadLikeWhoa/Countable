@@ -26,7 +26,7 @@
         <h2 id="methods">Available methods</h2>
         <p>In this section of the documentation, an asterisk (*) denotes a method argument that is optional. Defaults are noted for all optional arguments.</p>
         <hr>
-        <h3 id="live">Countable.live(elements, callback, options)</h3>
+        <h3 id="on">Countable.on(elements, callback, options)</h3>
         <p>This method enables full live-counting on an element. Use the callback function to process the counted values.</p>
         <div class="method-description">
           <header class="description-header">
@@ -83,10 +83,10 @@
           </div>
         </div>
         <pre><code>const area = document.getElementById('area')
-Countable.live(area, counter => console.log(counter))</code></pre>
+Countable.on(area, counter => console.log(counter))</code></pre>
         <hr>
-        <h3 id="die">Countable.die(elements)</h3>
-        <p>In order to remove the Countable functionality from an element, call <code>Countable.die()</code>.</p>
+        <h3 id="off">Countable.off(elements)</h3>
+        <p>In order to remove the Countable functionality from an element, call <code>Countable.off()</code>.</p>
         <div class="method-description">
           <header class="description-header">
             <div class="grid">
@@ -116,10 +116,10 @@ Countable.live(area, counter => console.log(counter))</code></pre>
           </div>
         </div>
         <pre><code>const area = document.getElementById('area')
-Countable.die(area)</code></pre>
+Countable.off(area)</code></pre>
         <hr>
-        <h3 id="once">Countable.once(elements, callback, options)</h3>
-        <p>There might be situations where you only want to count paragraphs, words and characters of an element once, i.e. if you want to display the word count of an article on your blog. In order to achieve this, call <code>Countable.once()</code>.</p>
+        <h3 id="once">Countable.count(targets, callback, options)</h3>
+        <p>There might be situations where you only want to count paragraphs, words and characters of an element once, i.e. if you want to display the word count of an article on your blog. In order to achieve this, call <code>Countable.count()</code>.</p>
         <p>This method is aliased as <code>Countable.count()</code>.</p>
         <div class="method-description">
           <header class="description-header">
@@ -138,10 +138,10 @@ Countable.die(area)</code></pre>
           <div class="method-argument">
             <div class="grid">
               <div class="col med-col-1-6">
-                <b>elements</b>
+                <b>targets</b>
               </div>
               <div class="col med-col-1-6">
-                <span class="type">Nodes</span>
+                <span class="type">Nodes|String</span>
               </div>
               <div class="col med-col-4-6">
                 All elements whose text should be counted.
@@ -176,7 +176,7 @@ Countable.die(area)</code></pre>
           </div>
         </div>
         <pre><code>const area = document.getElementById('area')
-Countable.once(area, counter => console.log(counter))</code></pre>
+Countable.count(area, counter => console.log(counter))</code></pre>
         <hr>
         <h3 id="enabled">Countable.enabled(element)</h3>
         <p>Countable also provides a handy method to check if live-counting functionality is enabled on an element.</p>
@@ -212,7 +212,7 @@ Countable.once(area, counter => console.log(counter))</code></pre>
 Countable.enabled(area)</code></pre>
         <hr>
         <h2 id="callback">Callback</h2>
-        <p>Both <code>Countable.live()</code> and <code>Countable.once()</code> require a callback function. Your callback function is called with a single parameter, an object containing the following properties.</p>
+        <p>Both <code>Countable.on()</code> and <code>Countable.count()</code> require a callback function. Your callback function is called with a single parameter, an object containing the following properties.</p>
         <p>You can refer back to your element using <code>this</code> inside the callback function.</p>
         <div class="method-description">
           <header class="description-header">
@@ -278,7 +278,7 @@ Countable.enabled(area)</code></pre>
         </div>
         <hr>
         <h2 id="options">Options</h2>
-        <p><code>Countable.live()</code> and <code>Countable.once()</code> both accept a third argument, an options object that allows you to change how Countable treats certain aspects of your element's text.</p>
+        <p><code>Countable.on()</code> and <code>Countable.count()</code> both accept a third argument, an options object that allows you to change how Countable treats certain aspects of your element's text.</p>
         <div class="method-description">
           <header class="description-header">
             <div class="grid">
@@ -348,7 +348,7 @@ Countable.enabled(area)</code></pre>
         </div>
         <pre><code>const area = document.getElementById('area')
 
-Countable.live(area, counter => console.log(counter), {
+Countable.on(area, counter => console.log(counter), {
   stripTags: true
 })</code></pre>
       </div>

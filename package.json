@@ -2,18 +2,14 @@
   "name": "Countable",
   "version": "2.0.0",
   "devDependencies": {
-    "connect-livereload": "^0.6.0",
-    "express": "^4.15.3",
-    "gulp": "^3.9.1",
-    "gulp-autoprefixer": "^4.0.0",
-    "gulp-concat": "^2.6.1",
-    "gulp-csso": "^3.0.0",
-    "gulp-sass": "^3.1.0",
-    "gulp-uglify": "^3.0.0",
-    "opn": "^5.1.0",
-    "tiny-lr": "^1.0.5"
+		"uglify-es": "^3.3.9",
+		"node-sass": "^4.5.3"
   },
   "dependencies": {
-    "countable": "^2.1.1"
-  }
+    "countable": "~3.0.0"
+  },
+	"scripts": {
+		"scripts": "cat node_modules/countable/countable.js src/js/main.js > assets/js/main.js && uglifyjs -m -c -o assets/js/main.js assets/js/main.js",
+		"styles": "node-sass --recursive --output-style compressed --output assets/css src/scss"
+	}
 }
