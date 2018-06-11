@@ -2,7 +2,7 @@
   "name": "countable",
   "description": "Countable is a JavaScript library to add live paragraph-, word- and character-counting to an HTML element.",
   "author": "Sacha Schmid <https://twitter.com/sachaschmid>",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "main": "Countable.js",
   "keywords": [
     "paragraphs",
