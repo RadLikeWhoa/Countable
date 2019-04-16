@@ -40,7 +40,7 @@
  *
  * @return Returns the Countable object to allow for chaining if the binding complete successfully. Returns void if the argument is not valid. 
  */
-export function on(elements: NodeList | HTMLCollection | Element,
+export function on(elements: NodeList | HTMLCollection,
     callback?: (counter: {
         paragraphs: number
         sentences: number
@@ -62,7 +62,7 @@ export function on(elements: NodeList | HTMLCollection | Element,
 *
 * @return Returns the Countable object to allow for chaining.
 */
-export function off(elements: NodeList | HTMLCollection | Element): Countable;
+export function off(elements: NodeList | HTMLCollection): Countable;
 
 /**
  * The `count` method works mostly like the `live` method, but no events are
@@ -78,7 +78,7 @@ export function off(elements: NodeList | HTMLCollection | Element): Countable;
  *
  * @returns The Countable object to allow for chaining. Return void if the argument is not valid. 
  */
-export function count(elements: NodeList | HTMLCollection | Element,
+export function count(elements: NodeList | HTMLCollection | String,
     callback?: (counter: {
         paragraphs: number
         sentences: number
@@ -100,7 +100,7 @@ export function count(elements: NodeList | HTMLCollection | Element,
  *
  * @return A boolean value representing whether Countable functionality is bound to all given elements.
  */
-export function enabled(elements: NodeList | HTMLCollection | Element): boolean;
+export function enabled(elements: NodeList | HTMLCollection): boolean;
 
 /**
  * The purpose of this type is to gather all functions exported above together.
