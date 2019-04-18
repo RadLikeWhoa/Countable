@@ -25,6 +25,20 @@
  *
  */
 
+export interface CountingResult {
+    paragraphs: number
+    sentences: number
+    words: number
+    characters: number
+    all: number
+}
+
+export interface OptionsOfCountable {
+    hardReturns?: boolean
+    stripTags?: boolean
+    ignore?: string[]
+}
+
 /**
  * The `on` method binds the counting handler to all given elements. The
  * event is either `oninput` or `onkeydown`, based on the capabilities of
@@ -41,18 +55,8 @@
  * @return Returns the Countable object to allow for chaining if the binding complete successfully. Returns void if the argument is not valid. 
  */
 export function on(elements: NodeList | HTMLCollection,
-    callback?: (counter: {
-        paragraphs: number
-        sentences: number
-        words: number
-        characters: number
-        all: number
-    }) => void,
-    options?: {
-        hardReturns?: boolean
-        stripTags?: boolean
-        ignore?: string[]
-    }): Countable
+    callback?: (counter: CountingResult) => void,
+    options?:OptionsOfCountable): Countable
 
 /**
 * The `off` method removes the Countable functionality from all given
@@ -79,18 +83,8 @@ export function off(elements: NodeList | HTMLCollection): Countable;
  * @returns The Countable object to allow for chaining. Return void if the argument is not valid. 
  */
 export function count(elements: NodeList | HTMLCollection | String,
-    callback?: (counter: {
-        paragraphs: number
-        sentences: number
-        words: number
-        characters: number
-        all: number
-    }) => void,
-    options?: {
-        hardReturns?: boolean
-        stripTags?: boolean
-        ignore?: string[]
-    }): Countable;
+    callback?: (counter: CountingResult) => void,
+    options?: OptionsOfCountable): Countable;
 
 /**
  * The `enabled` method checks if the live-counting functionality is bound
