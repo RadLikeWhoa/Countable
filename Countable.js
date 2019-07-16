@@ -14,6 +14,7 @@
  */
 
 ;(function (global) {
+  'use strict'
 
   /**
    * @private
