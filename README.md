@@ -65,7 +65,7 @@ Countable.off(area)
 Similar to `Countable.on()`, but the callback is only executed once, there are no events bound.
 
 ```javascript
-Countable.once(area, counter => console.log(counter))
+Countable.count(area, counter => console.log(counter))
 ```
 
 ### Countable.enabled(elements)
