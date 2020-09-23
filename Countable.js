@@ -87,7 +87,7 @@
    *
    * @param   {Function}      callback  The callback function to validate.
    *
-   * @return  {Boolean}       Returns whether all arguments are vaild.
+   * @return  {Boolean}       Returns whether all arguments are valid.
    */
 
   function validateArguments (targets, callback) {
